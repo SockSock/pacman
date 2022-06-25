@@ -1,6 +1,4 @@
-import Sprite from './sprite.js';
-
-class Pacman extends Sprite {
+class Pacman {
     board;
     grid;
     pacmanXPos;
@@ -9,7 +7,6 @@ class Pacman extends Sprite {
     pacmanYChange
 
     constructor() {
-        super();
         this.board = new Board();
         this.grid = this.board.getGrid();
         this.pacmanXPos = 112;
@@ -18,12 +15,12 @@ class Pacman extends Sprite {
         this.pacmanYChange = 0;
     }
 
-    drawPacMan() {
+    drawSprite() {
         fill(255, 255, 0)
         circle(this.pacmanXPos+=this.pacmanXChange, this.pacmanYPos+=this.pacmanYChange, 8);
     }
 
-    move() {
+    moveSprite() {
         // A
         if (keyCode === 65) {
             if (this.grid[this.pacmanYPos/8][this.pacmanXPos/8] === 1) {

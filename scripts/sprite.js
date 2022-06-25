@@ -1,9 +1,9 @@
 /*
 https://stackoverflow.com/a/48428063
  */
-export default class Sprite {
+class Sprite {
     constructor() {
-        if (this.constructor == Sprite) {
+        if (this.constructor === Sprite) {
             throw new Error("Abstract classes can't be instantiated.");
         }
     }

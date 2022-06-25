@@ -42,7 +42,7 @@ class Board {
         ];
     }
 
-    drawBoard() {
+    drawSprite() {
         for (let i = 0; i < this.grid.length; i++) {
             for (let j = 0; j < this.grid.length;  j++) {
                 if (this.grid[i][j] === 1) {
