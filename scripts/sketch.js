@@ -1,7 +1,10 @@
+import {Board} from './board.js';
+import {Pacman} from './pacman.js';
+
 let pacman;
 let board;
 
-function setup() {
+window.setup = function() {
     frameRate(20);
     rectMode(CENTER);
     createCanvas(224, 288);
@@ -10,7 +13,7 @@ function setup() {
     pacman = new Pacman();
 }
 
-function draw() {
+window.draw = function() {
     background(0);
     board.drawSprite();
     pacman.drawSprite();

@@ -1,7 +1,7 @@
 /*
 https://stackoverflow.com/a/48428063
  */
-class Sprite {
+export class Sprite {
     constructor() {
         if (this.constructor === Sprite) {
             throw new Error("Abstract classes can't be instantiated.");

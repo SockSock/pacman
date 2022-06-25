@@ -1,4 +1,7 @@
-class Pacman {
+import {Board} from './board.js';
+import {Sprite} from './sprite.js';
+
+export class Pacman extends Sprite {
     board;
     grid;
     pacmanXPos;
@@ -7,8 +10,9 @@ class Pacman {
     pacmanYChange
 
     constructor() {
-        this.board = new Board();
-        this.grid = this.board.getGrid();
+        super();
+        let board = new Board();
+        this.grid = board.getGrid();
         this.pacmanXPos = 112;
         this.pacmanYPos = 208;
         this.pacmanXChange = 8
