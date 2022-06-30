@@ -1,8 +1,7 @@
 import {Board} from './board.js';
-import {Sprite} from './sprite.js';
+import {Entity} from './entity.js';
 
-export class Pacman extends Sprite {
-    board;
+export class Pacman extends Entity {
     grid;
     pacmanXPos;
     pacmanYPos;

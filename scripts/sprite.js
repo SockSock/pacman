@@ -1,6 +1,3 @@
-/*
-https://stackoverflow.com/a/48428063
- */
 export class Sprite {
     constructor() {
         if (this.constructor === Sprite) {

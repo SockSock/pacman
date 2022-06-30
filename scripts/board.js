@@ -1,7 +1,10 @@
-export class Board {
+import {Sprite} from "./sprite.js";
+
+export class Board extends Sprite {
     grid;
 
     constructor() {
+        super();
         this.grid = [
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
