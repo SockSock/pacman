@@ -49,9 +49,14 @@ export class Board extends Sprite {
         for (let i = 0; i < this.grid.length; i++) {
             for (let j = 0; j < this.grid.length;  j++) {
                 if (this.grid[i][j] === 1) {
-                    fill(0, 0, 255);
                     noStroke();
+                    fill(0, 0, 255);
                     rect(j*7, i*7, 7, 7);
+                }
+                if (this.grid[i][j] === 0) {
+                    noStroke();
+                    fill(0, 255, 0);
+                    rect(j*7, i*7, 1, 1);
                 }
             }
         }
