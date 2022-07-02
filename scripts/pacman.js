@@ -85,19 +85,19 @@ export class Pacman extends Entity {
 
     changeDirection() {
         // W
-        if (keyCode === 87) {
+        if (keyCode === 87 || keyCode === UP_ARROW) {
             this.dir = "up";
         }
         // A
-        if (keyCode === 65) {
+        if (keyCode === 65 || keyCode === LEFT_ARROW) {
             this.dir = "left";
         }
         // S
-        if (keyCode === 83) {
+        if (keyCode === 83 || keyCode === DOWN_ARROW) {
             this.dir = "down";
         }
         // D
-        if (keyCode === 68) {
+        if (keyCode === 68 || keyCode === RIGHT_ARROW) {
             this.dir = "right";
         }
     }
