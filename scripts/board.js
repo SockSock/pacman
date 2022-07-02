@@ -53,11 +53,6 @@ export class Board extends Sprite {
                     fill(0, 0, 255);
                     rect(j*7, i*7, 7, 7);
                 }
-                if (this.grid[i][j] === 0) {
-                    noStroke();
-                    fill(0, 255, 0);
-                    rect(j*7, i*7, 1, 1);
-                }
             }
         }
     }

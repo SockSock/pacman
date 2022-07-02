@@ -5,7 +5,6 @@ let pacman;
 let board;
 
 window.setup = function() {
-    // frameRate(4);
     rectMode(CENTER);
     createCanvas(224, 288);
     keyCode = 65;
@@ -18,6 +17,7 @@ window.draw = function() {
     board.drawSprite();
     pacman.drawSprite();
     pacman.moveSprite();
+    pacman.stopSprite();
 }
 
 window.keyPressed = function() {

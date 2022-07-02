@@ -26,15 +26,11 @@ export class Pacman extends Entity {
     drawSprite() {
         fill(255, 255, 0)
         circle(this.pacmanXPos+=this.pacmanXChange, this.pacmanYPos+=this.pacmanYChange, 7);
-        console.log(this.pacmanXPos, this.pacmanYPos, this.pacmanXPos % 7, this.pacmanYPos % 7, this.pacmanXChange, this.pacmanYChange, this.dir, this.grid[this.cellCoords[0]][this.cellCoords[1]-1], this.cellCoords[0], this.cellCoords[1]);
-        console.log("Test: " + this.grid[2][29]);
     }
 
     moveSprite() {
         this.cellCoords = [Math.ceil((this.pacmanXPos-3)/7), Math.ceil((this.pacmanYPos-3)/7)];
-        noStroke();
-        fill(255, 0, 0);
-        rect(this.cellCoords[0]*7, this.cellCoords[1]*7, 7, 7);
+
         // W
         if (this.dir === "up") {
             if (!(this.pacmanXPos % 7 === 0)) {
@@ -97,6 +93,33 @@ export class Pacman extends Entity {
         // D
         if (keyCode === 68) {
             this.dir = "right";
+        }
+    }
+
+    stopSprite() {
+        // W
+        if (this.grid[this.cellCoords[1]-1][this.cellCoords[0]] === 1 && this.dir === "up") {
+            if ((this.pacmanXPos/7) === this.cellCoords[0] && (this.pacmanYPos/7) === this.cellCoords[1]) {
+                this.pacmanYChange = 0;
+            }
+        }
+        // A
+        if (this.grid[this.cellCoords[1]][this.cellCoords[0]-1] === 1 && this.dir === "left") {
+            if ((this.pacmanXPos/7) === this.cellCoords[0] && (this.pacmanYPos/7) === this.cellCoords[1]) {
+                this.pacmanXChange = 0;
+            }
+        }
+        // S
+        if (this.grid[this.cellCoords[1]+1][this.cellCoords[0]] === 1 && this.dir === "down") {
+            if ((this.pacmanXPos/7) === this.cellCoords[0] && (this.pacmanYPos/7) === this.cellCoords[1]) {
+                this.pacmanYChange = 0;
+            }
+        }
+        // D
+        if (this.grid[this.cellCoords[1]][this.cellCoords[0]+1] === 1 && this.dir === "right") {
+            if ((this.pacmanXPos/7) === this.cellCoords[0] && (this.pacmanYPos/7) === this.cellCoords[1]) {
+                this.pacmanXChange = 0;
+            }
         }
     }
 }
