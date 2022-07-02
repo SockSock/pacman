@@ -17,7 +17,7 @@ export class Pacman extends Entity {
         this.grid = board.getGrid();
         this.pacmanXPos = 90;
         this.pacmanYPos = 182;
-        this.pacmanXChange = 1
+        this.pacmanXChange = 0.5
         this.pacmanYChange = 0;
         this.dir = "right";
         this.stopDir = "right";
@@ -40,7 +40,7 @@ export class Pacman extends Entity {
             } else if (this.grid[this.cellCoords[1]-1][this.cellCoords[0]] === 0) {
                 this.stopDir = "up";
                 this.pacmanXChange = 0;
-                this.pacmanYChange = -1;
+                this.pacmanYChange = -0.5;
             } else {
 
             }
@@ -51,7 +51,7 @@ export class Pacman extends Entity {
 
             } else if (this.grid[this.cellCoords[1]][this.cellCoords[0]-1] === 0) {
                 this.stopDir = "left";
-                this.pacmanXChange = -1;
+                this.pacmanXChange = -0.5;
                 this.pacmanYChange = 0;
             } else {
 
@@ -64,7 +64,7 @@ export class Pacman extends Entity {
             } else if (this.grid[this.cellCoords[1]+1][this.cellCoords[0]] === 0) {
                 this.stopDir = "down";
                 this.pacmanXChange = 0;
-                this.pacmanYChange = 1;
+                this.pacmanYChange = 0.5;
             } else {
 
             }
@@ -75,7 +75,7 @@ export class Pacman extends Entity {
 
             } else if (this.grid[this.cellCoords[1]][this.cellCoords[0]+1] === 0) {
                 this.stopDir = "right";
-                this.pacmanXChange = 1;
+                this.pacmanXChange = 0.5;
                 this.pacmanYChange = 0;
             } else {
 
