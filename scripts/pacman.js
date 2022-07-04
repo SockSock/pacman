@@ -11,7 +11,7 @@ export class Pacman extends Entity {
     pacmanXChange;
     pacmanYChange;
     dir;
-    stopDir;
+    stopDir; // Direction used to calculate collision detection.
 
     constructor() {
         super();
@@ -27,18 +27,23 @@ export class Pacman extends Entity {
         this.cellCoords = [Math.ceil((this.pacmanXPos-3)/7), Math.ceil((this.pacmanYPos-3)/7)];
     }
 
+    // Displays Pac-Man.
     drawSprite() {
         fill(255, 255, 0)
         circle(this.pacmanXPos+=this.pacmanXChange, this.pacmanYPos+=this.pacmanYChange, 7);
     }
 
+    // Logic for the movement of Pac-Man.
     moveSprite() {
+        // Stores the future location of Pac-Man in relation to the grid.
         this.cellCoords = [Math.ceil((this.pacmanXPos-3)/7), Math.ceil((this.pacmanYPos-3)/7)];
 
         // W
         if (this.dir === "up") {
+            // Checks if Pac-Man is the middle of a tile.
             if (!(this.pacmanXPos % 7 === 0)) {
 
+              // If he is, check if the tile above Pac-Man is empty to move into (because direction is up).
             } else if (this.grid[this.cellCoords[1]-1][this.cellCoords[0]] === 0) {
                 this.stopDir = "up";
                 this.pacmanXChange = 0;
@@ -77,6 +82,7 @@ export class Pacman extends Entity {
         }
     }
 
+    // Logic for user inputs to be registered properly.
     changeDirection() {
         // W
         if (keyCode === 87 || keyCode === UP_ARROW) {
@@ -96,6 +102,7 @@ export class Pacman extends Entity {
         }
     }
 
+    // Logic for the collision detection of Pac-Man.
     stopSprite() {
         // W
         if (this.grid[this.cellCoords[1]-1][this.cellCoords[0]] === 1 && this.stopDir === "up") {
