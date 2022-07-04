@@ -1,3 +1,5 @@
+// Pacman class.
+
 import {Board} from './board.js';
 import {Entity} from './entity.js';
 
@@ -41,8 +43,6 @@ export class Pacman extends Entity {
                 this.stopDir = "up";
                 this.pacmanXChange = 0;
                 this.pacmanYChange = -0.5;
-            } else {
-
             }
         }
         // A
@@ -53,8 +53,6 @@ export class Pacman extends Entity {
                 this.stopDir = "left";
                 this.pacmanXChange = -0.5;
                 this.pacmanYChange = 0;
-            } else {
-
             }
         }
         // S
@@ -65,8 +63,6 @@ export class Pacman extends Entity {
                 this.stopDir = "down";
                 this.pacmanXChange = 0;
                 this.pacmanYChange = 0.5;
-            } else {
-
             }
         }
         // D
@@ -77,8 +73,6 @@ export class Pacman extends Entity {
                 this.stopDir = "right";
                 this.pacmanXChange = 0.5;
                 this.pacmanYChange = 0;
-            } else {
-
             }
         }
     }

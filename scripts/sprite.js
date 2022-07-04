@@ -1,3 +1,5 @@
+// Sprite abstract class.
+
 export class Sprite {
     constructor() {
         if (this.constructor === Sprite) {

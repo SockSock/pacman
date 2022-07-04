@@ -1,3 +1,5 @@
+// Entity abstract class.
+
 import {Sprite} from './sprite.js';
 
 export class Entity extends Sprite {
