@@ -40,7 +40,7 @@ export class Pacman extends Entity {
 
         // W
         if (this.dir === "up") {
-            // Check if Pac-Man is the middle of a tile.
+            // Check if Pac-Man is in the middle of a tile.
             if (!(this.pacmanXPos % 7 === 0)) {
 
               // If he is, check if the tile above Pac-Man is empty to move into (because direction is up).
