@@ -1,4 +1,4 @@
-// Sprite abstract class.
+// Sprite abstract class. Used for overriding methods.
 
 export class Sprite {
     constructor() {

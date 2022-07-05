@@ -1,4 +1,4 @@
-// Entity abstract class.
+// Entity abstract class. Used for overriding methods.
 
 import {Sprite} from './sprite.js';
 

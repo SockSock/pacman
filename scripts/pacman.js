@@ -1,4 +1,4 @@
-// Pacman class.
+// Pacman class. Contains subroutines related to the movement and collision detection of Pac-Man.
 
 import {Board} from './board.js';
 import {Entity} from './entity.js';
@@ -40,7 +40,7 @@ export class Pacman extends Entity {
 
         // W
         if (this.dir === "up") {
-            // Checks if Pac-Man is the middle of a tile.
+            // Check if Pac-Man is the middle of a tile.
             if (!(this.pacmanXPos % 7 === 0)) {
 
               // If he is, check if the tile above Pac-Man is empty to move into (because direction is up).
@@ -105,7 +105,10 @@ export class Pacman extends Entity {
     // Logic for the collision detection of Pac-Man.
     stopSprite() {
         // W
+        // Check if the tile above Pac-Man is a wall (because direction is up).
         if (this.grid[this.cellCoords[1]-1][this.cellCoords[0]] === 1 && this.stopDir === "up") {
+            // If he is, stop Pac-Man if the current location of Pac-Man equals his future location, stored
+            // in the cellCoords array.
             if ((this.pacmanXPos/7) === this.cellCoords[0] && (this.pacmanYPos/7) === this.cellCoords[1]) {
                 this.pacmanYChange = 0;
             }
