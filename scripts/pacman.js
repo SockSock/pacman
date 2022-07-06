@@ -33,7 +33,7 @@ export class Pacman extends Entity {
         circle(this.pacmanXPos+=this.pacmanXChange, this.pacmanYPos+=this.pacmanYChange, 7);
     }
 
-    // Logic for the movement of Pac-Man.
+    // Validation: Logic for the movement of Pac-Man.
     moveSprite() {
         // Stores the future location of Pac-Man in relation to the grid.
         this.cellCoords = [Math.ceil((this.pacmanXPos-3)/7), Math.ceil((this.pacmanYPos-3)/7)];
@@ -82,7 +82,7 @@ export class Pacman extends Entity {
         }
     }
 
-    // Logic for user inputs to be registered properly.
+    // Validation: Logic for user inputs to be registered properly.
     changeDirection() {
         // W
         if (keyCode === 87 || keyCode === UP_ARROW) {
@@ -102,7 +102,7 @@ export class Pacman extends Entity {
         }
     }
 
-    // Logic for the collision detection of Pac-Man.
+    // Validation: Logic for the collision detection of Pac-Man.
     stopSprite() {
         // W
         // Check if the tile above Pac-Man is a wall (because direction is up).
