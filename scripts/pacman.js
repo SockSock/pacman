@@ -13,9 +13,10 @@ export class Pacman extends Entity {
     dir;
     stopDir; // Direction used to calculate collision detection.
 
-    constructor() {
+    constructor(board, score) {
         super();
-        let board = new Board();
+        this.score = score;
+        this.board = board;
         this.grid = board.getGrid();
         this.x = 90;
         this.y = 182;
@@ -131,5 +132,9 @@ export class Pacman extends Entity {
                 this.xVel = 0;
             }
         }
+    }
+
+    getCoords() {
+        return this.cellCoords;
     }
 }
