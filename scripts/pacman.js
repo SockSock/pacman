@@ -1,6 +1,5 @@
 // Pacman class. Contains subroutines related to the movement and collision detection of Pac-Man.
 
-import {Board} from './board.js';
 import {Entity} from './entity.js';
 
 export class Pacman extends Entity {
@@ -16,7 +15,6 @@ export class Pacman extends Entity {
     constructor(board, score) {
         super();
         this.score = score;
-        this.board = board;
         this.grid = board.getGrid();
         this.x = 90;
         this.y = 182;
