@@ -2,7 +2,6 @@
 
 import {Board} from './board.js';
 import {Pacman} from './pacman.js';
-import {Dot} from './dot.js';
 import {Score} from './score.js';
 
 let pacman;
@@ -17,7 +16,6 @@ window.setup = function() {
     board = new Board();
     score = new Score();
     pacman = new Pacman(board, score);
-    // dot = new Dot(board, pacman, score);
 }
 
 // Updates 60 frames per second to reload objects to update their locations.
@@ -28,7 +26,8 @@ window.draw = function() {
     pacman.drawSprite();
     pacman.moveSprite();
     pacman.stopSprite();
-    // dot.eatCollectible();
+    pacman.eatCollectible();
+    score.drawSprite();
 }
 
 // Detects keys inputted by the user to allow for movement of Pac-Man.
