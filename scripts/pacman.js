@@ -138,4 +138,8 @@ export class Pacman extends Entity {
             this.grid[this.cellCoords[1]][this.cellCoords[0]] = 3;
         }
     }
+
+    getLocation() {
+        return this.cellCoords;
+    }
 }
