@@ -3,11 +3,12 @@
 import {Board} from './board.js';
 import {Pacman} from './pacman.js';
 import {Score} from './score.js';
+import {Ghost} from "./ghost.js";
 
 let pacman;
 let board;
-let dot;
 let score;
+let ghost;
 
 // Loads and defines initial properties which are needed before the game starts.
 window.setup = function() {
@@ -16,6 +17,7 @@ window.setup = function() {
     board = new Board();
     score = new Score();
     pacman = new Pacman(board, score);
+    ghost = new Ghost(board, pacman);
 }
 
 // Updates 60 frames per second to reload objects to update their locations.
@@ -28,6 +30,8 @@ window.draw = function() {
     pacman.stopSprite();
     pacman.eatCollectible();
     score.drawSprite();
+    ghost.drawSprite();
+    ghost.moveSprite();
 }
 
 // Detects keys inputted by the user to allow for movement of Pac-Man.
