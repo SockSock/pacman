@@ -18,7 +18,7 @@ export class Ghost extends Entity {
         this.pacmanCellCoords  = pacman.getLocation();
         this.x = 90;
         this.y = 98;
-        this.xVel = 0.5
+        this.xVel = 0.5;
         this.yVel = 0;
         this.dir = "right";
         this.cellCoords = [Math.ceil((this.x-3)/7), Math.ceil((this.y-3)/7)];
@@ -30,14 +30,13 @@ export class Ghost extends Entity {
     }
 
     moveSprite() {
-        console.log("xVel: " + this.xVel + " yVel: " + this.yVel);
-        console.log("cellCoords: " + this.cellCoords);
-        console.log("pacmanCellCoords: " + this.pacmanCellCoords);
+        console.log(this.dir);
         this.cellCoords = [Math.ceil((this.x-3)/7), Math.ceil((this.y-3)/7)];
         this.pacmanCellCoords  = this.pacman.getLocation();
 
         if (!(this.cellCoords[0] === this.pacmanCellCoords[0] && this.cellCoords[1] === this.pacmanCellCoords[1])) {
-            if (this.cellCoords[0] > this.pacmanCellCoords[0]) {
+            // Left
+            if (this.cellCoords[0] > this.pacmanCellCoords[0] && this.dir !== "right") {
                 if (!(this.y % 7 === 0)) {
 
                 } else if (this.grid[this.cellCoords[1]][this.cellCoords[0]-1] === 0 || this.grid[this.cellCoords[1]][this.cellCoords[0]-1] === 3) {
@@ -45,7 +44,8 @@ export class Ghost extends Entity {
                     this.yVel = 0;
                     this.dir = "left";
                 }
-            } else if (this.cellCoords[0] < this.pacmanCellCoords[0]) {
+              // Right
+            } else if (this.cellCoords[0] < this.pacmanCellCoords[0] && this.dir !== "left") {
                 if (!(this.y % 7 === 0)) {
 
                 } else if (this.grid[this.cellCoords[1]][this.cellCoords[0]+1] === 0 || this.grid[this.cellCoords[1]][this.cellCoords[0]+1] === 3) {
@@ -53,7 +53,8 @@ export class Ghost extends Entity {
                     this.yVel = 0;
                     this.dir = "right";
                 }
-            } else if (this.cellCoords[1] > this.pacmanCellCoords[1]) {
+              // Up
+            } else if (this.cellCoords[1] > this.pacmanCellCoords[1] && this.dir !== "down") {
                 if (!(this.x % 7 === 0)) {
 
                 } else if (this.grid[this.cellCoords[1]-1][this.cellCoords[0]] === 0 || this.grid[this.cellCoords[1]-1][this.cellCoords[0]] === 3) {
@@ -61,7 +62,8 @@ export class Ghost extends Entity {
                     this.yVel = -0.5;
                     this.dir = "up";
                 }
-            } else if (this.cellCoords[1] < this.pacmanCellCoords[1]) {
+              // Down
+            } else if (this.cellCoords[1] < this.pacmanCellCoords[1] && this.dir !== "up") {
                 if (!(this.x % 7 === 0)) {
 
                 } else if (this.grid[this.cellCoords[1]+1][this.cellCoords[0]] === 0 || this.grid[this.cellCoords[1]+1][this.cellCoords[0]] === 3) {
