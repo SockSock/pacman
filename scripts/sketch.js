@@ -14,6 +14,7 @@ let ghost;
 window.setup = function() {
     rectMode(CENTER);
     createCanvas(600, 750);
+    frameRate(60);
     board = new Board();
     score = new Score();
     pacman = new Pacman(board, score);
