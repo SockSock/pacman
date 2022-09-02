@@ -30,48 +30,58 @@ export class Ghost extends Entity {
     }
 
     moveSprite() {
-        console.log(this.dir);
         this.cellCoords = [Math.ceil((this.x-3)/7), Math.ceil((this.y-3)/7)];
         this.pacmanCellCoords  = this.pacman.getLocation();
 
-        if (!(this.cellCoords[0] === this.pacmanCellCoords[0] && this.cellCoords[1] === this.pacmanCellCoords[1])) {
-            // Left
+        // Up
+        if (!(this.x % 7 === 0)) {
+
+        } else if (this.grid[this.cellCoords[1]-1][this.cellCoords[0]] === 0 || this.grid[this.cellCoords[1]-1][this.cellCoords[0]] === 3) {
+            if (this.cellCoords[1] > this.pacmanCellCoords[1] && this.dir !== "down") {
+                this.dir = "up";
+                this.xVel = 0;
+                this.yVel = -0.5;
+            } else {
+
+            }
+        }
+
+        // Left
+        if (!(this.y % 7 === 0)) {
+
+        } else if (this.grid[this.cellCoords[1]][this.cellCoords[0]-1] === 0 || this.grid[this.cellCoords[1]][this.cellCoords[0]-1] === 3) {
             if (this.cellCoords[0] > this.pacmanCellCoords[0] && this.dir !== "right") {
-                if (!(this.y % 7 === 0)) {
+                this.dir = "left";
+                this.xVel = -0.5;
+                this.yVel = 0;
+            } else {
 
-                } else if (this.grid[this.cellCoords[1]][this.cellCoords[0]-1] === 0 || this.grid[this.cellCoords[1]][this.cellCoords[0]-1] === 3) {
-                    this.xVel = -0.5;
-                    this.yVel = 0;
-                    this.dir = "left";
-                }
-              // Right
-            } else if (this.cellCoords[0] < this.pacmanCellCoords[0] && this.dir !== "left") {
-                if (!(this.y % 7 === 0)) {
+            }
+        }
+        // Down
+        if (!(this.x % 7 === 0)) {
 
-                } else if (this.grid[this.cellCoords[1]][this.cellCoords[0]+1] === 0 || this.grid[this.cellCoords[1]][this.cellCoords[0]+1] === 3) {
-                    this.xVel = 0.5;
-                    this.yVel = 0;
-                    this.dir = "right";
-                }
-              // Up
-            } else if (this.cellCoords[1] > this.pacmanCellCoords[1] && this.dir !== "down") {
-                if (!(this.x % 7 === 0)) {
+        } else if (this.grid[this.cellCoords[1]+1][this.cellCoords[0]] === 0 || this.grid[this.cellCoords[1]+1][this.cellCoords[0]] === 3) {
+            if (this.cellCoords[1] < this.pacmanCellCoords[1] && this.dir !== "up") {
+                this.dir = "down";
+                this.xVel = 0;
+                this.yVel = 0.5;
+            } else {
 
-                } else if (this.grid[this.cellCoords[1]-1][this.cellCoords[0]] === 0 || this.grid[this.cellCoords[1]-1][this.cellCoords[0]] === 3) {
-                    this.xVel = 0;
-                    this.yVel = -0.5;
-                    this.dir = "up";
-                }
-              // Down
-            } else if (this.cellCoords[1] < this.pacmanCellCoords[1] && this.dir !== "up") {
-                if (!(this.x % 7 === 0)) {
+            }
+        }
+        // Right
+        if (!(this.y % 7 === 0)) {
 
-                } else if (this.grid[this.cellCoords[1]+1][this.cellCoords[0]] === 0 || this.grid[this.cellCoords[1]+1][this.cellCoords[0]] === 3) {
-                    this.xVel = 0;
-                    this.yVel = 0.5;
-                    this.dir = "down";
-                }
+        } else if (this.grid[this.cellCoords[1]][this.cellCoords[0]+1] === 0 || this.grid[this.cellCoords[1]][this.cellCoords[0]+1] === 3) {
+            if (this.cellCoords[0] < this.pacmanCellCoords[0] && this.dir !== "left") {
+                this.dir = "right";
+                this.xVel = 0.5;
+                this.yVel = 0;
+            } else {
+
             }
         }
     }
+
 }
