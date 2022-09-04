@@ -9,7 +9,7 @@ export class Ghost extends Entity {
     xVel;
     yVel;
     dir;
-    pacman;
+    distance;
 
     constructor(board, pacman) {
         super();
@@ -22,6 +22,7 @@ export class Ghost extends Entity {
         this.yVel = 0;
         this.dir = "right";
         this.cellCoords = [Math.ceil((this.x-3)/7), Math.ceil((this.y-3)/7)];
+        this.distance = 0;
     }
 
     drawSprite() {
@@ -30,58 +31,59 @@ export class Ghost extends Entity {
     }
 
     moveSprite() {
-        this.cellCoords = [Math.ceil((this.x-3)/7), Math.ceil((this.y-3)/7)];
-        this.pacmanCellCoords  = this.pacman.getLocation();
+        this.cellCoords = [Math.ceil((this.x-3)/7), Math.ceil((this.y -3)/7)];
+        this.pacmanCellCoords = this.pacman.getLocation();
+        this.distance = Math.abs(this.cellCoords[0] - this.pacmanCellCoords[0]) + Math.abs(this.cellCoords[1] - this.pacmanCellCoords[1]);
+        console.log(this.distance, this.dir);
 
         // Up
-        if (!(this.x % 7 === 0)) {
+        if (this.grid[this.cellCoords[1]-1][this.cellCoords[0]] === 1) {
 
-        } else if (this.grid[this.cellCoords[1]-1][this.cellCoords[0]] === 0 || this.grid[this.cellCoords[1]-1][this.cellCoords[0]] === 3) {
-            if (this.cellCoords[1] > this.pacmanCellCoords[1] && this.dir !== "down") {
+        } else if (this.dir !== "down" && (this.grid[this.cellCoords[1]-1][this.cellCoords[0]] === 0 || this.grid[this.cellCoords[1]-1][this.cellCoords[0]] === 3)) {
+            if (!(this.x % 7 === 0)) {
+
+            } else if (Math.abs(this.cellCoords[0] - this.pacmanCellCoords[0]) + Math.abs(this.cellCoords[1]-1 - this.pacmanCellCoords[1]) < this.distance) {
                 this.dir = "up";
                 this.xVel = 0;
                 this.yVel = -0.5;
-            } else {
-
             }
         }
-
         // Left
-        if (!(this.y % 7 === 0)) {
+        if (this.grid[this.cellCoords[1]][this.cellCoords[0]-1] === 1) {
 
-        } else if (this.grid[this.cellCoords[1]][this.cellCoords[0]-1] === 0 || this.grid[this.cellCoords[1]][this.cellCoords[0]-1] === 3) {
-            if (this.cellCoords[0] > this.pacmanCellCoords[0] && this.dir !== "right") {
+        } else if (this.dir !== "right" && (this.grid[this.cellCoords[1]][this.cellCoords[0]-1] === 0 || this.grid[this.cellCoords[1]][this.cellCoords[0]-1] === 3)) {
+            if (!(this.y % 7 === 0)) {
+
+            } else if (Math.abs(this.cellCoords[0]-1 - this.pacmanCellCoords[0]) + Math.abs(this.cellCoords[1] - this.pacmanCellCoords[1]) < this.distance) {
                 this.dir = "left";
                 this.xVel = -0.5;
                 this.yVel = 0;
-            } else {
-
             }
         }
         // Down
-        if (!(this.x % 7 === 0)) {
+        if (this.grid[this.cellCoords[1]+1][this.cellCoords[0]] === 1) {
 
-        } else if (this.grid[this.cellCoords[1]+1][this.cellCoords[0]] === 0 || this.grid[this.cellCoords[1]+1][this.cellCoords[0]] === 3) {
-            if (this.cellCoords[1] < this.pacmanCellCoords[1] && this.dir !== "up") {
+        } else if (this.dir !== "up" && (this.grid[this.cellCoords[1]+1][this.cellCoords[0]] === 0 || this.grid[this.cellCoords[1]+1][this.cellCoords[0]] === 3)) {
+            if (!(this.x % 7 === 0)) {
+
+            } else if (Math.abs(this.cellCoords[0] - this.pacmanCellCoords[0]) + Math.abs(this.cellCoords[1]+1 - this.pacmanCellCoords[1]) < this.distance) {
                 this.dir = "down";
                 this.xVel = 0;
                 this.yVel = 0.5;
-            } else {
-
             }
         }
         // Right
-        if (!(this.y % 7 === 0)) {
+        if (this.grid[this.cellCoords[1]][this.cellCoords[0]+1] === 1) {
 
-        } else if (this.grid[this.cellCoords[1]][this.cellCoords[0]+1] === 0 || this.grid[this.cellCoords[1]][this.cellCoords[0]+1] === 3) {
-            if (this.cellCoords[0] < this.pacmanCellCoords[0] && this.dir !== "left") {
+        } else if (this.dir !== "left" && (this.grid[this.cellCoords[1]][this.cellCoords[0]+1] === 0 || this.grid[this.cellCoords[1]][this.cellCoords[0]+1] === 3)) {
+            if (!(this.y % 7 === 0)) {
+
+            } else if (Math.abs(this.cellCoords[0]+1 - this.pacmanCellCoords[0]) + Math.abs(this.cellCoords[1] - this.pacmanCellCoords[1]) < this.distance) {
                 this.dir = "right";
                 this.xVel = 0.5;
                 this.yVel = 0;
-            } else {
-
             }
         }
-    }
 
+    }
 }
