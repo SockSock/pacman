@@ -40,43 +40,43 @@ export class Pacman extends Entity {
         // W
         if (this.dir === "up") {
             // Check if Pac-Man is in the middle of a tile.
-            if (!(this.x % 7 === 0)) {
-
-              // If he is, check if the tile above Pac-Man is empty to move into (because direction is up).
-            } else if (this.grid[this.cellCoords[1]-1][this.cellCoords[0]] === 0 || this.grid[this.cellCoords[1]-1][this.cellCoords[0]] === 3) {
-                this.stopDir = "up";
-                this.xVel = 0;
-                this.yVel = -0.5;
+            if (this.x % 7 === 0) {
+                // If he is, check if the tile above Pac-Man is empty to move into (because direction is up).
+                if (this.grid[this.cellCoords[1]-1][this.cellCoords[0]] === 0 || this.grid[this.cellCoords[1]-1][this.cellCoords[0]] === 3) {
+                    this.stopDir = "up";
+                    this.xVel = 0;
+                    this.yVel = -0.5;
+                }
             }
         }
         // A
         if (this.dir === "left") {
-            if (!(this.y % 7 === 0)) {
-
-            } else if (this.grid[this.cellCoords[1]][this.cellCoords[0]-1] === 0 || this.grid[this.cellCoords[1]][this.cellCoords[0]-1] === 3) {
-                this.stopDir = "left";
-                this.xVel = -0.5;
-                this.yVel = 0;
+            if (this.y % 7 === 0) {
+                if (this.grid[this.cellCoords[1]][this.cellCoords[0]-1] === 0 || this.grid[this.cellCoords[1]][this.cellCoords[0]-1] === 3) {
+                    this.stopDir = "left";
+                    this.xVel = -0.5;
+                    this.yVel = 0;
+                }
             }
         }
         // S
         if (this.dir === "down") {
-            if (!(this.x % 7 === 0)) {
-
-            } else if (this.grid[this.cellCoords[1]+1][this.cellCoords[0]] === 0 || this.grid[this.cellCoords[1]+1][this.cellCoords[0]] === 3) {
-                this.stopDir = "down";
-                this.xVel = 0;
-                this.yVel = 0.5;
+            if (this.x % 7 === 0) {
+                if (this.grid[this.cellCoords[1]+1][this.cellCoords[0]] === 0 || this.grid[this.cellCoords[1]+1][this.cellCoords[0]] === 3) {
+                    this.stopDir = "down";
+                    this.xVel = 0;
+                    this.yVel = 0.5;
+                }
             }
         }
         // D
         if (this.dir === "right") {
-            if (!(this.y % 7 === 0)) {
-
-            } else if (this.grid[this.cellCoords[1]][this.cellCoords[0]+1] === 0 || this.grid[this.cellCoords[1]][this.cellCoords[0]+1] === 3) {
-                this.stopDir = "right";
-                this.xVel = 0.5;
-                this.yVel = 0;
+            if (this.y % 7 === 0) {
+                if (this.grid[this.cellCoords[1]][this.cellCoords[0]+1] === 0 || this.grid[this.cellCoords[1]][this.cellCoords[0]+1] === 3) {
+                    this.stopDir = "right";
+                    this.xVel = 0.5;
+                    this.yVel = 0;
+                }
             }
         }
     }
