@@ -37,50 +37,50 @@ export class Ghost extends Entity {
         console.log(this.distance, this.dir);
 
         // Up
-        if (this.grid[this.cellCoords[1]-1][this.cellCoords[0]] === 1) {
-
-        } else if (this.dir !== "down" && (this.grid[this.cellCoords[1]-1][this.cellCoords[0]] === 0 || this.grid[this.cellCoords[1]-1][this.cellCoords[0]] === 3)) {
-            if (this.x % 7 === 0) {
-                if (Math.abs(this.cellCoords[0] - this.pacmanCellCoords[0]) + Math.abs(this.cellCoords[1]-1 - this.pacmanCellCoords[1]) < this.distance) {
-                    this.dir = "up";
-                    this.xVel = 0;
-                    this.yVel = -0.5;
+        if (this.grid[this.cellCoords[1]-1][this.cellCoords[0]] !== 1) {
+            if (this.dir !== "down" && (this.grid[this.cellCoords[1]-1][this.cellCoords[0]] === 0 || this.grid[this.cellCoords[1]-1][this.cellCoords[0]] === 3)) {
+                if (this.x % 7 === 0) {
+                    if (Math.abs(this.cellCoords[0] - this.pacmanCellCoords[0]) + Math.abs(this.cellCoords[1]-1 - this.pacmanCellCoords[1]) < this.distance) {
+                        this.dir = "up";
+                        this.xVel = 0;
+                        this.yVel = -0.5;
+                    }
                 }
             }
         }
         // Left
-        if (this.grid[this.cellCoords[1]][this.cellCoords[0]-1] === 1) {
-
-        } else if (this.dir !== "right" && (this.grid[this.cellCoords[1]][this.cellCoords[0]-1] === 0 || this.grid[this.cellCoords[1]][this.cellCoords[0]-1] === 3)) {
-            if (this.y % 7 === 0) {
-                if (Math.abs(this.cellCoords[0]-1 - this.pacmanCellCoords[0]) + Math.abs(this.cellCoords[1] - this.pacmanCellCoords[1]) < this.distance) {
-                    this.dir = "left";
-                    this.xVel = -0.5;
-                    this.yVel = 0;
+        if (this.grid[this.cellCoords[1]][this.cellCoords[0]-1] !== 1) {
+            if (this.dir !== "right" && (this.grid[this.cellCoords[1]][this.cellCoords[0]-1] === 0 || this.grid[this.cellCoords[1]][this.cellCoords[0]-1] === 3)) {
+                if (this.y % 7 === 0) {
+                    if (Math.abs(this.cellCoords[0]-1 - this.pacmanCellCoords[0]) + Math.abs(this.cellCoords[1] - this.pacmanCellCoords[1]) < this.distance) {
+                        this.dir = "left";
+                        this.xVel = -0.5;
+                        this.yVel = 0;
+                    }
                 }
             }
         }
         // Down
-        if (this.grid[this.cellCoords[1]+1][this.cellCoords[0]] === 1) {
-
-        } else if (this.dir !== "up" && (this.grid[this.cellCoords[1]+1][this.cellCoords[0]] === 0 || this.grid[this.cellCoords[1]+1][this.cellCoords[0]] === 3)) {
-            if (this.x % 7 === 0) {
-                if (Math.abs(this.cellCoords[0] - this.pacmanCellCoords[0]) + Math.abs(this.cellCoords[1]+1 - this.pacmanCellCoords[1]) < this.distance) {
-                    this.dir = "down";
-                    this.xVel = 0;
-                    this.yVel = 0.5;
+        if (this.grid[this.cellCoords[1]+1][this.cellCoords[0]] !== 1) {
+            if (this.dir !== "up" && (this.grid[this.cellCoords[1]+1][this.cellCoords[0]] === 0 || this.grid[this.cellCoords[1]+1][this.cellCoords[0]] === 3)) {
+                if (this.x % 7 === 0) {
+                    if (Math.abs(this.cellCoords[0] - this.pacmanCellCoords[0]) + Math.abs(this.cellCoords[1]+1 - this.pacmanCellCoords[1]) < this.distance) {
+                        this.dir = "down";
+                        this.xVel = 0;
+                        this.yVel = 0.5;
+                    }
                 }
             }
         }
         // Right
-        if (this.grid[this.cellCoords[1]][this.cellCoords[0]+1] === 1) {
-
-        } else if (this.dir !== "left" && (this.grid[this.cellCoords[1]][this.cellCoords[0]+1] === 0 || this.grid[this.cellCoords[1]][this.cellCoords[0]+1] === 3)) {
-            if (this.y % 7 === 0) {
-                if (Math.abs(this.cellCoords[0]+1 - this.pacmanCellCoords[0]) + Math.abs(this.cellCoords[1] - this.pacmanCellCoords[1]) < this.distance) {
-                    this.dir = "right";
-                    this.xVel = 0.5;
-                    this.yVel = 0;
+        if (this.grid[this.cellCoords[1]][this.cellCoords[0]+1] !== 1) {
+            if (this.dir !== "left" && (this.grid[this.cellCoords[1]][this.cellCoords[0]+1] === 0 || this.grid[this.cellCoords[1]][this.cellCoords[0]+1] === 3)) {
+                if (this.y % 7 === 0) {
+                    if (Math.abs(this.cellCoords[0]+1 - this.pacmanCellCoords[0]) + Math.abs(this.cellCoords[1] - this.pacmanCellCoords[1]) < this.distance) {
+                        this.dir = "right";
+                        this.xVel = 0.5;
+                        this.yVel = 0;
+                    }
                 }
             }
         }
