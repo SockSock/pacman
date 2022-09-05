@@ -55,15 +55,15 @@ export class Board extends Sprite {
     drawSprite() {
         for (let i = 0; i < this.grid.length; i++) {
             for (let j = 0; j < this.grid.length;  j++) {
-                if (this.grid[i][j] === 0) {
+                if (this.grid[j][i] === 0) {
                     noStroke();
                     fill(255, 255, 0);
-                    circle(j*7, i*7, 2);
+                    circle(i*7, j*7, 2);
                 }
-                if (this.grid[i][j] === 1) {
+                if (this.grid[j][i] === 1) {
                     noStroke();
                     fill(0, 0, 255);
-                    rect(j*7, i*7, 7, 7);
+                    rect(i*7, j*7, 7, 7);
                 }
             }
         }
