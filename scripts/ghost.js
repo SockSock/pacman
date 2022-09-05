@@ -14,6 +14,7 @@ export class Ghost extends Entity {
     start;
     end;
     openSet;
+    closedSet;
     board;
     path;
 
@@ -32,6 +33,7 @@ export class Ghost extends Entity {
         this.start = 0;
         this.end = 0;
         this.openSet = [];
+        this.closedSet = [];
         this.path = [];
     }
 
@@ -40,32 +42,53 @@ export class Ghost extends Entity {
                 fill(255, 0, 0);
                 rect(this.path[i].y*7, this.path[i].x*7, 7, 7);
             }
+            for (let i = 0; i < this.openSet.length; i++) {
+                fill(0, 255, 0);
+                rect(this.openSet[i].y*7, this.openSet[i].x*7, 7, 7);
+            }
     }
 
     moveSprite() {
-        this.cellCoords = [Math.ceil((this.x-3)/7), Math.ceil((this.y-3)/7)];
         this.pacmanCellCoords = this.pacman.getLocation();
-        this.start = this.grid[this.cellCoords[1]][this.cellCoords[0]];
         this.end = this.grid[this.pacmanCellCoords[1]][this.pacmanCellCoords[0]];
-        this.openSet.push(this.start);
 
         if (this.openSet.length > 0) {
             let current = this.openSet[0];
             if (current === this.end) {
+                let temp = current;
+                this.path.push(temp);
+                while (temp.cameFrom) {
+                    this.path.push(temp.cameFrom);
+                    temp = temp.cameFrom;
+                }
                 console.log("Done.")
             }
 
             this.openSet.splice(0, 1);
+            this.closedSet.push(current);
             let neighbours = current.neighbours;
             for (let i = 0; i < neighbours.length; i++) {
                 let neighbour = neighbours[i];
-                let tentativeGScore = neighbour.g + 1;
-                if (tentativeGScore > neighbour.g) {
-                    neighbour.g = tentativeGScore;
-                    neighbour.f = tentativeGScore + this.heuristic(neighbour, this.end);
-                    if (!(this.openSet.includes(neighbour)) && !neighbour.wall) {
+
+                if (!(this.closedSet.includes(neighbour)) && !neighbour.wall) {
+                    let tentativeGScore = current.g + 1;
+
+                    let newPath = false;
+                    if (this.openSet.includes(neighbour)) {
+                        if (tentativeGScore < neighbour.g) {
+                            neighbour.g = tentativeGScore;
+                            newPath = true;
+                        }
+                    } else {
+                        neighbour.g = tentativeGScore;
+                        newPath = true;
                         this.openSet.push(neighbour);
-                        this.path.push(current);
+                    }
+
+                    if (newPath) {
+                        neighbour.h = this.heuristic(neighbour, this.end);
+                        neighbour.f = neighbour.g + neighbour.h;
+                        neighbour.cameFrom = current;
                     }
                 }
             }
@@ -91,6 +114,9 @@ export class Ghost extends Entity {
                 }
             }
         }
+        this.cellCoords = [Math.ceil((this.x-3)/7), Math.ceil((this.y-3)/7)];
+        this.start = this.grid[this.cellCoords[1]][this.cellCoords[0]];
+        this.openSet.push(this.start);
     }
 
     heuristic(a, b) {
