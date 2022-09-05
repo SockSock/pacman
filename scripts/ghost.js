@@ -60,7 +60,7 @@ export class Ghost extends Entity {
             for (let i = 0; i < neighbours.length; i++) {
                 let neighbour = neighbours[i];
                 let tentativeGScore = neighbour.g + 1;
-                if (tentativeGScore < neighbour.g) {
+                if (tentativeGScore > neighbour.g) {
                     neighbour.g = tentativeGScore;
                     neighbour.f = tentativeGScore + this.heuristic(neighbour, this.end);
                     if (!(this.openSet.includes(neighbour)) && !neighbour.wall) {
