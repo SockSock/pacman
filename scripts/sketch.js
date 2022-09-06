@@ -18,8 +18,9 @@ window.setup = function() {
     board = new Board();
     score = new Score();
     pacman = new Pacman(board, score);
-    ghost = new Ghost(pacman);
+    ghost = new Ghost(pacman, board);
     ghost.setupPoints();
+    ghost.updateLocations();
 }
 
 // Updates 60 frames per second to reload objects to update their locations.
@@ -32,7 +33,7 @@ window.draw = function() {
     pacman.stopSprite();
     pacman.eatCollectible();
     score.drawSprite();
-    ghost.updateLocations();
+    // ghost.updateLocations();
     ghost.moveSprite();
     ghost.drawSprite();
 }

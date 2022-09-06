@@ -7,7 +7,7 @@ export class Point {
     neighbours;
     cameFrom;
 
-    constructor(x, y, wall) {
+    constructor(x, y) {
         this.x = x;
         this.y = y;
         this.f = 0;
@@ -15,22 +15,21 @@ export class Point {
         this.h = 0;
         this.neighbours = [];
         this.cameFrom = undefined;
-        this.wall = wall;
     }
 
     addNeighbours(grid) {
         let i = this.x;
         let j = this.y;
-        if (i < grid.length - 1) {
+        if (i < grid.length - 1 && grid[i+1][j] instanceof Point) {
             this.neighbours.push(grid[i+1][j]);
         }
-        if (i > 0) {
+        if (i > 0 && grid[i-1][j] instanceof Point) {
             this.neighbours.push(grid[i-1][j]);
         }
-        if (j < grid[0].length - 1) {
+        if (j < grid[0].length - 1 && grid[i][j+1] instanceof Point) {
             this.neighbours.push(grid[i][j+1]);
         }
-        if (j > 0) {
+        if (j > 0 && grid[i][j-1] instanceof Point) {
             this.neighbours.push(grid[i][j-1]);
         }
     }
