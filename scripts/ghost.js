@@ -134,13 +134,11 @@ export class Ghost extends Entity {
     }
 
     updateLocations() {
-        if  (frameCount % 30 === 0) {
             this.cellCoords = [Math.ceil((this.x-3)/7), Math.ceil((this.y-3)/7)];
             this.start = this.grid[this.cellCoords[1]][this.cellCoords[0]];
             this.pacmanCellCoords = this.pacman.getLocation();
             this.end = this.grid[this.pacmanCellCoords[1]][this.pacmanCellCoords[0]];
             this.openSet.push(this.start);
-        }
     }
 
     heuristic(a, b) {
