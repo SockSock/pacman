@@ -32,6 +32,7 @@ window.draw = function() {
     pacman.stopSprite();
     pacman.eatCollectible();
     score.drawSprite();
+    ghost.updateLocations();
     ghost.moveSprite();
     ghost.drawSprite();
 }

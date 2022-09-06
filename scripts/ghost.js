@@ -13,6 +13,7 @@ export class Ghost extends Entity {
     dir;
     start;
     end;
+    current;
     openSet;
     closedSet;
     board;
@@ -24,38 +25,43 @@ export class Ghost extends Entity {
         this.board = new Board();
         this.grid = this.board.getGrid();
         this.pacmanCellCoords  = pacman.getLocation();
-        this.x = 90;
+        this.x = 91;
         this.y = 98;
-        this.xVel = 0.5;
+        this.xVel = 0;
         this.yVel = 0;
-        this.dir = "right";
+        this.dir = "";
         this.cellCoords = 0;
         this.start = 0;
         this.end = 0;
+        this.current = 0;
         this.openSet = [];
         this.closedSet = [];
         this.path = [];
     }
 
     drawSprite() {
-            for (let i = 0; i < this.path.length; i++) {
-                fill(255, 0, 0);
-                rect(this.path[i].y*7, this.path[i].x*7, 7, 7);
-            }
-            for (let i = 0; i < this.openSet.length; i++) {
-                fill(0, 255, 0);
-                rect(this.openSet[i].y*7, this.openSet[i].x*7, 7, 7);
-            }
+        // Displays the ghost.
+        fill(255, 0, 0)
+        rect(this.x+=this.xVel, this.y+=this.yVel, 7, 7);
+
+        // Displays the chosen path.
+        for (let i = 0; i < this.path.length; i++) {
+            fill(0, 255, 0);
+            rect(this.path[i].y*7, this.path[i].x*7, 7, 7);
+        }
+
+        // What's being searched.
+        for (let i = 0; i < this.openSet.length; i++) {
+            fill(0, 255, 0);
+            rect(this.openSet[i].y*7, this.openSet[i].x*7, 7, 7);
+        }
     }
 
     moveSprite() {
-        this.pacmanCellCoords = this.pacman.getLocation();
-        this.end = this.grid[this.pacmanCellCoords[1]][this.pacmanCellCoords[0]];
-
         if (this.openSet.length > 0) {
-            let current = this.openSet[0];
-            if (current === this.end) {
-                let temp = current;
+            this.current = this.openSet[0];
+            if (this.current === this.end) {
+                let temp = this.current;
                 this.path.push(temp);
                 while (temp.cameFrom) {
                     this.path.push(temp.cameFrom);
@@ -65,13 +71,13 @@ export class Ghost extends Entity {
             }
 
             this.openSet.splice(0, 1);
-            this.closedSet.push(current);
-            let neighbours = current.neighbours;
+            this.closedSet.push(this.current);
+            let neighbours = this.current.neighbours;
             for (let i = 0; i < neighbours.length; i++) {
                 let neighbour = neighbours[i];
 
                 if (!(this.closedSet.includes(neighbour)) && !neighbour.wall) {
-                    let tentativeGScore = current.g + 1;
+                    let tentativeGScore = this.current.g + 1;
 
                     let newPath = false;
                     if (this.openSet.includes(neighbour)) {
@@ -88,7 +94,7 @@ export class Ghost extends Entity {
                     if (newPath) {
                         neighbour.h = this.heuristic(neighbour, this.end);
                         neighbour.f = neighbour.g + neighbour.h;
-                        neighbour.cameFrom = current;
+                        neighbour.cameFrom = this.current;
                     }
                 }
             }
@@ -114,9 +120,16 @@ export class Ghost extends Entity {
                 }
             }
         }
-        this.cellCoords = [Math.ceil((this.x-3)/7), Math.ceil((this.y-3)/7)];
-        this.start = this.grid[this.cellCoords[1]][this.cellCoords[0]];
-        this.openSet.push(this.start);
+    }
+
+    updateLocations() {
+        if  (frameCount % 30 === 0) {
+            this.cellCoords = [Math.ceil((this.x-3)/7), Math.ceil((this.y-3)/7)];
+            this.start = this.grid[this.cellCoords[1]][this.cellCoords[0]];
+            this.pacmanCellCoords = this.pacman.getLocation();
+            this.end = this.grid[this.pacmanCellCoords[1]][this.pacmanCellCoords[0]];
+            this.openSet.push(this.start);
+        }
     }
 
     heuristic(a, b) {
