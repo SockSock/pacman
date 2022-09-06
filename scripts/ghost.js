@@ -42,7 +42,18 @@ export class Ghost extends Entity {
     drawSprite() {
         // Displays the ghost.
         fill(255, 0, 0)
-        rect(this.x+=this.xVel, this.y+=this.yVel, 7, 7);
+        rect(this.x, this.y, 7, 7);
+
+        // Makes the ghost move.
+        if (frameCount % 15 === 0) {
+            if (this.path.length > 0) {
+                let next = this.path.pop();
+                let x = next.x;
+                let y = next.y;
+                this.y = x*7;
+                this.x = y*7;
+            }
+        }
 
         // Displays the chosen path.
         for (let i = 0; i < this.path.length; i++) {
