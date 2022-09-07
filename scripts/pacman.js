@@ -139,7 +139,23 @@ export class Pacman extends Entity {
         }
     }
 
+    reset() {
+        this.x = 90;
+        this.y = 182;
+        this.xVel = 0.5
+        this.yVel = 0;
+        this.dir = "right";
+        this.stopDir = "right";
+        keyCode = 68;
+        this.cellCoords = [Math.ceil((this.x-3)/7), Math.ceil((this.y-3)/7)];
+    }
+
     getLocation() {
         return this.cellCoords;
+    }
+
+    getDir() {
+        console.log(this.dir);
+        return this.stopDir;
     }
 }
