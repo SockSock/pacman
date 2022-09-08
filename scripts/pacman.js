@@ -155,7 +155,6 @@ export class Pacman extends Entity {
     }
 
     getDir() {
-        console.log(this.dir);
         return this.stopDir;
     }
 }

@@ -142,7 +142,7 @@ export class Ghost extends Entity {
         this.start = this.graph[this.cellCoords[1]][this.cellCoords[0]];
         this.pacmanCellCoords = this.pacman.getLocation();
 
-        // If it's the red ghost, chase the pacman.
+        // If it's the red ghost, chase Pac-Man directly.
         if (this.mode === "chase") {
             this.end = this.graph[this.pacmanCellCoords[1]][this.pacmanCellCoords[0]];
             this.openSet.push(this.start);
