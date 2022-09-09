@@ -1,3 +1,5 @@
+// Lives class. Contains subroutines related to the life count logic.
+
 import {Sprite} from "./sprite.js";
 
 export class Lives extends Sprite {
@@ -8,6 +10,7 @@ export class Lives extends Sprite {
         this.count = 2;
     }
 
+    // Displays the life count.
     drawSprite() {
         for (let i = 0; i < this.count; i++) {
             fill(255, 255, 0);
@@ -15,6 +18,7 @@ export class Lives extends Sprite {
         }
     }
 
+    // Validation: Decreases the life count if a ghost touches Pac-Man, and causes the game to end if all lives are lost.
     decreaseLives() {
         this.count--;
         if (this.count === -1) {

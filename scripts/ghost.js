@@ -1,3 +1,5 @@
+// Ghost class. Contains subroutines related to the pathing and collision detection of the ghosts.
+
 import {Entity} from './entity.js';
 import {Board} from './board.js';
 import {Point} from './point.js';
@@ -10,12 +12,12 @@ export class Ghost extends Entity {
     x;
     y;
     dir;
-    start;
-    end;
-    current;
-    openSet;
-    closedSet;
-    path;
+    start; // Location of the ghost in the graph.
+    end; // Location of Pac-Man in the graph.
+    current; // The selected node at the start.
+    openSet; // Set of nodes that haven't been searched yet.
+    closedSet; // Set of nodes that have already been searched.
+    path; // Stores the path that the ghost will follow.
 
     constructor(x, y, colour, mode, pacman, board, lives) {
         super();
@@ -33,12 +35,12 @@ export class Ghost extends Entity {
         this.colour = colour;
     }
 
+    // Displays the ghost.
     drawSprite() {
-        // Displays the ghost.
         fill(this.colour);
         rect(this.x, this.y, 7, 7);
 
-        // Makes the ghost move.
+        // Validation: Updates the position of the ghost.
         if (frameCount % 6 === 0) {
             if (this.path.length > 0) {
                 let next = this.path.pop();
@@ -56,6 +58,7 @@ export class Ghost extends Entity {
         // }
     }
 
+    // Validation: Logic for the movement of the ghost. Happens every 10 frames.
     moveSprite() {
         if (frameCount % 10 === 0) {
             this.updateLocations();
@@ -119,6 +122,8 @@ export class Ghost extends Entity {
         }
     }
 
+
+    // Validation: Checks if a ghost is touching Pac-Man.
     checkContact() {
         if (this.x === this.pacman.x && this.y === this.pacman.y) {
             this.lives.decreaseLives();
@@ -131,6 +136,7 @@ export class Ghost extends Entity {
         return abs(a.x - b.x) + abs(a.y - b.y);
     }
 
+    // Validation: Updates the location of the ghost and Pac-Man in the graph.
     updateLocations() {
         // Reset the sets and the paths.
         this.openSet = [];
@@ -177,6 +183,7 @@ export class Ghost extends Entity {
         }
     }
 
+    // Validation: Sets up the graph.
     setupPoints() {
         for (let i = 0; i < this.graph.length; i++) {
             for (let j = 0; j < this.graph.length; j++) {

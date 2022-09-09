@@ -1,9 +1,11 @@
+// Point class. This stores all the details of a point in the graph.
+
 export class Point {
     x;
     y;
-    f;
-    g;
-    h;
+    f; // Overall cost.
+    g; // Distance between two points.
+    h; // Heuristic cost.
     neighbours;
     cameFrom;
 
@@ -17,6 +19,7 @@ export class Point {
         this.cameFrom = undefined;
     }
 
+    // Validation: Creates the neighbours of a point in the graph in four directions.
     addNeighbours(grid) {
         let i = this.x;
         let j = this.y;
