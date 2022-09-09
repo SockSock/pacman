@@ -5,7 +5,7 @@ export class Lives extends Sprite {
 
     constructor() {
         super();
-        this.count = 3;
+        this.count = 2;
     }
 
     drawSprite() {
@@ -17,5 +17,8 @@ export class Lives extends Sprite {
 
     decreaseLives() {
         this.count--;
+        if (this.count === -1) {
+            noLoop();
+        }
     }
 }
