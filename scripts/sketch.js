@@ -11,7 +11,7 @@ let board;
 let score;
 let lives;
 let red;
-let pink;
+// let pink;
 
 // Loads and defines initial properties which are needed before the game starts.
 window.setup = function() {
@@ -23,11 +23,11 @@ window.setup = function() {
     lives = new Lives();
     pacman = new Pacman(board, score);
     red = new Ghost(10, 119, "red", "chase", pacman, board, lives);
-    pink = new Ghost(180, 119, "pink", "cutoff", pacman, board, lives);
+    // pink = new Ghost(180, 119, "pink", "cutoff", pacman, board, lives);
     red.setupPoints();
     red.updateLocations();
-    pink.setupPoints();
-    pink.updateLocations();
+    // pink.setupPoints();
+    // pink.updateLocations();
 }
 
 // Updates 60 frames per second to reload objects to update their locations.
@@ -44,9 +44,9 @@ window.draw = function() {
     red.moveSprite();
     red.drawSprite();
     red.checkContact();
-    pink.moveSprite();
-    pink.drawSprite();
-    pink.checkContact();
+    // pink.moveSprite();
+    // pink.drawSprite();
+    // pink.checkContact();
 }
 
 // Detects keys inputted by the user to allow for movement of Pac-Man.
