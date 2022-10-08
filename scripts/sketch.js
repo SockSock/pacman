@@ -25,10 +25,10 @@ window.setup = function() {
     score = new Score();
     lives = new Lives();
     pacman = new Pacman(board, score);
-    redGhost = new Ghost(10, 119, "red", "chase", pacman, board, lives);
-    pinkGhost = new Ghost(180, 119, "pink", "chase", pacman, board, lives);
-    blueGhost = new Ghost(98, 119, "cyan", "chase", pacman, board, lives);
-    orangeGhost = new Ghost(150, 119, "orange", "chase", pacman, board, lives);
+    redGhost = new Ghost(42, 119, "red", "direct", false, pacman, board, lives);
+    pinkGhost = new Ghost(42, 56, "pink", "direct", false, pacman, board, lives);
+    blueGhost = new Ghost(147, 56, "cyan", "direct", false, pacman, board, lives);
+    orangeGhost = new Ghost(150, 119, "orange",  "direct", false, pacman, board, lives);
     ghosts = [redGhost, pinkGhost, blueGhost, orangeGhost];
     for (let i = 0; i < ghosts.length; i++) {
         ghosts[i].setupPoints();
@@ -52,7 +52,7 @@ window.draw = function() {
         ghosts[i].moveSprite();
         ghosts[i].stopSprite();
         ghosts[i].changeDirection();
-        ghosts[i].checkContact();
+        ghosts[i].checkContact(ghosts);
     }
 
     score.drawSprite();

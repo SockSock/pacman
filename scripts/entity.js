@@ -26,7 +26,6 @@ export class Entity extends Sprite {
     moveSprite() {
         // Stores the future location of Pac-Man in relation to the grid.
         this.cellCoords = getCellCoords(this.x, this.y);
-        console.log(this.dir);
 
         // W
         if (this.dir === "up") {

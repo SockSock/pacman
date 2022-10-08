@@ -1,4 +1,4 @@
-// Utils for Pacman game
+// Utils for the game.
 
 export function getDirectionBetweenTwoPoints(p1, p2) {
     if (p1.x < p2.x) {

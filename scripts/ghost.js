@@ -24,7 +24,7 @@ export class Ghost extends Entity {
     closedSet; // Set of nodes that have already been searched.
     path; // Stores the path that the ghost will follow.
 
-    constructor(x, y, colour, mode, pacman, board, lives) {
+    constructor(x, y, colour, behaviour, scatter, pacman, board, lives) {
         super();
         this.shape = "square";
         this.pacman = pacman;
@@ -38,15 +38,19 @@ export class Ghost extends Entity {
         this.startY = y;
         this.xVel = 0;
         this.yVel = 0;
-        this.mode = mode;
+        this.behaviour = behaviour;
+        this.scatter = scatter;
         this.colour = colour;
         this.passableTerrain = [0, 2, 3];
     }
 
     // Validation: Checks if a ghost is touching Pac-Man.
-    checkContact() {
+    checkContact(ghosts) {
         if (this.x + 3 > this.pacman.x - 3 && this.x - 3 < this.pacman.x + 3 && this.y + 3 > this.pacman.y - 3 && this.y - 3 < this.pacman.y + 3) {
             this.pacman.reset();
+            for (let i = 0; i < ghosts.length; i++) {
+                ghosts[i].reset();
+            }
             this.lives.decreaseLives();
         }
     }
@@ -55,11 +59,11 @@ export class Ghost extends Entity {
     changeDirection() {
         if (frameCount % FPS_FACTOR === 0) {
             this.updateLocations();
-            // Displays the chosen path.
-            for (let i = 0; i < this.path.length; i++) {
-                fill(0, 255, 0);
-                rect(this.path[i].y*7, this.path[i].x*7, 3, 3);
-            }
+            // // Displays the chosen path.
+            // for (let i = 0; i < this.path.length; i++) {
+            //     fill(0, 255, 0);
+            //     rect(this.path[i].y*7, this.path[i].x*7, 3, 3);
+            // }
             if (this.path.length >= 2) {
                 this.dir = getDirectionBetweenTwoPoints(
                     new Point(this.path[this.path.length - 2].y, this.path[this.path.length - 2].x),
@@ -84,12 +88,14 @@ export class Ghost extends Entity {
         this.pacmanCellCoords = this.pacman.getLocation();
 
         // If it's the red ghost, chase Pac-Man directly.
-        if (this.mode === "chase") {
+        if (this.behaviour === "direct") {
             this.end = this.graph[this.pacmanCellCoords[1]][this.pacmanCellCoords[0]];
             this.openSet.push(this.start);
             this.pathFind();
         }
-        if (this.mode === "scatter") {
+
+        // If scatter mode is active, go to the scatter location.
+        if (this.scatter) {
             let scatterPoint = getCellCoords(this.startX, this.startY);
             this.end = this.graph[scatterPoint[1]][scatterPoint[0]];
             this.openSet.push(this.start);
@@ -176,5 +182,10 @@ export class Ghost extends Entity {
                 }
             }
         }
+    }
+
+    reset() {
+        this.x = this.startX;
+        this.y = this.startY;
     }
  }
