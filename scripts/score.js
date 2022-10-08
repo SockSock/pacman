@@ -1,4 +1,4 @@
-// Score class. Contains subroutines related to the score count logic.
+// Score class. Written by Anish Shastri, 03/08/22. Contains subroutines related to the score count logic.
 
 import {Sprite} from './sprite.js';
 

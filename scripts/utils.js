@@ -1,4 +1,4 @@
-// Utils for the game.
+// Utils for the game. Written by Anish Shastri, 08/10/22.
 
 export function getDirectionBetweenTwoPoints(p1, p2) {
     if (p1.x < p2.x) {

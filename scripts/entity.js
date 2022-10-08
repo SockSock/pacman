@@ -1,4 +1,4 @@
-// Entity abstract class. Used for overriding methods.
+// Entity abstract class. Written by Anish Shastri, 30/06/22. Used for overriding methods.
 
 import {Sprite} from './sprite.js';
 import {getCellCoords} from "./utils.js";

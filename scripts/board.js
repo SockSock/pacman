@@ -1,4 +1,4 @@
-// Board class. Validation: Contains a subroutine to generate the layout of the maze according to the grid array.
+// Board class. Written by Anish Shastri, 25/06/22. Validation: Contains a subroutine to generate the layout of the maze according to the grid array.
 
 import {Sprite} from "./sprite.js";
 

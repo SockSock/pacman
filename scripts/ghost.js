@@ -1,4 +1,4 @@
-// Ghost class. Contains subroutines related to the pathing and collision detection of the ghosts.
+// Ghost class. Written by Anish Shastri, 03/08/22. Contains subroutines related to the pathing and collision detection of the ghosts.
 
 import {Entity} from './entity.js';
 import {Board} from './board.js';

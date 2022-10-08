@@ -1,4 +1,4 @@
-// Main class. This is the main entry point where the game starts when it is executed.
+// Main class. Written by Anish Shastri, 25/06/22. This is the main entry point where the game starts when it is executed.
 
 import {Board} from './board.js';
 import {Pacman} from './pacman.js';

@@ -1,4 +1,4 @@
-// Point class. This stores all the details of a point in the graph.
+// Point class. Written by Anish Shastri, 05/09/22. This stores all the details of a point in the graph.
 
 export class Point {
     x;

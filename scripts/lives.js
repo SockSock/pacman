@@ -1,4 +1,4 @@
-// Lives class. Contains subroutines related to the life count logic.
+// Lives class. Written by Anish Shastri, 03/08/22. Contains subroutines related to the life count logic.
 
 import {Sprite} from "./sprite.js";
 

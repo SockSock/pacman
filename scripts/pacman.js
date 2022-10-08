@@ -1,4 +1,4 @@
-// Pacman class. Contains subroutines related to the movement and collision detection of Pac-Man.
+// Pacman class. Written by Anish Shastri, 25/06/22. Contains subroutines related to the movement and collision detection of Pac-Man.
 
 import {Entity} from './entity.js';
 import {getCellCoords} from "./utils.js";
