@@ -1,4 +1,4 @@
-// Entity abstract class. Written by Anish Shastri, 30/06/22. Used for overriding methods.
+// Entity abstract class. Written by Anish Shastri, 30/06/22. Used for overriding methods and to reuse subroutines.
 
 import {Sprite} from './sprite.js';
 import {getCellCoords} from "./utils.js";
@@ -11,7 +11,7 @@ export class Entity extends Sprite {
         }
     }
 
-    // Displays Pac-Man.
+    // Displays Pac-Man and the ghosts.
     drawSprite() {
         fill(this.colour)
         if (this.shape === "circle") {
@@ -22,16 +22,16 @@ export class Entity extends Sprite {
         }
     }
 
-    // Validation: Logic for the movement of Pac-Man.
+    // Validation: Logic for the movement of Pac-Man and the ghosts.
     moveSprite() {
         // Stores the future location of Pac-Man in relation to the grid.
         this.cellCoords = getCellCoords(this.x, this.y);
 
         // W
         if (this.dir === "up") {
-            // Check if Pac-Man is in the middle of a tile.
+            // Check if Pac-Man or a ghost is in the middle of a tile.
             if (this.x % 7 === 0) {
-                // If he is, check if the tile above Pac-Man is empty to move into (because direction is up).
+                // If he is, check if the tile above Pac-Man or a ghost is empty to move into (because direction is up).
                 if (this.passableTerrain.includes(this.grid[this.cellCoords[1]-1][this.cellCoords[0]])) {
                     this.stopDir = "up";
                     this.xVel = 0;
@@ -71,13 +71,13 @@ export class Entity extends Sprite {
         }
     }
 
-    // Validation: Logic for the collision detection of Pac-Man.
+    // Validation: Logic for the collision detection of Pac-Man and the ghosts.
     stopSprite() {
         // W
-        // Check if the tile above Pac-Man is a wall (because direction is up).
+        // Check if the tile above Pac-Man or a ghost is a wall (because direction is up).
         if (this.grid[this.cellCoords[1]-1][this.cellCoords[0]] === 1 && this.stopDir === "up") {
-            // If he is, stop Pac-Man if the current location of Pac-Man equals his future location, stored
-            // in the cellCoords array.
+            // If he is, stop Pac-Man or a ghost if the current location of Pac-Man or a ghost equals their future
+            // location, stored in the cellCoords array.
             if ((this.x/7) === this.cellCoords[0] && (this.y/7) === this.cellCoords[1]) {
                 this.yVel = 0;
             }

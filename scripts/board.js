@@ -68,9 +68,4 @@ export class Board extends Sprite {
             }
         }
     }
-
-    // TODO: remove
-    getGrid() {
-        return this.grid;
-    }
 }

@@ -1,5 +1,6 @@
 // Utils for the game. Written by Anish Shastri, 08/10/22.
 
+// Validation: Calculates the direction using two points.
 export function getDirectionBetweenTwoPoints(p1, p2) {
     if (p1.x < p2.x) {
         return "left";
@@ -12,6 +13,12 @@ export function getDirectionBetweenTwoPoints(p1, p2) {
     }
 }
 
+// Getter method to return the cell coordinates.
 export function getCellCoords(x, y) {
     return [Math.ceil((x-3)/7), Math.ceil((y-3)/7)]
+}
+
+// Getter method to return the grid from the Board class.
+export function getGrid(board) {
+    return board.grid;
 }

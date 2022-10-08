@@ -3,7 +3,7 @@
 import {Entity} from './entity.js';
 import {Board} from './board.js';
 import {Point} from './point.js';
-import {getCellCoords, getDirectionBetweenTwoPoints} from "./utils.js";
+import {getCellCoords, getDirectionBetweenTwoPoints, getGrid} from "./utils.js";
 
 const FPS_FACTOR = 1;
 
@@ -11,7 +11,6 @@ export class Ghost extends Entity {
     grid;
     cellCoords;
     pacmanCellCoords;
-    pacmanDir;
     x;
     y;
     xVel;
@@ -29,9 +28,8 @@ export class Ghost extends Entity {
         this.shape = "square";
         this.pacman = pacman;
         this.lives = lives;
-        this.grid = board.getGrid();
-        this.pacmanCellCoords  = pacman.getLocation();
-        this.pacmanDir = pacman.getDir();
+        this.grid = getGrid(board);
+        this.pacmanCellCoords  = getCellCoords(this.pacman.x, this.pacman.y);
         this.x = x;
         this.y = y;
         this.startX = x;
@@ -48,6 +46,7 @@ export class Ghost extends Entity {
     checkContact(ghosts) {
         if (this.x + 3 > this.pacman.x - 3 && this.x - 3 < this.pacman.x + 3 && this.y + 3 > this.pacman.y - 3 && this.y - 3 < this.pacman.y + 3) {
             this.pacman.reset();
+            // Loops through the array which holds the ghosts to reset all the ghosts.
             for (let i = 0; i < ghosts.length; i++) {
                 ghosts[i].reset();
             }
@@ -85,7 +84,7 @@ export class Ghost extends Entity {
         // Get the current cell coordinates of the ghost and the pacman.
         this.cellCoords = [Math.ceil((this.x - 3) / 7), Math.ceil((this.y - 3) / 7)];
         this.start = this.graph[this.cellCoords[1]][this.cellCoords[0]];
-        this.pacmanCellCoords = this.pacman.getLocation();
+        this.pacmanCellCoords = getCellCoords(this.pacman.x, this.pacman.y);
 
         // If it's the red ghost, chase Pac-Man directly.
         if (this.behaviour === "direct") {
@@ -167,7 +166,7 @@ export class Ghost extends Entity {
 
     // Validation: Sets up the graph.
     setupPoints() {
-        this.graph = new Board().getGrid();
+        this.graph = getGrid(new Board());
         for (let i = 0; i < this.graph.length; i++) {
             for (let j = 0; j < this.graph.length; j++) {
                 if (this.graph[i][j] === 0 || this.graph[i][j] === 3 || this.graph[i][j] === 2) {
@@ -184,6 +183,7 @@ export class Ghost extends Entity {
         }
     }
 
+    // Resets the ghost to its starting position.
     reset() {
         this.x = this.startX;
         this.y = this.startY;

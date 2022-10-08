@@ -41,12 +41,10 @@ window.draw = function() {
     scale(3);
     background(0);
     board.drawSprite();
-
     pacman.drawSprite();
     pacman.moveSprite();
     pacman.stopSprite();
     pacman.eatCollectible();
-
     for (let i = 0; i < ghosts.length; i++) {
         ghosts[i].drawSprite();
         ghosts[i].moveSprite();
@@ -54,9 +52,7 @@ window.draw = function() {
         ghosts[i].changeDirection();
         ghosts[i].checkContact(ghosts);
     }
-
     score.drawSprite();
-
     lives.drawSprite();
 }
 

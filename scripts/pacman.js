@@ -1,7 +1,7 @@
 // Pacman class. Written by Anish Shastri, 25/06/22. Contains subroutines related to the movement and collision detection of Pac-Man.
 
 import {Entity} from './entity.js';
-import {getCellCoords} from "./utils.js";
+import {getCellCoords, getGrid} from "./utils.js";
 
 export class Pacman extends Entity {
     grid;
@@ -18,7 +18,7 @@ export class Pacman extends Entity {
         this.colour = "yellow";
         this.shape = "circle";
         this.score = score;
-        this.grid = board.getGrid();
+        this.grid = getGrid(board);
         this.x = 90;
         this.y = 182;
         this.xVel = 0.5
@@ -50,6 +50,7 @@ export class Pacman extends Entity {
         }
     }
 
+    // Validation: Logic for checking if Pac-Man has eaten a dot and increasing the score.
     eatCollectible() {
         if (this.grid[this.cellCoords[1]][this.cellCoords[0]] === 0) {
             this.score.increaseScore();
@@ -57,6 +58,7 @@ export class Pacman extends Entity {
         }
     }
 
+    // Resets the location of Pac-Man back to the starting position.
     reset() {
         this.x = 90;
         this.y = 182;
@@ -66,15 +68,5 @@ export class Pacman extends Entity {
         this.stopDir = "right";
         keyCode = 68;
         this.cellCoords = [Math.ceil((this.x-3)/7), Math.ceil((this.y-3)/7)];
-    }
-
-    // TODO: remove
-    getLocation() {
-        return this.cellCoords;
-    }
-
-    // TODO: remove
-    getDir() {
-        return this.stopDir;
     }
 }
