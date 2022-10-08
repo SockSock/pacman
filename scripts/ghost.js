@@ -3,9 +3,9 @@
 import {Entity} from './entity.js';
 import {Board} from './board.js';
 import {Point} from './point.js';
-import {getDirectionBetweenTwoPoints} from "./utils.js";
+import {getCellCoords, getDirectionBetweenTwoPoints} from "./utils.js";
 
-const FPS_FACTOR = 10;
+const FPS_FACTOR = 1;
 
 export class Ghost extends Entity {
     grid;
@@ -34,10 +34,13 @@ export class Ghost extends Entity {
         this.pacmanDir = pacman.getDir();
         this.x = x;
         this.y = y;
+        this.startX = x;
+        this.startY = y;
         this.xVel = 0;
         this.yVel = 0;
         this.mode = mode;
         this.colour = colour;
+        this.passableTerrain = [0, 2, 3];
     }
 
     // Validation: Checks if a ghost is touching Pac-Man.
@@ -83,6 +86,12 @@ export class Ghost extends Entity {
         // If it's the red ghost, chase Pac-Man directly.
         if (this.mode === "chase") {
             this.end = this.graph[this.pacmanCellCoords[1]][this.pacmanCellCoords[0]];
+            this.openSet.push(this.start);
+            this.pathFind();
+        }
+        if (this.mode === "scatter") {
+            let scatterPoint = getCellCoords(this.startX, this.startY);
+            this.end = this.graph[scatterPoint[1]][scatterPoint[0]];
             this.openSet.push(this.start);
             this.pathFind();
         }
