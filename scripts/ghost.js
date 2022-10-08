@@ -3,6 +3,9 @@
 import {Entity} from './entity.js';
 import {Board} from './board.js';
 import {Point} from './point.js';
+import {getDirectionBetweenTwoPoints} from "./utils.js";
+
+const FPS_FACTOR = 2;
 
 export class Ghost extends Entity {
     grid;
@@ -11,6 +14,8 @@ export class Ghost extends Entity {
     pacmanDir;
     x;
     y;
+    xVel;
+    yVel;
     dir;
     start; // Location of the ghost in the graph.
     end; // Location of Pac-Man in the graph.
@@ -29,38 +34,66 @@ export class Ghost extends Entity {
         this.pacmanDir = pacman.getDir();
         this.x = x;
         this.y = y;
+        this.xVel = 0;
+        this.yVel = 0;
         this.dir = "";
         this.cellCoords = 0;
         this.mode = mode;
         this.colour = colour;
+        this.direction = "";
     }
 
     // Displays the ghost.
     drawSprite() {
         fill(this.colour);
-        rect(this.x, this.y, 7, 7);
+        rect(this.x+=this.xVel, this.y+=this.yVel, 7, 7);
 
         // Validation: Updates the position of the ghost.
-        if (frameCount % 6 === 0) {
-            if (this.path.length > 0) {
-                let next = this.path.pop();
-                let x = next.x;
-                let y = next.y;
-                this.y = x*7;
-                this.x = y*7;
+        if (frameCount % FPS_FACTOR === 0) {
+            if (this.path.length >= 2) {
+                this.direction = getDirectionBetweenTwoPoints(
+                    new Point(this.path[this.path.length - 2].y, this.path[this.path.length - 2].x),
+                    new Point(this.path[this.path.length - 1].y, this.path[this.path.length - 1].x),
+                );
+            }
+
+            // console.log(this.x, this.y, this.direction);
+            if (this.direction === "U") {
+                if (this.x % 7 === 0) {
+                    this.xVel = 0;
+                    this.yVel = -0.5;
+                }
+            }
+            if (this.direction === "D") {
+                if (this.x % 7 === 0) {
+                    this.xVel = 0;
+                    this.yVel = 0.5;
+                }
+            }
+            if (this.direction === "L") {
+                if (this.y % 7 === 0) {
+                    this.xVel = -0.5;
+                    this.yVel = 0;
+                }
+            }
+            if (this.direction === "R") {
+                if (this.y % 7 === 0) {
+                    this.xVel = 0.5;
+                    this.yVel = 0;
+                }
             }
         }
 
-        // // Displays the chosen path.
-        // for (let i = 0; i < this.path.length; i++) {
-        //     fill(0, 255, 0);
-        //     rect(this.path[i].y*7, this.path[i].x*7, 7, 7);
-        // }
+        // Displays the chosen path.
+        for (let i = 0; i < this.path.length; i++) {
+            fill(0, 255, 0);
+            rect(this.path[i].y*7, this.path[i].x*7, 3, 3);
+        }
     }
 
     // Validation: Logic for the movement of the ghost. Happens every 10 frames.
     moveSprite() {
-        if (frameCount % 10 === 0) {
+        if (frameCount % FPS_FACTOR === 0) {
             this.updateLocations();
         }
     }

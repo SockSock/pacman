@@ -1,6 +1,7 @@
 // Pacman class. Contains subroutines related to the movement and collision detection of Pac-Man.
 
 import {Entity} from './entity.js';
+import {getCellCoords} from "./utils.js";
 
 export class Pacman extends Entity {
     grid;
@@ -23,7 +24,7 @@ export class Pacman extends Entity {
         this.dir = "right";
         this.stopDir = "right";
         keyCode = 68;
-        this.cellCoords = [Math.ceil((this.x-3)/7), Math.ceil((this.y-3)/7)];
+        this.cellCoords = getCellCoords(this.x, this.y);
     }
 
     // Displays Pac-Man.
@@ -35,7 +36,7 @@ export class Pacman extends Entity {
     // Validation: Logic for the movement of Pac-Man.
     moveSprite() {
         // Stores the future location of Pac-Man in relation to the grid.
-        this.cellCoords = [Math.ceil((this.x-3)/7), Math.ceil((this.y-3)/7)];
+        this.cellCoords = getCellCoords(this.x, this.y);
 
         // W
         if (this.dir === "up") {

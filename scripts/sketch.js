@@ -43,7 +43,7 @@ window.draw = function() {
     lives.drawSprite();
     red.moveSprite();
     red.drawSprite();
-    red.checkContact();
+    // red.checkContact();
     // pink.moveSprite();
     // pink.drawSprite();
     // pink.checkContact();
