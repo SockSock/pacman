@@ -10,7 +10,7 @@ let pacman;
 let board;
 let score;
 let lives;
-let red;
+let redGhost;
 // let pink;
 
 // Loads and defines initial properties which are needed before the game starts.
@@ -22,10 +22,10 @@ window.setup = function() {
     score = new Score();
     lives = new Lives();
     pacman = new Pacman(board, score);
-    red = new Ghost(10, 119, "red", "chase", pacman, board, lives);
+    redGhost = new Ghost(10, 119, "red", "chase", pacman, board, lives);
     // pink = new Ghost(180, 119, "pink", "cutoff", pacman, board, lives);
-    red.setupPoints();
-    red.updateLocations();
+    redGhost.setupPoints();
+    redGhost.updateLocations();
     // pink.setupPoints();
     // pink.updateLocations();
 }
@@ -35,15 +35,21 @@ window.draw = function() {
     scale(3);
     background(0);
     board.drawSprite();
+
     pacman.drawSprite();
     pacman.moveSprite();
     pacman.stopSprite();
     pacman.eatCollectible();
+
+    redGhost.drawSprite();
+    redGhost.moveSprite();
+    redGhost.stopSprite();
+    redGhost.changeDirection();
+    // redGhost.checkContact();
+
     score.drawSprite();
+
     lives.drawSprite();
-    red.moveSprite();
-    red.drawSprite();
-    // red.checkContact();
     // pink.moveSprite();
     // pink.drawSprite();
     // pink.checkContact();

@@ -1,14 +1,14 @@
-
+// Utils for Pacman game
 
 export function getDirectionBetweenTwoPoints(p1, p2) {
     if (p1.x < p2.x) {
-        return "L";
+        return "left";
     } else if (p1.x > p2.x) {
-        return "R";
+        return "right";
     } else if (p1.y < p2.y) {
-        return "U";
+        return "up";
     } else if (p1.y > p2.y) {
-        return "D";
+        return "down";
     }
 }
 

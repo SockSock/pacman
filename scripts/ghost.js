@@ -36,65 +36,80 @@ export class Ghost extends Entity {
         this.y = y;
         this.xVel = 0;
         this.yVel = 0;
-        this.dir = "";
-        this.cellCoords = 0;
         this.mode = mode;
         this.colour = colour;
-        this.direction = "";
     }
 
-    // Displays the ghost.
-    drawSprite() {
-        fill(this.colour);
-        rect(this.x+=this.xVel, this.y+=this.yVel, 7, 7);
-
-        // Validation: Updates the position of the ghost.
-        if (frameCount % FPS_FACTOR === 0) {
-            if (this.path.length >= 2) {
-                this.direction = getDirectionBetweenTwoPoints(
-                    new Point(this.path[this.path.length - 2].y, this.path[this.path.length - 2].x),
-                    new Point(this.path[this.path.length - 1].y, this.path[this.path.length - 1].x),
-                );
-            }
-
-            // console.log(this.x, this.y, this.direction);
-            if (this.direction === "U") {
-                if (this.x % 7 === 0) {
-                    this.xVel = 0;
-                    this.yVel = -0.5;
-                }
-            }
-            if (this.direction === "D") {
-                if (this.x % 7 === 0) {
-                    this.xVel = 0;
-                    this.yVel = 0.5;
-                }
-            }
-            if (this.direction === "L") {
-                if (this.y % 7 === 0) {
-                    this.xVel = -0.5;
-                    this.yVel = 0;
-                }
-            }
-            if (this.direction === "R") {
-                if (this.y % 7 === 0) {
-                    this.xVel = 0.5;
-                    this.yVel = 0;
-                }
-            }
-        }
-
-        // Displays the chosen path.
-        for (let i = 0; i < this.path.length; i++) {
-            fill(0, 255, 0);
-            rect(this.path[i].y*7, this.path[i].x*7, 3, 3);
+    // Validation: Checks if a ghost is touching Pac-Man.
+    checkContact() {
+        if (this.x === this.pacman.x && this.y === this.pacman.y) {
+            this.lives.decreaseLives();
+            this.pacman.reset();
         }
     }
 
     // Validation: Logic for the movement of the ghost. Happens every 10 frames.
-    moveSprite() {
+    changeDirection() {
         if (frameCount % FPS_FACTOR === 0) {
             this.updateLocations();
+            // Displays the chosen path.
+            for (let i = 0; i < this.path.length; i++) {
+                fill(0, 255, 0);
+                rect(this.path[i].y*7, this.path[i].x*7, 3, 3);
+            }
+            if (this.path.length >= 2) {
+                this.dir = getDirectionBetweenTwoPoints(
+                    new Point(this.path[this.path.length - 2].y, this.path[this.path.length - 2].x),
+                    new Point(this.path[this.path.length - 1].y, this.path[this.path.length - 1].x),
+                );
+            }
+        }
+    }
+
+    // Validation: Updates the location of the ghost and Pac-Man in the graph.
+    updateLocations() {
+        // Reset the sets and the paths.
+        this.openSet = [];
+        this.closedSet = [];
+        this.path = [];
+
+        // Get the current cell coordinates of the ghost and the pacman.
+        this.cellCoords = [Math.ceil((this.x - 3) / 7), Math.ceil((this.y - 3) / 7)];
+        this.start = this.graph[this.cellCoords[1]][this.cellCoords[0]];
+        this.pacmanCellCoords = this.pacman.getLocation();
+
+        // If it's the red ghost, chase Pac-Man directly.
+        if (this.mode === "chase") {
+            this.end = this.graph[this.pacmanCellCoords[1]][this.pacmanCellCoords[0]];
+            this.openSet.push(this.start);
+            this.pathFind();
+        }
+        // If it's the pink ghost, chase the two tiles in front of Pac-Man.
+        if (this.mode === "cutoff") {
+            // Need Pac-Man's direction to check his front.
+            this.pacmanDir = this.pacman.getDir();
+            if (this.pacmanDir === "up") {
+                if (this.graph[this.pacmanCellCoords[1]-2][this.pacmanCellCoords[0]] !== 1 && this.graph[this.pacmanCellCoords[1]-2][this.pacmanCellCoords[0]] !== undefined) {
+                    this.end = this.graph[this.pacmanCellCoords[1]-2][this.pacmanCellCoords[0]];
+                }
+            }
+            if (this.pacmanDir === "left") {
+                if (this.graph[this.pacmanCellCoords[1]][this.pacmanCellCoords[0]-2] !== 1 && this.graph[this.pacmanCellCoords[1]][this.pacmanCellCoords[0]-2] !== undefined) {
+                    this.end = this.graph[this.pacmanCellCoords[1]][this.pacmanCellCoords[0]+2];
+                }
+            }
+            if (this.pacmanDir === "down") {
+                if (this.graph[this.pacmanCellCoords[1]+2][this.pacmanCellCoords[0]] !== 1 && this.graph[this.pacmanCellCoords[1]+2][this.pacmanCellCoords[0]] !== undefined) {
+                    this.end = this.graph[this.pacmanCellCoords[1]-2][this.pacmanCellCoords[0]];
+                }
+            }
+            if (this.pacmanDir === "right") {
+                if (this.graph[this.pacmanCellCoords[1]][this.pacmanCellCoords[0]+2] !== 1 && this.graph[this.pacmanCellCoords[1]][this.pacmanCellCoords[0]+2] !== undefined) {
+                    this.end = this.graph[this.pacmanCellCoords[1]][this.pacmanCellCoords[0]-2];
+                }
+            }
+            this.openSet.push(this.start);
+            this.pathFind();
         }
     }
 
@@ -155,65 +170,9 @@ export class Ghost extends Entity {
         }
     }
 
-
-    // Validation: Checks if a ghost is touching Pac-Man.
-    checkContact() {
-        if (this.x === this.pacman.x && this.y === this.pacman.y) {
-            this.lives.decreaseLives();
-            this.pacman.reset();
-        }
-    }
-
     // Calculates the Manhattan distance between two points.
     heuristic(a, b) {
         return abs(a.x - b.x) + abs(a.y - b.y);
-    }
-
-    // Validation: Updates the location of the ghost and Pac-Man in the graph.
-    updateLocations() {
-        // Reset the sets and the paths.
-        this.openSet = [];
-        this.closedSet = [];
-        this.path = [];
-
-        // Get the current cell coordinates of the ghost and the pacman.
-        this.cellCoords = [Math.ceil((this.x - 3) / 7), Math.ceil((this.y - 3) / 7)];
-        this.start = this.graph[this.cellCoords[1]][this.cellCoords[0]];
-        this.pacmanCellCoords = this.pacman.getLocation();
-
-        // If it's the red ghost, chase Pac-Man directly.
-        if (this.mode === "chase") {
-            this.end = this.graph[this.pacmanCellCoords[1]][this.pacmanCellCoords[0]];
-            this.openSet.push(this.start);
-            this.pathFind();
-        }
-        // If it's the pink ghost, chase the two tiles in front of Pac-Man.
-        if (this.mode === "cutoff") {
-            // Need Pac-Man's direction to check his front.
-            this.pacmanDir = this.pacman.getDir();
-            if (this.pacmanDir === "up") {
-                if (this.graph[this.pacmanCellCoords[1]-2][this.pacmanCellCoords[0]] !== 1 && this.graph[this.pacmanCellCoords[1]-2][this.pacmanCellCoords[0]] !== undefined) {
-                    this.end = this.graph[this.pacmanCellCoords[1]-2][this.pacmanCellCoords[0]];
-                }
-            }
-            if (this.pacmanDir === "left") {
-                if (this.graph[this.pacmanCellCoords[1]][this.pacmanCellCoords[0]-2] !== 1 && this.graph[this.pacmanCellCoords[1]][this.pacmanCellCoords[0]-2] !== undefined) {
-                    this.end = this.graph[this.pacmanCellCoords[1]][this.pacmanCellCoords[0]+2];
-                }
-            }
-            if (this.pacmanDir === "down") {
-                if (this.graph[this.pacmanCellCoords[1]+2][this.pacmanCellCoords[0]] !== 1 && this.graph[this.pacmanCellCoords[1]+2][this.pacmanCellCoords[0]] !== undefined) {
-                    this.end = this.graph[this.pacmanCellCoords[1]-2][this.pacmanCellCoords[0]];
-                }
-            }
-            if (this.pacmanDir === "right") {
-                if (this.graph[this.pacmanCellCoords[1]][this.pacmanCellCoords[0]+2] !== 1 && this.graph[this.pacmanCellCoords[1]][this.pacmanCellCoords[0]+2] !== undefined) {
-                    this.end = this.graph[this.pacmanCellCoords[1]][this.pacmanCellCoords[0]-2];
-                }
-            }
-            this.openSet.push(this.start);
-            this.pathFind();
-        }
     }
 
     // Validation: Sets up the graph.
