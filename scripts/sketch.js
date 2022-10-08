@@ -11,7 +11,10 @@ let board;
 let score;
 let lives;
 let redGhost;
-// let pink;
+let pinkGhost;
+let blueGhost;
+let orangeGhost;
+let ghosts;
 
 // Loads and defines initial properties which are needed before the game starts.
 window.setup = function() {
@@ -23,11 +26,14 @@ window.setup = function() {
     lives = new Lives();
     pacman = new Pacman(board, score);
     redGhost = new Ghost(10, 119, "red", "chase", pacman, board, lives);
-    // pink = new Ghost(180, 119, "pink", "cutoff", pacman, board, lives);
-    redGhost.setupPoints();
-    redGhost.updateLocations();
-    // pink.setupPoints();
-    // pink.updateLocations();
+    pinkGhost = new Ghost(180, 119, "pink", "cutoff", pacman, board, lives);
+    blueGhost = new Ghost(130, 119, "cyan", "chase", pacman, board, lives);
+    orangeGhost = new Ghost(150, 119, "orange", "chase", pacman, board, lives);
+    ghosts = [redGhost, pinkGhost, blueGhost, orangeGhost];
+    for (let i = 0; i < ghosts.length; i++) {
+        ghosts[i].setupPoints();
+        ghosts[i].updateLocations();
+    }
 }
 
 // Updates 60 frames per second to reload objects to update their locations.
@@ -41,18 +47,17 @@ window.draw = function() {
     pacman.stopSprite();
     pacman.eatCollectible();
 
-    redGhost.drawSprite();
-    redGhost.moveSprite();
-    redGhost.stopSprite();
-    redGhost.changeDirection();
-    // redGhost.checkContact();
+    for (let i = 0; i < ghosts.length; i++) {
+        ghosts[i].drawSprite();
+        ghosts[i].moveSprite();
+        ghosts[i].stopSprite();
+        ghosts[i].changeDirection();
+        ghosts[i].checkContact();
+    }
 
     score.drawSprite();
 
     lives.drawSprite();
-    // pink.moveSprite();
-    // pink.drawSprite();
-    // pink.checkContact();
 }
 
 // Detects keys inputted by the user to allow for movement of Pac-Man.

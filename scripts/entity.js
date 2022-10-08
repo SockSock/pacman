@@ -13,8 +13,13 @@ export class Entity extends Sprite {
 
     // Displays Pac-Man.
     drawSprite() {
-        fill(255, 255, 0)
-        circle(this.x+=this.xVel, this.y+=this.yVel, 7);
+        fill(this.colour)
+        if (this.shape === "circle") {
+            circle(this.x+=this.xVel, this.y+=this.yVel, 7);
+        }
+        if (this.shape === "square") {
+            rect(this.x+=this.xVel, this.y+=this.yVel, 7, 7);
+        }
     }
 
     // Validation: Logic for the movement of Pac-Man.

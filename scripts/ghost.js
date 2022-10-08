@@ -5,7 +5,7 @@ import {Board} from './board.js';
 import {Point} from './point.js';
 import {getDirectionBetweenTwoPoints} from "./utils.js";
 
-const FPS_FACTOR = 2;
+const FPS_FACTOR = 10;
 
 export class Ghost extends Entity {
     grid;
@@ -26,9 +26,9 @@ export class Ghost extends Entity {
 
     constructor(x, y, colour, mode, pacman, board, lives) {
         super();
+        this.shape = "square";
         this.pacman = pacman;
         this.lives = lives;
-        this.graph = new Board().getGrid();
         this.grid = board.getGrid();
         this.pacmanCellCoords  = pacman.getLocation();
         this.pacmanDir = pacman.getDir();
@@ -42,9 +42,9 @@ export class Ghost extends Entity {
 
     // Validation: Checks if a ghost is touching Pac-Man.
     checkContact() {
-        if (this.x === this.pacman.x && this.y === this.pacman.y) {
-            this.lives.decreaseLives();
+        if (this.x + 3 > this.pacman.x - 3 && this.x - 3 < this.pacman.x + 3 && this.y + 3 > this.pacman.y - 3 && this.y - 3 < this.pacman.y + 3) {
             this.pacman.reset();
+            this.lives.decreaseLives();
         }
     }
 
@@ -68,6 +68,8 @@ export class Ghost extends Entity {
 
     // Validation: Updates the location of the ghost and Pac-Man in the graph.
     updateLocations() {
+        this.setupPoints();
+
         // Reset the sets and the paths.
         this.openSet = [];
         this.closedSet = [];
@@ -81,33 +83,6 @@ export class Ghost extends Entity {
         // If it's the red ghost, chase Pac-Man directly.
         if (this.mode === "chase") {
             this.end = this.graph[this.pacmanCellCoords[1]][this.pacmanCellCoords[0]];
-            this.openSet.push(this.start);
-            this.pathFind();
-        }
-        // If it's the pink ghost, chase the two tiles in front of Pac-Man.
-        if (this.mode === "cutoff") {
-            // Need Pac-Man's direction to check his front.
-            this.pacmanDir = this.pacman.getDir();
-            if (this.pacmanDir === "up") {
-                if (this.graph[this.pacmanCellCoords[1]-2][this.pacmanCellCoords[0]] !== 1 && this.graph[this.pacmanCellCoords[1]-2][this.pacmanCellCoords[0]] !== undefined) {
-                    this.end = this.graph[this.pacmanCellCoords[1]-2][this.pacmanCellCoords[0]];
-                }
-            }
-            if (this.pacmanDir === "left") {
-                if (this.graph[this.pacmanCellCoords[1]][this.pacmanCellCoords[0]-2] !== 1 && this.graph[this.pacmanCellCoords[1]][this.pacmanCellCoords[0]-2] !== undefined) {
-                    this.end = this.graph[this.pacmanCellCoords[1]][this.pacmanCellCoords[0]+2];
-                }
-            }
-            if (this.pacmanDir === "down") {
-                if (this.graph[this.pacmanCellCoords[1]+2][this.pacmanCellCoords[0]] !== 1 && this.graph[this.pacmanCellCoords[1]+2][this.pacmanCellCoords[0]] !== undefined) {
-                    this.end = this.graph[this.pacmanCellCoords[1]-2][this.pacmanCellCoords[0]];
-                }
-            }
-            if (this.pacmanDir === "right") {
-                if (this.graph[this.pacmanCellCoords[1]][this.pacmanCellCoords[0]+2] !== 1 && this.graph[this.pacmanCellCoords[1]][this.pacmanCellCoords[0]+2] !== undefined) {
-                    this.end = this.graph[this.pacmanCellCoords[1]][this.pacmanCellCoords[0]-2];
-                }
-            }
             this.openSet.push(this.start);
             this.pathFind();
         }
@@ -177,6 +152,7 @@ export class Ghost extends Entity {
 
     // Validation: Sets up the graph.
     setupPoints() {
+        this.graph = new Board().getGrid();
         for (let i = 0; i < this.graph.length; i++) {
             for (let j = 0; j < this.graph.length; j++) {
                 if (this.graph[i][j] === 0 || this.graph[i][j] === 3 || this.graph[i][j] === 2) {

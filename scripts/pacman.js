@@ -15,6 +15,8 @@ export class Pacman extends Entity {
 
     constructor(board, score) {
         super();
+        this.colour = "yellow";
+        this.shape = "circle";
         this.score = score;
         this.grid = board.getGrid();
         this.x = 90;
