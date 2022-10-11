@@ -23,7 +23,7 @@ export class Ghost extends Entity {
     closedSet; // Set of nodes that have already been searched.
     path; // Stores the path that the ghost will follow.
 
-    constructor(x, y, colour, behaviour, scatter, pacman, board, lives) {
+    constructor(x, y, colour, scatter, pacman, board, lives) {
         super();
         this.shape = "square";
         this.pacman = pacman;
@@ -36,7 +36,6 @@ export class Ghost extends Entity {
         this.startY = y;
         this.xVel = 0;
         this.yVel = 0;
-        this.behaviour = behaviour;
         this.scatter = scatter;
         this.colour = colour;
         this.passableTerrain = [0, 2, 3];
@@ -86,17 +85,44 @@ export class Ghost extends Entity {
         this.start = this.graph[this.cellCoords[1]][this.cellCoords[0]];
         this.pacmanCellCoords = getCellCoords(this.pacman.x, this.pacman.y);
 
-        // If it's the red ghost, chase Pac-Man directly.
-        if (this.behaviour === "direct") {
-            this.end = this.graph[this.pacmanCellCoords[1]][this.pacmanCellCoords[0]];
-            this.openSet.push(this.start);
-            this.pathFind();
-        }
-
         // If scatter mode is active, go to the scatter location.
         if (this.scatter) {
-            let scatterPoint = getCellCoords(this.startX, this.startY);
-            this.end = this.graph[scatterPoint[1]][scatterPoint[0]];
+            let start = Date.now();
+            let timer = setInterval(() => {
+                let timePassed = Date.now() - start;
+                if (timePassed >= 10000) {
+                    clearInterval(timer);
+                    this.scatter = false;
+                }
+            });
+            // Scatter to a certain point depending on the ghost.
+            if (this.colour === "red") {
+                let scatterPoint = [1, 4];
+                this.end = this.graph[scatterPoint[1]][scatterPoint[0]];
+                this.openSet.push(this.start);
+                this.pathFind();
+            }
+            if (this.colour === "pink") {
+                let scatterPoint = [26, 4];
+                this.end = this.graph[scatterPoint[1]][scatterPoint[0]];
+                this.openSet.push(this.start);
+                this.pathFind();
+            }
+            if (this.colour === "cyan") {
+                let scatterPoint = [1, 32];
+                this.end = this.graph[scatterPoint[1]][scatterPoint[0]];
+                this.openSet.push(this.start);
+                this.pathFind();
+            }
+            if (this.colour === "orange") {
+                let scatterPoint = [26, 32];
+                this.end = this.graph[scatterPoint[1]][scatterPoint[0]];
+                this.openSet.push(this.start);
+                this.pathFind();
+            }
+          // Otherwise, chase Pac-Man normally.
+        } else {
+            this.end = this.graph[this.pacmanCellCoords[1]][this.pacmanCellCoords[0]];
             this.openSet.push(this.start);
             this.pathFind();
         }

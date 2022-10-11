@@ -25,10 +25,10 @@ window.setup = function() {
     score = new Score();
     lives = new Lives();
     pacman = new Pacman(board, score);
-    redGhost = new Ghost(42, 119, "red", "direct", false, pacman, board, lives);
-    pinkGhost = new Ghost(42, 56, "pink", "direct", false, pacman, board, lives);
-    blueGhost = new Ghost(147, 56, "cyan", "direct", false, pacman, board, lives);
-    orangeGhost = new Ghost(147, 119, "orange",  "direct", false, pacman, board, lives);
+    redGhost = new Ghost(42, 119, "red", false, pacman, board, lives);
+    pinkGhost = new Ghost(42, 56, "pink", false, pacman, board, lives);
+    blueGhost = new Ghost(147, 56, "cyan", false, pacman, board, lives);
+    orangeGhost = new Ghost(147, 119, "orange", false, pacman, board, lives);
     ghosts = [redGhost, pinkGhost, blueGhost, orangeGhost];
     for (let i = 0; i < ghosts.length; i++) {
         ghosts[i].setupPoints();
@@ -44,7 +44,7 @@ window.draw = function() {
     pacman.drawSprite();
     pacman.moveSprite();
     pacman.stopSprite();
-    pacman.eatCollectible();
+    pacman.eatCollectible(ghosts);
     for (let i = 0; i < ghosts.length; i++) {
         ghosts[i].drawSprite();
         ghosts[i].moveSprite();

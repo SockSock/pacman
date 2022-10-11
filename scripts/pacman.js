@@ -50,10 +50,19 @@ export class Pacman extends Entity {
         }
     }
 
-    // Validation: Logic for checking if Pac-Man has eaten a dot and increasing the score.
-    eatCollectible() {
+    // Validation: Logic for checking if Pac-Man has eaten a dot and increasing the score or eaten a power pellet
+    // and enabling scatter mode.
+    eatCollectible(ghosts) {
+        // Dot collected
         if (this.grid[this.cellCoords[1]][this.cellCoords[0]] === 0) {
             this.score.increaseScore();
+            this.grid[this.cellCoords[1]][this.cellCoords[0]] = 3;
+        }
+        // Power pellet collected
+        if (this.grid[this.cellCoords[1]][this.cellCoords[0]] === 4) {
+            for (let i = 0; i < ghosts.length; i++) {
+                ghosts[i].scatter = true;
+            }
             this.grid[this.cellCoords[1]][this.cellCoords[0]] = 3;
         }
     }
