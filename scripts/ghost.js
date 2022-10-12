@@ -88,8 +88,11 @@ export class Ghost extends Entity {
         // If scatter mode is active, go to the scatter location.
         if (this.scatter) {
             let start = Date.now();
+            // Set the timer.
             let timer = setInterval(() => {
+                // Get the time passed.
                 let timePassed = Date.now() - start;
+                // If the time passed is greater than or equal to 10 seconds, stop the timer and set scatter to false.
                 if (timePassed >= 10000) {
                     clearInterval(timer);
                     this.scatter = false;
