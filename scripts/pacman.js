@@ -27,7 +27,7 @@ export class Pacman extends Entity {
         this.stopDir = "right";
         keyCode = 68;
         this.cellCoords = getCellCoords(this.x, this.y);
-        this.passableTerrain = [0, 3];
+        this.passableTerrain = [0, 3, 4];
     }
 
     // Validation: Logic for user inputs to be registered properly.

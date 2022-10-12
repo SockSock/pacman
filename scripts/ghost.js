@@ -38,7 +38,7 @@ export class Ghost extends Entity {
         this.yVel = 0;
         this.scatter = scatter;
         this.colour = colour;
-        this.passableTerrain = [0, 2, 3];
+        this.passableTerrain = [0, 2, 3, 4];
     }
 
     // Validation: Checks if a ghost is touching Pac-Man.
@@ -84,7 +84,9 @@ export class Ghost extends Entity {
         this.cellCoords = [Math.ceil((this.x - 3) / 7), Math.ceil((this.y - 3) / 7)];
         this.start = this.graph[this.cellCoords[1]][this.cellCoords[0]];
         this.pacmanCellCoords = getCellCoords(this.pacman.x, this.pacman.y);
+        console.log(this.scatter);
 
+        // TODO: Fix timer not restarting issue if a power pellet is collected while scatter mode is active.
         // If scatter mode is active, go to the scatter location.
         if (this.scatter) {
             let start = Date.now();
@@ -198,7 +200,7 @@ export class Ghost extends Entity {
         this.graph = getGrid(new Board());
         for (let i = 0; i < this.graph.length; i++) {
             for (let j = 0; j < this.graph.length; j++) {
-                if (this.graph[i][j] === 0 || this.graph[i][j] === 3 || this.graph[i][j] === 2) {
+                if (this.graph[i][j] === 0 || this.graph[i][j] === 2 || this.graph[i][j] === 3 || this.graph[i][j] === 4) {
                     this.graph[i][j] = new Point(i, j);
                 }
             }
