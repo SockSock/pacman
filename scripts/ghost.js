@@ -5,8 +5,6 @@ import {Board} from './board.js';
 import {Point} from './point.js';
 import {getCellCoords, getDirectionBetweenTwoPoints, getGrid} from "./utils.js";
 
-const FPS_FACTOR = 1;
-
 export class Ghost extends Entity {
     grid;
     cellCoords;
@@ -57,19 +55,17 @@ export class Ghost extends Entity {
 
     // Validation: Logic for the movement of the ghost. Happens every 10 frames.
     changeDirection() {
-        if (frameCount % FPS_FACTOR === 0) {
-            this.updateLocations();
-            // // Displays the chosen path.
-            // for (let i = 0; i < this.path.length; i++) {
-            //     fill(0, 255, 0);
-            //     rect(this.path[i].y*7, this.path[i].x*7, 3, 3);
-            // }
-            if (this.path.length >= 2) {
-                this.dir = getDirectionBetweenTwoPoints(
-                    new Point(this.path[this.path.length - 2].y, this.path[this.path.length - 2].x),
-                    new Point(this.path[this.path.length - 1].y, this.path[this.path.length - 1].x),
-                );
-            }
+        this.updateLocations();
+        // // Displays the chosen path.
+        // for (let i = 0; i < this.path.length; i++) {
+        //     fill(0, 255, 0);
+        //     rect(this.path[i].y*7, this.path[i].x*7, 3, 3);
+        // }
+        if (this.path.length >= 2) {
+            this.dir = getDirectionBetweenTwoPoints(
+                new Point(this.path[this.path.length - 2].y, this.path[this.path.length - 2].x),
+                new Point(this.path[this.path.length - 1].y, this.path[this.path.length - 1].x),
+            );
         }
     }
 
