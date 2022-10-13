@@ -37,6 +37,8 @@ export class Ghost extends Entity {
         this.xVel = 0;
         this.yVel = 0;
         this.scatter = scatter;
+        this.scatterTime = 0;
+        this.resetTimer = false;
         this.colour = colour;
         this.passableTerrain = [0, 2, 3, 4];
     }
@@ -88,17 +90,18 @@ export class Ghost extends Entity {
         // TODO: Fix timer not restarting issue if a power pellet is collected while scatter mode is active.
         // If scatter mode is active, go to the scatter location.
         if (this.scatter) {
-            let start = Date.now();
-            // Set the timer.
-            let timer = setInterval(() => {
-                // Get the time passed.
-                let timePassed = Date.now() - start;
-                // If the time passed is greater than or equal to 10 seconds, stop the timer and set scatter to false.
-                if (timePassed >= 10000) {
-                    clearInterval(timer);
-                    this.scatter = false;
-                }
-            });
+            // Sets a timer.
+            this.scatterTime += 1;
+            // If scatter mode is already enabled, reset the timer.
+            if (this.resetTimer === true) {
+                this.scatterTime = 0;
+                this.resetTimer = false;
+            }
+            if (this.scatterTime >= 600) { // 600 frames = 10 seconds.
+                this.scatter = false;
+                this.scatterTime = 0;
+            }
+
             // Scatter to a certain point depending on the ghost.
             if (this.colour === "red") {
                 let scatterPoint = [1, 4];

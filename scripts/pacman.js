@@ -61,7 +61,13 @@ export class Pacman extends Entity {
         // Power pellet collected
         if (this.grid[this.cellCoords[1]][this.cellCoords[0]] === 4) {
             for (let i = 0; i < ghosts.length; i++) {
-                ghosts[i].scatter = true;
+                // Check if scatter mode is already enabled.
+                if (ghosts[i].scatter === true) {
+                    ghosts[i].resetTimer = true;
+                  // Otherwise, enable scatter mode.
+                } else {
+                    ghosts[i].scatter = true;
+                }
             }
             this.grid[this.cellCoords[1]][this.cellCoords[0]] = 3;
         }
