@@ -84,7 +84,6 @@ export class Ghost extends Entity {
         this.cellCoords = [Math.ceil((this.x - 3) / 7), Math.ceil((this.y - 3) / 7)];
         this.start = this.graph[this.cellCoords[1]][this.cellCoords[0]];
         this.pacmanCellCoords = getCellCoords(this.pacman.x, this.pacman.y);
-        console.log(this.scatter);
 
         // TODO: Fix timer not restarting issue if a power pellet is collected while scatter mode is active.
         // If scatter mode is active, go to the scatter location.
