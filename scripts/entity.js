@@ -15,10 +15,19 @@ export class Entity extends Sprite {
     }
 
     // Displays Pac-Man and the ghosts.
-    drawSprite() {
+    drawSprite(ghosts) {
+        // Pac-Man
         fill(this.colour)
         if (this.shape === "circle") {
             circle(this.x+=this.pacmanXVel, this.y+=this.pacmanYVel, 7);
+        }
+        // Ghosts
+        for (let i = 0; i < ghosts.length; i++) {
+            if (ghosts[i].scatter === true) {
+                fill(255, 255, 255);
+            } else {
+                fill(this.colour);
+            }
         }
         if (this.shape === "square") {
             rect(this.x+=this.ghostXVel, this.y+=this.ghostYVel, 7, 7);

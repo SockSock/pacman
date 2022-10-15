@@ -69,8 +69,8 @@ export class Pacman extends Entity {
     reset() {
         this.x = 90;
         this.y = 182;
-        this.xVel = 0.5
-        this.yVel = 0;
+        this.pacmanXVel = 0.5
+        this.pacmanYVel = 0;
         this.dir = "right";
         this.stopDir = "right";
         keyCode = 68;

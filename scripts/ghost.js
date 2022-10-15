@@ -13,11 +13,14 @@ export class Ghost extends Entity {
     closedSet; // Set of nodes that have already been searched.
     path; // Stores the path that the ghost will follow.
 
-    constructor(x, y, colour, scatter, pacman, board, lives) {
+    constructor(x, y, name, colour, scatter, pacman, board, lives) {
         super();
         this.shape = "square";
         this.pacman = pacman;
         this.lives = lives;
+        this.scatter = scatter;
+        this.colour = colour;
+        this.name = name;
         this.grid = getGrid(board);
         this.pacmanCellCoords  = getCellCoords(this.pacman.x, this.pacman.y);
         this.x = x;
@@ -26,10 +29,8 @@ export class Ghost extends Entity {
         this.startY = y;
         this.ghostXVel = 0;
         this.ghostYVel = 0;
-        this.scatter = scatter;
         this.scatterTime = 0;
         this.resetTimer = false;
-        this.colour = colour;
         this.passableTerrain = [0, 2, 3, 4];
     }
 
@@ -75,7 +76,6 @@ export class Ghost extends Entity {
         this.start = this.graph[this.cellCoords[1]][this.cellCoords[0]];
         this.pacmanCellCoords = getCellCoords(this.pacman.x, this.pacman.y);
 
-        // TODO: Fix timer not restarting issue if a power pellet is collected while scatter mode is active.
         // If scatter mode is active, go to the scatter location.
         if (this.scatter) {
             // Sets a timer.
@@ -91,25 +91,25 @@ export class Ghost extends Entity {
             }
 
             // Scatter to a certain point depending on the ghost.
-            if (this.colour === "red") {
+            if (this.name === "blinky") {
                 let scatterPoint = [1, 5];
                 this.end = this.graph[scatterPoint[1]][scatterPoint[0]];
                 this.openSet.push(this.start);
                 this.pathFind();
             }
-            if (this.colour === "pink") {
+            if (this.name === "pinky") {
                 let scatterPoint = [26, 5];
                 this.end = this.graph[scatterPoint[1]][scatterPoint[0]];
                 this.openSet.push(this.start);
                 this.pathFind();
             }
-            if (this.colour === "cyan") {
+            if (this.name === "inky") {
                 let scatterPoint = [1, 31];
                 this.end = this.graph[scatterPoint[1]][scatterPoint[0]];
                 this.openSet.push(this.start);
                 this.pathFind();
             }
-            if (this.colour === "orange") {
+            if (this.name === "clyde") {
                 let scatterPoint = [26, 31];
                 this.end = this.graph[scatterPoint[1]][scatterPoint[0]];
                 this.openSet.push(this.start);
