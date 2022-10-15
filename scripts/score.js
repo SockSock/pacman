@@ -16,8 +16,8 @@ export class Score extends Sprite {
         text(this.count, 7, 15 );
     }
 
-    // Increases the score when Pac-Man collects a dot.
-    increaseScore() {
-        this.count++;
+    // Increases the score when Pac-Man collects a dot or eats a ghost.
+    increaseScore(value) {
+        this.count+=value;
     }
 }

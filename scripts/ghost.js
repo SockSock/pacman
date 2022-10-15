@@ -36,13 +36,15 @@ export class Ghost extends Entity {
 
     // Validation: Checks if a ghost is touching Pac-Man.
     checkContact(ghosts) {
-        if (this.x + 3 > this.pacman.x - 3 && this.x - 3 < this.pacman.x + 3 && this.y + 3 > this.pacman.y - 3 && this.y - 3 < this.pacman.y + 3) {
-            this.pacman.reset();
-            // Loops through the array which holds the ghosts to reset all the ghosts' positions.
-            for (let i = 0; i < ghosts.length; i++) {
-                ghosts[i].reset();
+        if (!this.scatter) {
+            if (this.x + 3 > this.pacman.x - 3 && this.x - 3 < this.pacman.x + 3 && this.y + 3 > this.pacman.y - 3 && this.y - 3 < this.pacman.y + 3) {
+                this.pacman.reset();
+                // Loops through the array which holds the ghosts to reset all the ghosts' positions.
+                for (let i = 0; i < ghosts.length; i++) {
+                    ghosts[i].reset();
+                }
+                this.lives.decreaseLives();
             }
-            this.lives.decreaseLives();
         }
     }
 
@@ -206,7 +208,12 @@ export class Ghost extends Entity {
 
     // Resets the ghost to its starting position.
     reset() {
-        this.x = this.startX;
-        this.y = this.startY;
+        if (this.scatter) {
+            this.x = 98;
+            this.y = 119;
+        } else {
+            this.x = this.startX;
+            this.y = this.startY;
+        }
     }
  }

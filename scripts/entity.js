@@ -23,7 +23,7 @@ export class Entity extends Sprite {
         }
         // Ghosts
         for (let i = 0; i < ghosts.length; i++) {
-            if (ghosts[i].scatter === true) {
+            if (ghosts[i].scatter) {
                 fill(255, 255, 255);
             } else {
                 fill(this.colour);
@@ -50,7 +50,7 @@ export class Entity extends Sprite {
                     this.pacmanYVel = -NORMAL_SPEED;
                 }
                 for (let i = 0; i < ghosts.length; i++) {
-                    if (ghosts[i].scatter === true) {
+                    if (ghosts[i].scatter) {
                         this.ghostXVel = 0;
                         this.ghostYVel = -SCATTER_SPEED;
                     } else {
@@ -69,7 +69,7 @@ export class Entity extends Sprite {
                     this.pacmanYVel = 0;
                 }
                 for (let i = 0; i < ghosts.length; i++) {
-                    if (ghosts[i].scatter === true) {
+                    if (ghosts[i].scatter) {
                         this.ghostXVel = -SCATTER_SPEED;
                         this.ghostYVel = 0;
                     } else {
@@ -88,7 +88,7 @@ export class Entity extends Sprite {
                     this.pacmanYVel = NORMAL_SPEED;
                 }
                 for (let i = 0; i < ghosts.length; i++) {
-                    if (ghosts[i].scatter === true) {
+                    if (ghosts[i].scatter) {
                         this.ghostXVel = 0;
                         this.ghostYVel = SCATTER_SPEED;
                     } else {
@@ -107,7 +107,7 @@ export class Entity extends Sprite {
                     this.pacmanYVel = 0;
                 }
                 for (let i = 0; i < ghosts.length; i++) {
-                    if (ghosts[i].scatter === true) {
+                    if (ghosts[i].scatter) {
                         this.ghostXVel = SCATTER_SPEED;
                         this.ghostYVel = 0;
                     } else {
