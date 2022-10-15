@@ -3,7 +3,6 @@
 import {Sprite} from "./sprite.js";
 
 export class Board extends Sprite {
-    grid;
 
     constructor() {
         super();

@@ -42,12 +42,12 @@ window.draw = function() {
     background(0);
     board.drawSprite();
     pacman.drawSprite();
-    pacman.moveSprite();
+    pacman.moveSprite(ghosts);
     pacman.stopSprite();
     pacman.eatCollectible(ghosts);
     for (let i = 0; i < ghosts.length; i++) {
         ghosts[i].drawSprite();
-        ghosts[i].moveSprite();
+        ghosts[i].moveSprite(ghosts);
         ghosts[i].stopSprite();
         ghosts[i].changeDirection();
         ghosts[i].checkContact(ghosts);

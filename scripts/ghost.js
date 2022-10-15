@@ -6,14 +6,6 @@ import {Point} from './point.js';
 import {getCellCoords, getDirectionBetweenTwoPoints, getGrid} from "./utils.js";
 
 export class Ghost extends Entity {
-    grid;
-    cellCoords;
-    pacmanCellCoords;
-    x;
-    y;
-    xVel;
-    yVel;
-    dir;
     start; // Location of the ghost in the graph.
     end; // Location of Pac-Man in the graph.
     current; // The selected node at the start.
@@ -32,8 +24,8 @@ export class Ghost extends Entity {
         this.y = y;
         this.startX = x;
         this.startY = y;
-        this.xVel = 0;
-        this.yVel = 0;
+        this.ghostXVel = 0;
+        this.ghostYVel = 0;
         this.scatter = scatter;
         this.scatterTime = 0;
         this.resetTimer = false;
@@ -100,25 +92,25 @@ export class Ghost extends Entity {
 
             // Scatter to a certain point depending on the ghost.
             if (this.colour === "red") {
-                let scatterPoint = [1, 4];
+                let scatterPoint = [1, 5];
                 this.end = this.graph[scatterPoint[1]][scatterPoint[0]];
                 this.openSet.push(this.start);
                 this.pathFind();
             }
             if (this.colour === "pink") {
-                let scatterPoint = [26, 4];
+                let scatterPoint = [26, 5];
                 this.end = this.graph[scatterPoint[1]][scatterPoint[0]];
                 this.openSet.push(this.start);
                 this.pathFind();
             }
             if (this.colour === "cyan") {
-                let scatterPoint = [1, 32];
+                let scatterPoint = [1, 31];
                 this.end = this.graph[scatterPoint[1]][scatterPoint[0]];
                 this.openSet.push(this.start);
                 this.pathFind();
             }
             if (this.colour === "orange") {
-                let scatterPoint = [26, 32];
+                let scatterPoint = [26, 31];
                 this.end = this.graph[scatterPoint[1]][scatterPoint[0]];
                 this.openSet.push(this.start);
                 this.pathFind();

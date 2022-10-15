@@ -4,14 +4,6 @@ import {Entity} from './entity.js';
 import {getCellCoords, getGrid} from "./utils.js";
 
 export class Pacman extends Entity {
-    grid;
-    cellCoords;
-    x;
-    y;
-    xVel;
-    yVel;
-    dir;
-    stopDir; // Direction used to calculate collision detection.
 
     constructor(board, score) {
         super();
@@ -21,10 +13,10 @@ export class Pacman extends Entity {
         this.grid = getGrid(board);
         this.x = 90;
         this.y = 182;
-        this.xVel = 0.5
-        this.yVel = 0;
+        this.pacmanXVel = 0.5
+        this.pacmanYVel = 0;
         this.dir = "right";
-        this.stopDir = "right";
+        this.stopDir = "right"; // Direction used to calculate collision detection.
         keyCode = 68;
         this.cellCoords = getCellCoords(this.x, this.y);
         this.passableTerrain = [0, 3, 4];

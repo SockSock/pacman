@@ -3,7 +3,6 @@
 import {Sprite} from "./sprite.js";
 
 export class Lives extends Sprite {
-    count;
 
     constructor() {
         super();
