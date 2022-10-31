@@ -5,7 +5,11 @@ import {Pacman} from './pacman.js';
 import {Score} from './score.js';
 import {Ghost} from "./ghost.js";
 import {Lives} from "./lives.js";
+import {Menu} from './menu.js';
+import {getMode} from "./utils.js";
 
+let menu;
+let mode;
 let pacman;
 let board;
 let score;
@@ -21,6 +25,7 @@ window.setup = function() {
     rectMode(CENTER);
     createCanvas(600, 750);
     frameRate(60);
+    menu = new Menu();
     board = new Board();
     score = new Score();
     lives = new Lives();
@@ -38,26 +43,37 @@ window.setup = function() {
 
 // Updates 60 frames per second to reload objects to update their locations.
 window.draw = function() {
+    mode = getMode(menu);
     scale(3);
     background(0);
-    board.drawSprite();
-    pacman.drawSprite();
-    pacman.moveSprite();
-    pacman.stopSprite();
-    pacman.eatCollectible(ghosts);
-    for (let i = 0; i < ghosts.length; i++) {
-        ghosts[i].drawSprite();
-        ghosts[i].moveSprite();
-        ghosts[i].stopSprite();
-        ghosts[i].changeDirection();
-        ghosts[i].checkContact(ghosts);
-        ghosts[i].scatterLogic();
+    menu.drawMainMenu();
+    menu.drawSettingsMenu();
+    if (mode === "play") {
+        board.drawSprite();
+        pacman.drawSprite();
+        pacman.moveSprite();
+        pacman.stopSprite();
+        pacman.eatCollectible(ghosts);
+        for (let i = 0; i < ghosts.length; i++) {
+            ghosts[i].drawSprite();
+            ghosts[i].moveSprite();
+            ghosts[i].stopSprite();
+            ghosts[i].changeDirection();
+            ghosts[i].checkContact(ghosts);
+            ghosts[i].scatterLogic();
+        }
+        score.drawSprite();
+        lives.drawSprite();
     }
-    score.drawSprite();
-    lives.drawSprite();
 }
 
 // Detects keys inputted by the user to allow for movement of Pac-Man.
 window.keyPressed = function() {
     pacman.changeDirection();
+}
+
+
+window.mousePressed = function() {
+    console.log(mouseX/3, mouseY/3);
+    menu.menuLogic();
 }

@@ -22,3 +22,8 @@ export function getCellCoords(x, y) {
 export function getGrid(board) {
     return board.grid;
 }
+
+// Getter method to return the mode of the game from the Menu class.
+export function getMode(menu) {
+    return menu.mode;
+}
