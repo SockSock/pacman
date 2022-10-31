@@ -4,7 +4,6 @@ import {Sprite} from './sprite.js';
 import {getCellCoords} from "./utils.js";
 
 const NORMAL_SPEED = 0.5;
-const SCATTER_SPEED = 0.25;
 
 export class Entity extends Sprite {
     constructor() {
@@ -15,27 +14,21 @@ export class Entity extends Sprite {
     }
 
     // Displays Pac-Man and the ghosts.
-    drawSprite(ghosts) {
+    drawSprite() {
         // Pac-Man
-        fill(this.colour)
+        fill(this.colour);
         if (this.shape === "circle") {
-            circle(this.x+=this.pacmanXVel, this.y+=this.pacmanYVel, 7);
+            circle(this.x+=this.xVel, this.y+=this.yVel, 7);
         }
         // Ghosts
-        for (let i = 0; i < ghosts.length; i++) {
-            if (ghosts[i].scatter) {
-                fill(255, 255, 255);
-            } else {
-                fill(this.colour);
-            }
-        }
+        fill(this.colour);
         if (this.shape === "square") {
-            rect(this.x+=this.ghostXVel, this.y+=this.ghostYVel, 7, 7);
+            rect(this.x+=this.xVel, this.y+=this.yVel, 7, 7);
         }
     }
 
     // Validation: Logic for the movement of Pac-Man and the ghosts.
-    moveSprite(ghosts) {
+    moveSprite() {
         // Stores the future location of Pac-Man in relation to the grid.
         this.cellCoords = getCellCoords(this.x, this.y);
 
@@ -46,17 +39,8 @@ export class Entity extends Sprite {
                 // If he is, check if the tile above Pac-Man or a ghost is empty to move into (because direction is up).
                 if (this.passableTerrain.includes(this.grid[this.cellCoords[1]-1][this.cellCoords[0]])) {
                     this.stopDir = "up";
-                    this.pacmanXVel = 0;
-                    this.pacmanYVel = -NORMAL_SPEED;
-                }
-                for (let i = 0; i < ghosts.length; i++) {
-                    if (ghosts[i].scatter) {
-                        this.ghostXVel = 0;
-                        this.ghostYVel = -SCATTER_SPEED;
-                    } else {
-                        this.ghostXVel = 0;
-                        this.ghostYVel = -NORMAL_SPEED;
-                    }
+                    this.xVel = 0;
+                    this.yVel = -NORMAL_SPEED;
                 }
             }
         }
@@ -65,17 +49,8 @@ export class Entity extends Sprite {
             if (this.y % 7 === 0) {
                 if (this.passableTerrain.includes(this.grid[this.cellCoords[1]][this.cellCoords[0]-1])) {
                     this.stopDir = "left";
-                    this.pacmanXVel = -NORMAL_SPEED;
-                    this.pacmanYVel = 0;
-                }
-                for (let i = 0; i < ghosts.length; i++) {
-                    if (ghosts[i].scatter) {
-                        this.ghostXVel = -SCATTER_SPEED;
-                        this.ghostYVel = 0;
-                    } else {
-                        this.ghostXVel = -NORMAL_SPEED;
-                        this.ghostYVel = 0;
-                    }
+                    this.xVel = -NORMAL_SPEED;
+                    this.yVel = 0;
                 }
             }
         }
@@ -84,17 +59,8 @@ export class Entity extends Sprite {
             if (this.x % 7 === 0) {
                 if (this.passableTerrain.includes(this.grid[this.cellCoords[1]+1][this.cellCoords[0]])) {
                     this.stopDir = "down";
-                    this.pacmanXVel = 0;
-                    this.pacmanYVel = NORMAL_SPEED;
-                }
-                for (let i = 0; i < ghosts.length; i++) {
-                    if (ghosts[i].scatter) {
-                        this.ghostXVel = 0;
-                        this.ghostYVel = SCATTER_SPEED;
-                    } else {
-                        this.ghostXVel = 0;
-                        this.ghostYVel = NORMAL_SPEED;
-                    }
+                    this.xVel = 0;
+                    this.yVel = NORMAL_SPEED;
                 }
             }
         }
@@ -103,17 +69,8 @@ export class Entity extends Sprite {
             if (this.y % 7 === 0) {
                 if (this.passableTerrain.includes(this.grid[this.cellCoords[1]][this.cellCoords[0]+1])) {
                     this.stopDir = "right";
-                    this.pacmanXVel = NORMAL_SPEED;
-                    this.pacmanYVel = 0;
-                }
-                for (let i = 0; i < ghosts.length; i++) {
-                    if (ghosts[i].scatter) {
-                        this.ghostXVel = SCATTER_SPEED;
-                        this.ghostYVel = 0;
-                    } else {
-                        this.ghostXVel = NORMAL_SPEED;
-                        this.ghostYVel = 0;
-                    }
+                    this.xVel = NORMAL_SPEED;
+                    this.yVel = 0;
                 }
             }
         }
@@ -127,29 +84,25 @@ export class Entity extends Sprite {
             // If he is, stop Pac-Man or a ghost if the current location of Pac-Man or a ghost equals their future
             // location, stored in the cellCoords array.
             if ((this.x/7) === this.cellCoords[0] && (this.y/7) === this.cellCoords[1]) {
-                this.pacmanYVel = 0;
-                this.ghostYVel = 0;
+                this.yVel = 0;
             }
         }
         // A
         if (this.grid[this.cellCoords[1]][this.cellCoords[0]-1] === 1 && this.stopDir === "left") {
             if ((this.x/7) === this.cellCoords[0] && (this.y/7) === this.cellCoords[1]) {
-                this.pacmanXVel = 0;
-                this.ghostXVel = 0;
+                this.xVel = 0;
             }
         }
         // S
         if (this.grid[this.cellCoords[1]+1][this.cellCoords[0]] === 1 && this.stopDir === "down") {
             if ((this.x/7) === this.cellCoords[0] && (this.y/7) === this.cellCoords[1]) {
-                this.pacmanYVel = 0;
-                this.ghostYVel = 0;
+                this.yVel = 0;
             }
         }
         // D
         if (this.grid[this.cellCoords[1]][this.cellCoords[0]+1] === 1 && this.stopDir === "right") {
             if ((this.x/7) === this.cellCoords[0] && (this.y/7) === this.cellCoords[1]) {
-                this.pacmanXVel = 0;
-                this.ghostXVel = 0;
+                this.xVel = 0;
             }
         }
     }

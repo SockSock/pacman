@@ -19,6 +19,7 @@ export class Ghost extends Entity {
         this.pacman = pacman;
         this.lives = lives;
         this.scatter = scatter;
+        this.startingColour = colour;
         this.colour = colour;
         this.name = name;
         this.grid = getGrid(board);
@@ -27,8 +28,10 @@ export class Ghost extends Entity {
         this.y = y;
         this.startX = x;
         this.startY = y;
-        this.ghostXVel = 0;
-        this.ghostYVel = 0;
+        this.xVel = 0;
+        this.yVel = 0;
+        this.dir = "";
+        this.stopDir = "";
         this.scatterTime = 0;
         this.resetTimer = false;
         this.passableTerrain = [0, 2, 3, 4];
@@ -48,7 +51,7 @@ export class Ghost extends Entity {
         }
     }
 
-    // Validation: Logic for the movement of the ghost. Happens every 10 frames.
+    // Validation: Logic for the movement of the ghost.
     changeDirection() {
         this.updateLocations();
         // // Displays the chosen path.
@@ -93,24 +96,28 @@ export class Ghost extends Entity {
             }
 
             // Scatter to a certain point depending on the ghost.
+            // Red ghost
             if (this.name === "blinky") {
                 let scatterPoint = [1, 5];
                 this.end = this.graph[scatterPoint[1]][scatterPoint[0]];
                 this.openSet.push(this.start);
                 this.pathFind();
             }
+            // Pink ghost
             if (this.name === "pinky") {
                 let scatterPoint = [26, 5];
                 this.end = this.graph[scatterPoint[1]][scatterPoint[0]];
                 this.openSet.push(this.start);
                 this.pathFind();
             }
+            // Cyan ghost
             if (this.name === "inky") {
                 let scatterPoint = [1, 31];
                 this.end = this.graph[scatterPoint[1]][scatterPoint[0]];
                 this.openSet.push(this.start);
                 this.pathFind();
             }
+            // Orange ghost
             if (this.name === "clyde") {
                 let scatterPoint = [26, 31];
                 this.end = this.graph[scatterPoint[1]][scatterPoint[0]];
@@ -179,6 +186,27 @@ export class Ghost extends Entity {
                     neighbour.cameFrom = this.current;
                 }
             }
+        }
+    }
+
+    // Validation: Controls the logic for scatter mode.
+    scatterLogic() {
+        if (this.scatter) {
+            this.colour = "white";
+            if (this.xVel === 0.5) {
+                this.xVel = 0.25;
+            }
+            if (this.xVel === -0.5) {
+                this.xVel = -0.25;
+            }
+            if (this.yVel === 0.5) {
+                this.yVel = 0.25;
+            }
+            if (this.yVel === -0.5) {
+                this.yVel = -0.25;
+            }
+        } else {
+            this.colour = this.startingColour;
         }
     }
 

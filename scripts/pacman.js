@@ -13,8 +13,8 @@ export class Pacman extends Entity {
         this.grid = getGrid(board);
         this.x = 90;
         this.y = 182;
-        this.pacmanXVel = 0.5
-        this.pacmanYVel = 0;
+        this.xVel = 0.5;
+        this.yVel = 0;
         this.dir = "right";
         this.stopDir = "right"; // Direction used to calculate collision detection.
         keyCode = 68;
@@ -77,11 +77,11 @@ export class Pacman extends Entity {
     reset() {
         this.x = 90;
         this.y = 182;
-        this.pacmanXVel = 0.5
-        this.pacmanYVel = 0;
+        this.xVel = 0.5;
+        this.yVel = 0;
         this.dir = "right";
         this.stopDir = "right";
         keyCode = 68;
-        this.cellCoords = [Math.ceil((this.x-3)/7), Math.ceil((this.y-3)/7)];
+        this.cellCoords = getCellCoords(this.x, this.y);
     }
 }

@@ -41,16 +41,17 @@ window.draw = function() {
     scale(3);
     background(0);
     board.drawSprite();
-    pacman.drawSprite(ghosts);
-    pacman.moveSprite(ghosts);
+    pacman.drawSprite();
+    pacman.moveSprite();
     pacman.stopSprite();
     pacman.eatCollectible(ghosts);
     for (let i = 0; i < ghosts.length; i++) {
-        ghosts[i].drawSprite(ghosts);
-        ghosts[i].moveSprite(ghosts);
+        ghosts[i].drawSprite();
+        ghosts[i].moveSprite();
         ghosts[i].stopSprite();
         ghosts[i].changeDirection();
         ghosts[i].checkContact(ghosts);
+        ghosts[i].scatterLogic();
     }
     score.drawSprite();
     lives.drawSprite();
