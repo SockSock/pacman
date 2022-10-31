@@ -3,7 +3,7 @@
 import {Sprite} from './sprite.js';
 import {getCellCoords} from "./utils.js";
 
-const NORMAL_SPEED = 0.5;
+const VELOCITY = 0.5;
 
 export class Entity extends Sprite {
     constructor() {
@@ -35,41 +35,41 @@ export class Entity extends Sprite {
         // W
         if (this.dir === "up") {
             // Check if Pac-Man or a ghost is in the middle of a tile.
-            if (this.x % 7 === 0) {
+            if (this.x % 7 < 0.5) {
                 // If he is, check if the tile above Pac-Man or a ghost is empty to move into (because direction is up).
                 if (this.passableTerrain.includes(this.grid[this.cellCoords[1]-1][this.cellCoords[0]])) {
                     this.stopDir = "up";
                     this.xVel = 0;
-                    this.yVel = -NORMAL_SPEED;
+                    this.yVel = -VELOCITY;
                 }
             }
         }
         // A
         if (this.dir === "left") {
-            if (this.y % 7 === 0) {
+            if (this.y % 7 < 0.5) {
                 if (this.passableTerrain.includes(this.grid[this.cellCoords[1]][this.cellCoords[0]-1])) {
                     this.stopDir = "left";
-                    this.xVel = -NORMAL_SPEED;
+                    this.xVel = -VELOCITY;
                     this.yVel = 0;
                 }
             }
         }
         // S
         if (this.dir === "down") {
-            if (this.x % 7 === 0) {
+            if (this.x % 7 < 0.5) {
                 if (this.passableTerrain.includes(this.grid[this.cellCoords[1]+1][this.cellCoords[0]])) {
                     this.stopDir = "down";
                     this.xVel = 0;
-                    this.yVel = NORMAL_SPEED;
+                    this.yVel = VELOCITY;
                 }
             }
         }
         // D
         if (this.dir === "right") {
-            if (this.y % 7 === 0) {
+            if (this.y % 7 < 0.5) {
                 if (this.passableTerrain.includes(this.grid[this.cellCoords[1]][this.cellCoords[0]+1])) {
                     this.stopDir = "right";
-                    this.xVel = NORMAL_SPEED;
+                    this.xVel = VELOCITY;
                     this.yVel = 0;
                 }
             }

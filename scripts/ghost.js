@@ -193,6 +193,7 @@ export class Ghost extends Entity {
     scatterLogic() {
         if (this.scatter) {
             this.colour = "white";
+            // Makes the ghosts move slower in scatter mode.
             if (this.xVel === 0.5) {
                 this.xVel = 0.25;
             }
@@ -206,6 +207,7 @@ export class Ghost extends Entity {
                 this.yVel = -0.25;
             }
         } else {
+            //  Makes the colour of the ghost return to the original colour.
             this.colour = this.startingColour;
         }
     }
