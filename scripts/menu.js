@@ -1,7 +1,9 @@
 // Menu class. Written by Anish Shastri, 31/10/22. Contains subroutines related to the menu logic.
 
 export class Menu {
-    constructor() {
+    constructor(score, board) {
+        this.score = score;
+        this.board = board;
         this.mode = "main";
         this.soundSlider = createSlider(0, 100, 100);
         this.soundSlider.hide();
@@ -72,6 +74,30 @@ export class Menu {
         }
     }
 
+    drawRestartMenu() {
+        if (this.mode === "restart") {
+            // Title
+            fill(255, 255, 255);
+            textSize(20);
+            text("Game Over", 40, 70);
+
+            // Score
+            fill(255, 255, 255);
+            textSize(15);
+            text("Score: " + this.score.count, 62, 110);
+
+            // Restart button
+            fill(255, 255, 255);
+            textSize(15);
+            text("Restart", 67, 150);
+
+            // Main menu button
+            fill(255, 255, 255);
+            textSize(15);
+            text("Main Menu", 57, 180);
+        }
+    }
+
     menuLogic() {
         // Main menu
         if (this.mode === "main") {
@@ -89,7 +115,24 @@ export class Menu {
         // Settings menu
         if (this.mode === "settings") {
             // Checks if the Back button has been pressed.
-            if (mouseX/3 > 75 && mouseX/3 < 102 && mouseY/3 > 220 && mouseY/3 < 240) {
+            if (mouseX/3 > 75 && mouseX/3 < 130 && mouseY/3 > 220 && mouseY/3 < 240) {
+                this.mode = "main";
+            }
+        }
+
+        // Restart menu
+        if (this.mode === "restart") {
+            // Checks if the Play again button has been pressed.
+            if (mouseX/3 > 67 && mouseX/3 < 112 && mouseY/3 > 130 && mouseY/3 < 150) {
+                // this.board.grid = this.board.startingGrid;
+                this.score.count = 0;
+                this.mode = "play";
+            }
+
+            // Checks if the Main menu button has been pressed.
+            if (mouseX/3 > 57 && mouseX/3 < 112 && mouseY/3 > 160 && mouseY/3 < 180) {
+                // this.board.grid = this.board.startingGrid;
+                this.score.count = 0;
                 this.mode = "main";
             }
         }

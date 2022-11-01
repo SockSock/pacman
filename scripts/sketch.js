@@ -25,10 +25,10 @@ window.setup = function() {
     rectMode(CENTER);
     createCanvas(600, 750);
     frameRate(60);
-    menu = new Menu();
     board = new Board();
     score = new Score();
-    lives = new Lives();
+    menu = new Menu(score, board);
+    lives = new Lives(menu);
     pacman = new Pacman(board, score);
     redGhost = new Ghost(42, 119, "blinky", "red", false, pacman, board, lives);
     pinkGhost = new Ghost(42, 56, "pinky", "pink", false, pacman, board, lives);
@@ -48,6 +48,7 @@ window.draw = function() {
     background(0);
     menu.drawMainMenu();
     menu.drawSettingsMenu();
+    menu.drawRestartMenu();
     if (mode === "play") {
         board.drawSprite();
         pacman.drawSprite();
@@ -72,8 +73,8 @@ window.keyPressed = function() {
     pacman.changeDirection();
 }
 
-
-window.mousePressed = function() {
+// Detects mouse clicks inputted by the user to allow for the selection of menu options.
+window.mouseClicked = function() {
     console.log(mouseX/3, mouseY/3);
     menu.menuLogic();
 }

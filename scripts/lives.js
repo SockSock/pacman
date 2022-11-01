@@ -4,9 +4,10 @@ import {Sprite} from "./sprite.js";
 
 export class Lives extends Sprite {
 
-    constructor() {
+    constructor(menu) {
         super();
-        this.count = 2;
+        this.menu = menu;
+        this.count = 0;
     }
 
     // Displays the life count.
@@ -21,7 +22,8 @@ export class Lives extends Sprite {
     decreaseLives() {
         this.count--;
         if (this.count === -1) {
-            noLoop();
+            this.count = 0;
+            this.menu.mode = "restart";
         }
     }
 }
