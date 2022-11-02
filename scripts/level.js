@@ -1,3 +1,5 @@
+// Contains the structure of the maze which is used by other classes. Written by Anish Shastri, 02/11/22.
+
 export function getLevel() {
     // 0 - dot
     // 1 - wall

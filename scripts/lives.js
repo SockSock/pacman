@@ -7,7 +7,7 @@ export class Lives extends Sprite {
     constructor(menu) {
         super();
         this.menu = menu;
-        this.count = 2;
+        this.count = 2; // Life count
     }
 
     // Displays the life count.
@@ -23,7 +23,7 @@ export class Lives extends Sprite {
         this.count--;
         if (this.count === -1) {
             this.menu.mode = "restart";
-            this.count = 2;
+            this.count = 2; // Resets the count when the game ends.
         }
     }
 }

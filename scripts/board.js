@@ -6,7 +6,7 @@ import {getLevel} from "./level.js";
 export class Board extends Sprite {
     constructor() {
         super();
-        this.grid = getLevel();
+        this.grid = getLevel(); // Gets the grid structure from the level file.
     }
 
     drawSprite() {

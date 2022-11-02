@@ -13,6 +13,7 @@ export class Menu {
         this.soundSlider.hide();
     }
 
+    // Validation: Displays the main menu if the mode is 'main'.
     drawMainMenu() {
         if (this.mode === "main") {
             // Title
@@ -32,6 +33,7 @@ export class Menu {
         }
     }
 
+    // Validation: Displays the settings menu if the mode is 'settings'.
     drawSettingsMenu() {
         if (this.mode === "settings") {
             // Main title
@@ -78,6 +80,7 @@ export class Menu {
         }
     }
 
+    // Validation: Displays the restart menu if the mode is 'restart'.
     drawRestartMenu() {
         if (this.mode === "restart") {
             // Title
@@ -102,6 +105,7 @@ export class Menu {
         }
     }
 
+    // Validation: Controls what happens when certain buttons are clicked in the menus.
     menuLogic() {
         // Main menu
         if (this.mode === "main") {
@@ -140,6 +144,7 @@ export class Menu {
         }
     }
 
+    // Resets the state of the game to the original.
     reset() {
         this.board.grid = getLevel();
         this.pacman.grid = getGrid(this.board);

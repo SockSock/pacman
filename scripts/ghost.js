@@ -222,7 +222,8 @@ export class Ghost extends Entity {
         this.graph = getGrid(new Board());
         for (let i = 0; i < this.graph.length; i++) {
             for (let j = 0; j < this.graph.length; j++) {
-                if (this.graph[i][j] === 0 || this.graph[i][j] === 2 || this.graph[i][j] === 3 || this.graph[i][j] === 4) {
+                // Checks for every value which is not a wall.
+                if (this.graph[i][j] !== 1) {
                     this.graph[i][j] = new Point(i, j);
                 }
             }
@@ -238,9 +239,11 @@ export class Ghost extends Entity {
 
     // Resets the ghost to its starting position.
     reset() {
+        // Reset to the middle of the maze if scatter mode is enabled.
         if (this.scatter) {
             this.x = 98;
             this.y = 119;
+          // Otherwise, reset to where the ghost originally spawned.
         } else {
             this.x = this.startX;
             this.y = this.startY;
