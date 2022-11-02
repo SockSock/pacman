@@ -41,7 +41,7 @@ window.setup = function() {
     }
 }
 
-// Updates 60 frames per second to reload objects to update their locations.
+// Validation: Updates 60 frames per second to reload objects to update their locations.
 window.draw = function() {
     mode = getMode(menu);
     scale(3);

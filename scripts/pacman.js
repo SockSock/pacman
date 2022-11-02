@@ -47,6 +47,7 @@ export class Pacman extends Entity {
         // Dot collected
         if (this.grid[this.cellCoords[1]][this.cellCoords[0]] === 0) {
             this.score.increaseScore(1);
+            // Change the dot into a path.
             this.grid[this.cellCoords[1]][this.cellCoords[0]] = 3;
         }
 
