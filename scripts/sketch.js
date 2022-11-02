@@ -27,9 +27,9 @@ window.setup = function() {
     frameRate(60);
     board = new Board();
     score = new Score();
-    menu = new Menu(score, board);
-    lives = new Lives(menu);
     pacman = new Pacman(board, score);
+    menu = new Menu(score, board, pacman);
+    lives = new Lives(menu);
     redGhost = new Ghost(42, 119, "blinky", "red", false, pacman, board, lives);
     pinkGhost = new Ghost(42, 56, "pinky", "pink", false, pacman, board, lives);
     blueGhost = new Ghost(147, 56, "inky", "cyan", false, pacman, board, lives);

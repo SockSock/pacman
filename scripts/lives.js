@@ -7,7 +7,7 @@ export class Lives extends Sprite {
     constructor(menu) {
         super();
         this.menu = menu;
-        this.count = 0;
+        this.count = 2;
     }
 
     // Displays the life count.
@@ -22,8 +22,8 @@ export class Lives extends Sprite {
     decreaseLives() {
         this.count--;
         if (this.count === -1) {
-            this.count = 0;
             this.menu.mode = "restart";
+            this.count = 2;
         }
     }
 }

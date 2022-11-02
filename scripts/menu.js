@@ -1,9 +1,13 @@
 // Menu class. Written by Anish Shastri, 31/10/22. Contains subroutines related to the menu logic.
 
+import {getLevel} from "./level.js";
+import {getGrid} from "./utils.js";
+
 export class Menu {
-    constructor(score, board) {
+    constructor(score, board, pacman) {
         this.score = score;
         this.board = board;
+        this.pacman = pacman;
         this.mode = "main";
         this.soundSlider = createSlider(0, 100, 100);
         this.soundSlider.hide();
@@ -124,17 +128,22 @@ export class Menu {
         if (this.mode === "restart") {
             // Checks if the Play again button has been pressed.
             if (mouseX/3 > 67 && mouseX/3 < 112 && mouseY/3 > 130 && mouseY/3 < 150) {
-                // this.board.grid = this.board.startingGrid;
-                this.score.count = 0;
+                this.reset();
                 this.mode = "play";
             }
 
             // Checks if the Main menu button has been pressed.
             if (mouseX/3 > 57 && mouseX/3 < 112 && mouseY/3 > 160 && mouseY/3 < 180) {
-                // this.board.grid = this.board.startingGrid;
-                this.score.count = 0;
+                this.reset();
                 this.mode = "main";
             }
         }
+    }
+
+    reset() {
+        this.board.grid = getLevel();
+        this.pacman.grid = getGrid(this.board);
+        this.score.count = 0;
+
     }
 }
