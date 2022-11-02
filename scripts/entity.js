@@ -32,7 +32,7 @@ export class Entity extends Sprite {
         // Stores the future location of Pac-Man in relation to the grid.
         this.cellCoords = getCellCoords(this.x, this.y);
 
-        // W
+        // Up
         if (this.dir === "up") {
             // Check if Pac-Man or a ghost is in the middle of a tile.
             if (this.x % 7 < 0.5) {
@@ -44,7 +44,7 @@ export class Entity extends Sprite {
                 }
             }
         }
-        // A
+        // Left
         if (this.dir === "left") {
             if (this.y % 7 < 0.5) {
                 if (this.passableTerrain.includes(this.grid[this.cellCoords[1]][this.cellCoords[0]-1])) {
@@ -54,7 +54,7 @@ export class Entity extends Sprite {
                 }
             }
         }
-        // S
+        // Down
         if (this.dir === "down") {
             if (this.x % 7 < 0.5) {
                 if (this.passableTerrain.includes(this.grid[this.cellCoords[1]+1][this.cellCoords[0]])) {
@@ -64,7 +64,7 @@ export class Entity extends Sprite {
                 }
             }
         }
-        // D
+        // Right
         if (this.dir === "right") {
             if (this.y % 7 < 0.5) {
                 if (this.passableTerrain.includes(this.grid[this.cellCoords[1]][this.cellCoords[0]+1])) {
@@ -78,7 +78,7 @@ export class Entity extends Sprite {
 
     // Validation: Logic for the collision detection of Pac-Man and the ghosts.
     stopSprite() {
-        // W
+        // Up
         // Check if the tile above Pac-Man or a ghost is a wall (because direction is up).
         if (this.grid[this.cellCoords[1]-1][this.cellCoords[0]] === 1 && this.stopDir === "up") {
             // If he is, stop Pac-Man or a ghost if the current location of Pac-Man or a ghost equals their future
@@ -87,19 +87,19 @@ export class Entity extends Sprite {
                 this.yVel = 0;
             }
         }
-        // A
+        // Left
         if (this.grid[this.cellCoords[1]][this.cellCoords[0]-1] === 1 && this.stopDir === "left") {
             if ((this.x/7) === this.cellCoords[0] && (this.y/7) === this.cellCoords[1]) {
                 this.xVel = 0;
             }
         }
-        // S
+        // Down
         if (this.grid[this.cellCoords[1]+1][this.cellCoords[0]] === 1 && this.stopDir === "down") {
             if ((this.x/7) === this.cellCoords[0] && (this.y/7) === this.cellCoords[1]) {
                 this.yVel = 0;
             }
         }
-        // D
+        // Right
         if (this.grid[this.cellCoords[1]][this.cellCoords[0]+1] === 1 && this.stopDir === "right") {
             if ((this.x/7) === this.cellCoords[0] && (this.y/7) === this.cellCoords[1]) {
                 this.xVel = 0;

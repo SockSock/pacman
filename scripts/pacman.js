@@ -24,19 +24,19 @@ export class Pacman extends Entity {
 
     // Validation: Logic for user inputs to be registered properly.
     changeDirection() {
-        // W
+        // Up
         if (keyCode === 87 || keyCode === UP_ARROW) {
             this.dir = "up";
         }
-        // A
+        // Left
         if (keyCode === 65 || keyCode === LEFT_ARROW) {
             this.dir = "left";
         }
-        // S
+        // Down
         if (keyCode === 83 || keyCode === DOWN_ARROW) {
             this.dir = "down";
         }
-        // D
+        // Right
         if (keyCode === 68 || keyCode === RIGHT_ARROW) {
             this.dir = "right";
         }
