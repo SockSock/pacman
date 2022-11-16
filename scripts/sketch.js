@@ -61,7 +61,7 @@ window.draw = function() {
             ghosts[i].stopSprite();
             ghosts[i].changeDirection();
             ghosts[i].checkContact(ghosts);
-            ghosts[i].scatterLogic();
+            ghosts[i].scatterSpeed();
         }
         score.drawSprite();
         lives.drawSprite();
@@ -76,5 +76,5 @@ window.keyPressed = function() {
 // Detects mouse clicks inputted by the user to allow for the selection of menu options.
 window.mouseClicked = function() {
     console.log(mouseX/3, mouseY/3);
-    menu.menuLogic();
+    menu.clickMenuButton();
 }

@@ -190,7 +190,7 @@ export class Ghost extends Entity {
     }
 
     // Validation: Controls the logic for scatter mode.
-    scatterLogic() {
+    scatterSpeed() {
         if (this.scatter) {
             this.colour = "white";
             // Makes the ghosts move slower in scatter mode.

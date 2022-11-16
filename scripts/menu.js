@@ -106,7 +106,7 @@ export class Menu {
     }
 
     // Validation: Controls what happens when certain buttons are clicked in the menus.
-    menuLogic() {
+    clickMenuButton() {
         // Main menu
         if (this.mode === "main") {
             // Checks if the Play button has been pressed.
