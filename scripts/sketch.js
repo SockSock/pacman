@@ -23,7 +23,7 @@ let ghosts;
 // Loads and defines initial properties which are needed before the game starts.
 window.setup = function() {
     rectMode(CENTER);
-    createCanvas(600, 750);
+    createCanvas(567, 750);
     frameRate(60);
     board = new Board();
     score = new Score();
@@ -55,6 +55,7 @@ window.draw = function() {
         pacman.moveSprite();
         pacman.stopSprite();
         pacman.eatCollectible(ghosts);
+        pacman.enterWarpTunnel();
         for (let i = 0; i < ghosts.length; i++) {
             ghosts[i].drawSprite();
             ghosts[i].moveSprite();
