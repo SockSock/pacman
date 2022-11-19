@@ -4,9 +4,10 @@ import {Sprite} from "./sprite.js";
 
 export class Lives extends Sprite {
 
-    constructor(menu) {
+    constructor(menu, sound) {
         super();
         this.menu = menu;
+        this.sound = sound;
         this.count = 2; // Life count
     }
 
@@ -24,6 +25,7 @@ export class Lives extends Sprite {
         if (this.count === -1) {
             this.menu.mode = "restart";
             this.count = 2; // Resets the count when the game ends.
+            this.sound.stopBackgroundMusic();
         }
     }
 }

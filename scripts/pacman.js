@@ -76,7 +76,6 @@ export class Pacman extends Entity {
 
     // Validation: Logic for checking if Pac-Man has entered a warp tunnel and teleporting him to the other side.
     enterWarpTunnel() {
-        console.log(this.x);
         // Left warp tunnel
         if (this.x < -3) {
             this.x = 193;

@@ -7,7 +7,10 @@ import {Ghost} from "./ghost.js";
 import {Lives} from "./lives.js";
 import {Menu} from './menu.js';
 import {getMode} from "./utils.js";
+import {Sound} from "./sound.js";
 
+let backgroundMusic;
+let sound;
 let menu;
 let mode;
 let pacman;
@@ -21,15 +24,22 @@ let orangeGhost;
 let ghosts;
 
 // Loads and defines initial properties which are needed before the game starts.
+window.preload = function() {
+    // Sound from Zapsplat.com
+    backgroundMusic = loadSound('assets/background_music.mp3');
+}
+
+// Loads and defines initial properties which are needed before the game starts.
 window.setup = function() {
     rectMode(CENTER);
     createCanvas(567, 750);
     frameRate(60);
+    sound = new Sound(backgroundMusic);
     board = new Board();
     score = new Score();
     pacman = new Pacman(board, score);
-    menu = new Menu(score, board, pacman);
-    lives = new Lives(menu);
+    menu = new Menu(score, board, pacman, sound);
+    lives = new Lives(menu, sound);
     redGhost = new Ghost(42, 119, "blinky", "red", false, pacman, board, lives);
     pinkGhost = new Ghost(42, 56, "pinky", "pink", false, pacman, board, lives);
     blueGhost = new Ghost(147, 56, "inky", "cyan", false, pacman, board, lives);

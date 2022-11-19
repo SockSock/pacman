@@ -4,10 +4,11 @@ import {getLevel} from "./level.js";
 import {getGrid} from "./utils.js";
 
 export class Menu {
-    constructor(score, board, pacman) {
+    constructor(score, board, pacman, sound) {
         this.score = score;
         this.board = board;
         this.pacman = pacman;
+        this.sound = sound;
         this.mode = "main";
         this.soundSlider = createSlider(0, 100, 100);
         this.soundSlider.hide();
@@ -112,6 +113,7 @@ export class Menu {
             // Checks if the Play button has been pressed.
             if (mouseX/3 > 75 && mouseX/3 < 102 && mouseY/3 > 110 && mouseY/3 < 130) {
                 this.mode = "play";
+                this.sound.playBackgroundMusic();
             }
 
             // Checks if the Settings button has been pressed.
@@ -134,6 +136,7 @@ export class Menu {
             if (mouseX/3 > 67 && mouseX/3 < 112 && mouseY/3 > 130 && mouseY/3 < 150) {
                 this.reset();
                 this.mode = "play";
+                this.sound.playBackgroundMusic();
             }
 
             // Checks if the Main menu button has been pressed.
