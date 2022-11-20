@@ -31,6 +31,7 @@ window.setup = function() {
     frameRate(60);
     // Sound from Zapsplat.com
     backgroundMusic = new Audio('assets/background_music.mp3');
+    backgroundMusic.loop = true;
     collectDot = new Audio('assets/collect_dot.mp3');
     sound = new Sound(backgroundMusic, collectDot);
     board = new Board();
