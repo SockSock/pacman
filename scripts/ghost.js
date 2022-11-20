@@ -189,7 +189,7 @@ export class Ghost extends Entity {
         }
     }
 
-    // Validation: Controls the logic for scatter mode.
+    // Validation: Controls the colour and speed logic for scatter mode.
     scatterSpeed() {
         if (this.scatter) {
             this.colour = "white";

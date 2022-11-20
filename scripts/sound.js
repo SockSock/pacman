@@ -1,3 +1,6 @@
+// Sound class. Written by Anish Shastri, 19/11/22. Contains subroutines to play certain sounds. They are called when
+// the appropriate event happens.
+
 export class Sound {
     constructor(backgroundMusic, collectDot, eatGhost) {
         this.backgroundMusic = backgroundMusic;
