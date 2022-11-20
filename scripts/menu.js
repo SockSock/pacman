@@ -113,6 +113,7 @@ export class Menu {
             // Checks if the Play button has been pressed.
             if (mouseX/3 > 75 && mouseX/3 < 102 && mouseY/3 > 110 && mouseY/3 < 130) {
                 this.mode = "play";
+                // Play the music.
                 this.sound.playBackgroundMusic();
             }
 
@@ -136,6 +137,7 @@ export class Menu {
             if (mouseX/3 > 67 && mouseX/3 < 112 && mouseY/3 > 130 && mouseY/3 < 150) {
                 this.reset();
                 this.mode = "play";
+                // Play the music.
                 this.sound.playBackgroundMusic();
             }
 

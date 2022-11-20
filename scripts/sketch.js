@@ -11,6 +11,7 @@ import {Sound} from "./sound.js";
 
 let backgroundMusic;
 let collectDot;
+let eatGhost;
 let sound;
 let menu;
 let mode;
@@ -33,7 +34,8 @@ window.setup = function() {
     backgroundMusic = new Audio('assets/background_music.mp3');
     backgroundMusic.loop = true;
     collectDot = new Audio('assets/collect_dot.mp3');
-    sound = new Sound(backgroundMusic, collectDot);
+    eatGhost = new Audio('assets/eat_ghost.mp3');
+    sound = new Sound(backgroundMusic, collectDot, eatGhost);
     board = new Board();
     score = new Score();
     pacman = new Pacman(board, score, sound);

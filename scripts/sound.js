@@ -1,7 +1,8 @@
 export class Sound {
-    constructor(backgroundMusic, collectDot) {
+    constructor(backgroundMusic, collectDot, eatGhost) {
         this.backgroundMusic = backgroundMusic;
         this.collectDot = collectDot;
+        this.eatGhost = eatGhost;
     }
 
     playBackgroundMusic() {
@@ -16,5 +17,10 @@ export class Sound {
     playCollectDot() {
         this.collectDot.currentTime = 0;
         this.collectDot.play();
+    }
+
+    playEatGhost() {
+        this.eatGhost.currentTime = 0;
+        this.eatGhost.play();
     }
 }
