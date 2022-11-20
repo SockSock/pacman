@@ -1,13 +1,20 @@
 export class Sound {
-    constructor(backgroundMusic) {
+    constructor(backgroundMusic, collectDot) {
         this.backgroundMusic = backgroundMusic;
+        this.collectDot = collectDot;
     }
 
     playBackgroundMusic() {
-        this.backgroundMusic.loop();
+        this.backgroundMusic.currentTime = 0;
+        this.backgroundMusic.play();
     }
 
     stopBackgroundMusic() {
-        this.backgroundMusic.stop();
+        this.backgroundMusic.pause();
+    }
+
+    playCollectDot() {
+        this.collectDot.currentTime = 0;
+        this.collectDot.play();
     }
 }

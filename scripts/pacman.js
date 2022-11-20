@@ -5,12 +5,13 @@ import {getCellCoords, getGrid} from "./utils.js";
 
 export class Pacman extends Entity {
 
-    constructor(board, score) {
+    constructor(board, score, sound) {
         super();
         this.colour = "yellow";
         this.shape = "circle";
         this.score = score;
         this.grid = getGrid(board);
+        this.sound = sound;
         this.x = 90;
         this.y = 182;
         this.xVel = 0.5;
@@ -49,6 +50,7 @@ export class Pacman extends Entity {
             this.score.increaseScore(1);
             // Change the dot into a path.
             this.grid[this.cellCoords[1]][this.cellCoords[0]] = 3;
+            this.sound.playCollectDot();
         }
 
         // Power pellet collected
