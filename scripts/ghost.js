@@ -195,16 +195,16 @@ export class Ghost extends Entity {
             this.colour = "white";
             // Makes the ghosts move slower in scatter mode.
             if (this.xVel === 0.5) {
-                this.xVel = 0.25;
+                this.xVel /= 2;
             }
             if (this.xVel === -0.5) {
-                this.xVel = -0.25;
+                this.xVel /= 2;
             }
             if (this.yVel === 0.5) {
-                this.yVel = 0.25;
+                this.yVel /= 2;
             }
             if (this.yVel === -0.5) {
-                this.yVel = -0.25;
+                this.yVel /= 2;
             }
         } else {
             //  Makes the colour of the ghost return to the original colour.
