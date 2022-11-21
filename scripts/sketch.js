@@ -30,11 +30,13 @@ window.setup = function() {
     rectMode(CENTER);
     createCanvas(567, 750);
     frameRate(60);
+
     // Sound from Zapsplat.com
     backgroundMusic = new Audio('assets/background_music.mp3');
     backgroundMusic.loop = true;
     collectDot = new Audio('assets/collect_dot.mp3');
     eatGhost = new Audio('assets/eat_ghost.mp3');
+
     sound = new Sound(backgroundMusic, collectDot, eatGhost);
     board = new Board();
     score = new Score();

@@ -9,7 +9,7 @@ export class Sound {
     }
 
     playBackgroundMusic() {
-        this.backgroundMusic.currentTime = 0;
+        this.backgroundMusic.currentTime = 0; // Resets the music to the beginning.
         this.backgroundMusic.play();
     }
 
