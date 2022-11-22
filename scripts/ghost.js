@@ -3,7 +3,7 @@
 import {Entity} from './entity.js';
 import {Board} from './board.js';
 import {Point} from './point.js';
-import {getCellCoords, getDirectionBetweenTwoPoints, getGrid} from "./utils.js";
+import {getCellCoords, getDirectionBetweenTwoPoints, getGrid, getDifficulty} from "./utils.js";
 
 export class Ghost extends Entity {
     start; // Location of the ghost in the graph.
@@ -13,11 +13,12 @@ export class Ghost extends Entity {
     closedSet; // Set of nodes that have already been searched.
     path; // Stores the path that the ghost will follow.
 
-    constructor(x, y, name, colour, scatter, pacman, board, lives) {
+    constructor(x, y, name, colour, scatter, pacman, board, lives, menu) {
         super();
         this.shape = "square";
         this.pacman = pacman;
         this.lives = lives;
+        this.menu = menu;
         this.scatter = scatter;
         this.startingColour = colour;
         this.colour = colour;
@@ -191,6 +192,8 @@ export class Ghost extends Entity {
 
     // Validation: Controls the colour and speed logic for scatter mode.
     scatterSpeed() {
+        console.log(this.xVel, this.yVel);
+        let difficulty = getDifficulty(this.menu);
         if (this.scatter) {
             this.colour = "white";
             // Makes the ghosts move slower in scatter mode.
@@ -207,8 +210,13 @@ export class Ghost extends Entity {
                 this.yVel /= 2;
             }
         } else {
-            //  Makes the colour of the ghost return to the original colour.
             this.colour = this.startingColour;
+            if (difficulty === "easy") {
+                // Reduce speed.
+            }
+            if (difficulty === "hard") {
+                // Increase speed.
+            }
         }
     }
 

@@ -43,10 +43,10 @@ window.setup = function() {
     pacman = new Pacman(board, score, sound);
     menu = new Menu(score, board, pacman, sound);
     lives = new Lives(menu, sound);
-    redGhost = new Ghost(42, 119, "blinky", "red", false, pacman, board, lives);
-    pinkGhost = new Ghost(42, 56, "pinky", "pink", false, pacman, board, lives);
-    blueGhost = new Ghost(147, 56, "inky", "cyan", false, pacman, board, lives);
-    orangeGhost = new Ghost(147, 119, "clyde", "orange", false, pacman, board, lives);
+    redGhost = new Ghost(42, 119, "blinky", "red", false, pacman, board, lives, menu);
+    pinkGhost = new Ghost(42, 56, "pinky", "pink", false, pacman, board, lives, menu);
+    blueGhost = new Ghost(147, 56, "inky", "cyan", false, pacman, board, lives, menu);
+    orangeGhost = new Ghost(147, 119, "clyde", "orange", false, pacman, board, lives, menu);
     ghosts = [redGhost, pinkGhost, blueGhost, orangeGhost];
     for (let i = 0; i < ghosts.length; i++) {
         ghosts[i].setupPoints();

@@ -27,3 +27,8 @@ export function getGrid(board) {
 export function getMode(menu) {
     return menu.mode;
 }
+
+// Getter method to return the difficulty of the game from the Menu class.
+export function getDifficulty(menu) {
+    return menu.difficulty;
+}

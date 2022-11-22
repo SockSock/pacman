@@ -149,7 +149,7 @@ export class Menu {
 
         // Restart menu
         if (this.mode === "restart") {
-            // Checks if the Play again button has been pressed.
+            // Checks if the Restart button has been pressed.
             if (mouseX/3 > 67 && mouseX/3 < 112 && mouseY/3 > 130 && mouseY/3 < 150) {
                 this.reset();
                 this.mode = "play";
