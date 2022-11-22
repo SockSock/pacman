@@ -32,3 +32,8 @@ export function getMode(menu) {
 export function getDifficulty(menu) {
     return menu.difficulty;
 }
+
+// Getter method to return the value of the sound slider from the Menu class.
+export function getVolume(menu) {
+    return menu.soundSlider.value() / 100; // Divided by 100 to get a value between 0 and 1.
+}

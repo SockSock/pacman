@@ -1,17 +1,18 @@
 // Pacman class. Written by Anish Shastri, 25/06/22. Contains subroutines related to the movement and collision detection of Pac-Man.
 
 import {Entity} from './entity.js';
-import {getCellCoords, getGrid} from "./utils.js";
+import {getCellCoords, getGrid, getVolume} from "./utils.js";
 
 export class Pacman extends Entity {
 
-    constructor(board, score, sound) {
+    constructor(board, score, sound, menu) {
         super();
         this.colour = "yellow";
         this.shape = "circle";
         this.score = score;
         this.grid = getGrid(board);
         this.sound = sound;
+        this.menu = menu;
         this.x = 90;
         this.y = 182;
         this.xVel = 0.5;
@@ -45,11 +46,12 @@ export class Pacman extends Entity {
 
     // Validation: Logic for checking if Pac-Man has eaten something.
     eatCollectible(ghosts) {
+        let volumeLevel = getVolume(this.menu);
         // Dot collected
         if (this.grid[this.cellCoords[1]][this.cellCoords[0]] === 0) {
             this.score.increaseScore(1);
             // Play the sound effect.
-            this.sound.playCollectDot();
+            this.sound.playCollectDot(volumeLevel);
             // Change the dot into a path.
             this.grid[this.cellCoords[1]][this.cellCoords[0]] = 3;
         }
@@ -74,7 +76,7 @@ export class Pacman extends Entity {
                 ghosts[i].reset();
                 this.score.increaseScore(100);
                 // Play the sound effect.
-                this.sound.playEatGhost();
+                this.sound.playEatGhost(volumeLevel);
             }
         }
     }

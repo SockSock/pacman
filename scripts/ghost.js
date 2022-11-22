@@ -192,7 +192,6 @@ export class Ghost extends Entity {
 
     // Validation: Controls the colour and speed logic for scatter mode.
     scatterSpeed() {
-        console.log(this.xVel, this.yVel);
         let difficulty = getDifficulty(this.menu);
         if (this.scatter) {
             this.colour = "white";
@@ -210,6 +209,7 @@ export class Ghost extends Entity {
                 this.yVel /= 2;
             }
         } else {
+            // Make the ghosts return to their original colour.
             this.colour = this.startingColour;
         }
     }

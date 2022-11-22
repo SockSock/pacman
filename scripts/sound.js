@@ -8,8 +8,9 @@ export class Sound {
         this.eatGhost = eatGhost;
     }
 
-    playBackgroundMusic() {
+    playBackgroundMusic(volumeLevel) {
         this.backgroundMusic.currentTime = 0; // Resets the music to the beginning.
+        this.backgroundMusic.volume = volumeLevel;
         this.backgroundMusic.play();
     }
 
@@ -17,13 +18,15 @@ export class Sound {
         this.backgroundMusic.pause();
     }
 
-    playCollectDot() {
+    playCollectDot(volumeLevel) {
         this.collectDot.currentTime = 0;
+        this.collectDot.volume = volumeLevel;
         this.collectDot.play();
     }
 
-    playEatGhost() {
+    playEatGhost(volumeLevel) {
         this.eatGhost.currentTime = 0;
+        this.eatGhost.volume = volumeLevel;
         this.eatGhost.play();
     }
 }
