@@ -6,7 +6,7 @@ import {Score} from './score.js';
 import {Ghost} from "./ghost.js";
 import {Lives} from "./lives.js";
 import {Menu} from './menu.js';
-import {getMode} from "./utils.js";
+import {getMode, getDifficulty} from "./utils.js";
 import {Sound} from "./sound.js";
 
 let backgroundMusic;
@@ -15,6 +15,7 @@ let eatGhost;
 let sound;
 let menu;
 let mode;
+let difficulty;
 let pacman;
 let board;
 let score;
@@ -57,6 +58,7 @@ window.setup = function() {
 // Validation: Updates 60 frames per second to reload objects to update their locations.
 window.draw = function() {
     mode = getMode(menu);
+    difficulty = getDifficulty(menu);
     scale(3);
     background(0);
     menu.drawMainMenu();
@@ -65,13 +67,13 @@ window.draw = function() {
     if (mode === "play") {
         board.drawSprite();
         pacman.drawSprite();
-        pacman.moveSprite();
+        pacman.moveSprite(0.5);
         pacman.stopSprite();
         pacman.eatCollectible(ghosts);
         pacman.enterWarpTunnel();
         for (let i = 0; i < ghosts.length; i++) {
             ghosts[i].drawSprite();
-            ghosts[i].moveSprite();
+            ghosts[i].moveSprite(difficulty);
             ghosts[i].stopSprite();
             ghosts[i].changeDirection();
             ghosts[i].checkContact(ghosts);

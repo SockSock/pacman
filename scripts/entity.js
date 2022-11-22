@@ -3,8 +3,6 @@
 import {Sprite} from './sprite.js';
 import {getCellCoords} from "./utils.js";
 
-const VELOCITY = 0.5;
-
 export class Entity extends Sprite {
     constructor() {
         super();
@@ -28,7 +26,7 @@ export class Entity extends Sprite {
     }
 
     // Validation: Logic for the movement of Pac-Man and the ghosts.
-    moveSprite() {
+    moveSprite(velocity) {
         // Stores the future location of Pac-Man in relation to the grid.
         this.cellCoords = getCellCoords(this.x, this.y);
 
@@ -40,7 +38,7 @@ export class Entity extends Sprite {
                 if (this.passableTerrain.includes(this.grid[this.cellCoords[1]-1][this.cellCoords[0]])) {
                     this.stopDir = "up";
                     this.xVel = 0;
-                    this.yVel = -VELOCITY;
+                    this.yVel = -velocity;
                 }
             }
         }
@@ -49,7 +47,7 @@ export class Entity extends Sprite {
             if (this.y % 7 < 0.5) {
                 if (this.passableTerrain.includes(this.grid[this.cellCoords[1]][this.cellCoords[0]-1])) {
                     this.stopDir = "left";
-                    this.xVel = -VELOCITY;
+                    this.xVel = -velocity;
                     this.yVel = 0;
                 }
             }
@@ -60,7 +58,7 @@ export class Entity extends Sprite {
                 if (this.passableTerrain.includes(this.grid[this.cellCoords[1]+1][this.cellCoords[0]])) {
                     this.stopDir = "down";
                     this.xVel = 0;
-                    this.yVel = VELOCITY;
+                    this.yVel = velocity;
                 }
             }
         }
@@ -69,7 +67,7 @@ export class Entity extends Sprite {
             if (this.y % 7 < 0.5) {
                 if (this.passableTerrain.includes(this.grid[this.cellCoords[1]][this.cellCoords[0]+1])) {
                     this.stopDir = "right";
-                    this.xVel = VELOCITY;
+                    this.xVel = velocity;
                     this.yVel = 0;
                 }
             }

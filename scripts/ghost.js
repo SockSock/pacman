@@ -197,26 +197,20 @@ export class Ghost extends Entity {
         if (this.scatter) {
             this.colour = "white";
             // Makes the ghosts move slower in scatter mode.
-            if (this.xVel === 0.5) {
+            if (this.xVel === difficulty) {
                 this.xVel /= 2;
             }
-            if (this.xVel === -0.5) {
+            if (this.xVel === -difficulty) {
                 this.xVel /= 2;
             }
-            if (this.yVel === 0.5) {
+            if (this.yVel === difficulty) {
                 this.yVel /= 2;
             }
-            if (this.yVel === -0.5) {
+            if (this.yVel === -difficulty) {
                 this.yVel /= 2;
             }
         } else {
             this.colour = this.startingColour;
-            if (difficulty === "easy") {
-                // Reduce speed.
-            }
-            if (difficulty === "hard") {
-                // Increase speed.
-            }
         }
     }
 

@@ -10,7 +10,7 @@ export class Menu {
         this.pacman = pacman;
         this.sound = sound;
         this.mode = "main";
-        this.difficulty = "medium";
+        this.difficulty = 0.5; // Holds the speed of the ghosts in terms of the difficulty mode.
         this.soundSlider = createSlider(0, 100, 100);
         this.soundSlider.hide();
     }
@@ -128,17 +128,17 @@ export class Menu {
         if (this.mode === "settings") {
             // Checks if the Easy button has been pressed.
             if (mouseX/3 > 15 && mouseX/3 < 55 && mouseY/3 > 90 && mouseY/3 < 110) {
-                this.difficulty = "easy";
+                this.difficulty = 0.25;
             }
 
             // Checks if the Medium button has been pressed.
             if (mouseX/3 > 65 && mouseX/3 < 115 && mouseY/3 > 90 && mouseY/3 < 110) {
-                this.difficulty = "medium";
+                this.difficulty = 0.5;
             }
 
             // Checks if the Hard button has been pressed.
             if (mouseX/3 > 135 && mouseX/3 < 165 && mouseY/3 > 90 && mouseY/3 < 110) {
-                this.difficulty = "hard";
+                this.difficulty = 0.51;
             }
 
             // Checks if the Back button has been pressed.
