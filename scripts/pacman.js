@@ -1,16 +1,19 @@
 // Pacman class. Written by Anish Shastri, 25/06/22. Contains subroutines related to the movement and collision detection of Pac-Man.
 
 import {Entity} from './entity.js';
-import {getCellCoords, getGrid, getVolume} from "./utils.js";
+import {getCellCoords, getGrid, getMode} from "./utils.js";
+import {getLevel} from "./level.js";
 
 export class Pacman extends Entity {
 
-    constructor(board, score, menu) {
+    constructor(board, score, sound, menu) {
         super();
         this.colour = "yellow";
         this.shape = "circle";
         this.score = score;
+        this.board = board;
         this.grid = getGrid(board);
+        this.sound = sound;
         this.menu = menu;
         this.x = 90;
         this.y = 182;
@@ -48,6 +51,8 @@ export class Pacman extends Entity {
         // Dot collected
         if (this.grid[this.cellCoords[1]][this.cellCoords[0]] === 0) {
             this.score.increaseScore(1);
+            // Play the sound effect.
+            this.sound.playCollectDot();
             // Change the dot into a path.
             this.grid[this.cellCoords[1]][this.cellCoords[0]] = 3;
         }
@@ -71,6 +76,8 @@ export class Pacman extends Entity {
             if (ghosts[i].scatter && this.cellCoords[0] === ghosts[i].cellCoords[0] && this.cellCoords[1] === ghosts[i].cellCoords[1]) {
                 ghosts[i].reset();
                 this.score.increaseScore(100);
+                // Play the sound effect.
+                this.sound.playEatGhost();
             }
         }
     }
@@ -97,5 +104,12 @@ export class Pacman extends Entity {
         this.stopDir = "right";
         keyCode = 68;
         this.cellCoords = getCellCoords(this.x, this.y);
+    }
+
+    restart() {
+        if (getMode(this.menu) === "restart") {
+            this.board.grid = getLevel();
+            this.grid = getGrid(this.board);
+        }
     }
 }

@@ -1,13 +1,8 @@
 // Menu class. Written by Anish Shastri, 31/10/22. Contains subroutines related to the menu logic.
 
-import {getLevel} from "./level.js";
-import {getGrid} from "./utils.js";
-
 export class Menu {
-    constructor(score, board, pacman) {
+    constructor(score) {
         this.score = score;
-        this.board = board;
-        this.pacman = pacman;
         this.mode = "main";
         this.difficulty = 0.5; // Holds the speed of the ghosts in terms of the difficulty mode.
         this.soundSlider = createSlider(0, 100, 100);
@@ -148,23 +143,15 @@ export class Menu {
         if (this.mode === "restart") {
             // Checks if the Restart button has been pressed.
             if (mouseX/3 > 67 && mouseX/3 < 112 && mouseY/3 > 130 && mouseY/3 < 150) {
-                this.reset();
                 this.mode = "play";
+                this.score.count = 0;
             }
 
             // Checks if the Main menu button has been pressed.
             if (mouseX/3 > 57 && mouseX/3 < 112 && mouseY/3 > 160 && mouseY/3 < 180) {
-                this.reset();
                 this.mode = "main";
+                this.score.count = 0;
             }
         }
-    }
-
-    // Resets the state of the game to the original.
-    reset() {
-        this.board.grid = getLevel();
-        this.pacman.grid = getGrid(this.board);
-        this.score.count = 0;
-
     }
 }

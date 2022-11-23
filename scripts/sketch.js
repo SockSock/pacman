@@ -40,10 +40,10 @@ window.setup = function() {
 
     board = new Board();
     score = new Score();
-    pacman = new Pacman(board, score);
-    menu = new Menu(score, board, pacman);
+    menu = new Menu(score);
+    sound = new Sound(backgroundMusic, collectDot, eatGhost, menu);
     lives = new Lives(menu);
-    sound = new Sound(backgroundMusic, collectDot, eatGhost, menu, pacman, lives);
+    pacman = new Pacman(board, score, sound, menu);
     redGhost = new Ghost(42, 119, "blinky", "red", false, pacman, board, lives, menu);
     pinkGhost = new Ghost(42, 56, "pinky", "pink", false, pacman, board, lives, menu);
     blueGhost = new Ghost(147, 56, "inky", "cyan", false, pacman, board, lives, menu);
@@ -64,6 +64,8 @@ window.draw = function() {
     menu.drawMainMenu();
     menu.drawSettingsMenu();
     menu.drawRestartMenu();
+    sound.controlBackgroundMusic();
+    pacman.restart();
     if (mode === "play") {
         board.drawSprite();
         pacman.drawSprite();

@@ -4,23 +4,21 @@
 import {getMode, getVolume} from "./utils.js";
 
 export class Sound {
-    constructor(backgroundMusic, collectDot, eatGhost, menu, pacman, lives) {
+    constructor(backgroundMusic, collectDot, eatGhost, menu) {
         this.backgroundMusic = backgroundMusic;
         this.collectDot = collectDot;
         this.eatGhost = eatGhost;
         this.menu = menu;
-        this.pacman = pacman;
-        this.lives = lives;
     }
 
-    playBackgroundMusic() {
-        this.backgroundMusic.currentTime = 0; // Resets the music to the beginning.
-        this.backgroundMusic.volume = getVolume(this.menu);
-        this.backgroundMusic.play();
-    }
-
-    stopBackgroundMusic() {
-        this.backgroundMusic.pause();
+    controlBackgroundMusic() {
+        if (getMode(this.menu) === "play") {
+            this.backgroundMusic.volume = getVolume(this.menu);
+            this.backgroundMusic.play();
+        } else {
+            this.backgroundMusic.pause();
+            this.backgroundMusic.currentTime = 0; // Resets the music to the beginning.
+        }
     }
 
     playCollectDot() {
