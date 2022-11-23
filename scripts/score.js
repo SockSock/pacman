@@ -14,7 +14,7 @@ export class Score extends Sprite {
     drawSprite() {
         fill(255, 255, 255);
         const tempCount = this.count;
-        text(tempCount, 7, 15 );
+        text(tempCount, 20, 15 );
     }
 
     // Increases the score when Pac-Man collects a dot or eats a ghost.
