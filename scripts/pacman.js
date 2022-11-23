@@ -45,7 +45,6 @@ export class Pacman extends Entity {
 
     // Validation: Logic for checking if Pac-Man has eaten something.
     eatCollectible(ghosts) {
-        let volumeLevel = getVolume(this.menu);
         // Dot collected
         if (this.grid[this.cellCoords[1]][this.cellCoords[0]] === 0) {
             this.score.increaseScore(1);

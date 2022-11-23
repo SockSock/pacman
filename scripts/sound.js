@@ -1,6 +1,8 @@
 // Sound class. Written by Anish Shastri, 19/11/22. Contains subroutines to play certain sounds. They are called when
 // the appropriate event happens.
 
+import {getMode, getVolume} from "./utils.js";
+
 export class Sound {
     constructor(backgroundMusic, collectDot, eatGhost, menu, pacman, lives) {
         this.backgroundMusic = backgroundMusic;
@@ -11,9 +13,9 @@ export class Sound {
         this.lives = lives;
     }
 
-    playBackgroundMusic(volumeLevel) {
+    playBackgroundMusic() {
         this.backgroundMusic.currentTime = 0; // Resets the music to the beginning.
-        this.backgroundMusic.volume = volumeLevel;
+        this.backgroundMusic.volume = getVolume(this.menu);
         this.backgroundMusic.play();
     }
 
@@ -21,15 +23,15 @@ export class Sound {
         this.backgroundMusic.pause();
     }
 
-    playCollectDot(volumeLevel) {
+    playCollectDot() {
         this.collectDot.currentTime = 0;
-        this.collectDot.volume = volumeLevel;
+        this.collectDot.volume = getVolume(this.menu);
         this.collectDot.play();
     }
 
-    playEatGhost(volumeLevel) {
+    playEatGhost() {
         this.eatGhost.currentTime = 0;
-        this.eatGhost.volume = volumeLevel;
+        this.eatGhost.volume = getVolume(this.menu);
         this.eatGhost.play();
     }
 }
