@@ -15,17 +15,17 @@ export class Menu {
             // Title
             fill(255, 255, 255);
             textSize(20);
-            text("Pac-Man", 50, 70);
+            text("Pac-Man", 80, 70);
 
             // Play button
             fill(255, 255, 255);
             textSize(15);
-            text("Play", 75, 130);
+            text("Play", 80, 130);
 
             // Settings button
             fill(255, 255, 255);
             textSize(15);
-            text("Settings", 65, 160);
+            text("Settings", 80, 160);
         }
     }
 
@@ -35,37 +35,45 @@ export class Menu {
             // Main title
             fill(255, 255, 255);
             textSize(20);
-            text("Settings", 55, 30);
+            text("Settings", 80, 30);
 
             // Difficulty button
             fill(255, 255, 255);
             textSize(15);
-            text("Difficulty", 63, 80);
+            text("Difficulty", 80, 80);
 
             // Easy button
-            fill(255, 255, 255);
+            if (this.difficulty === 0.25) {
+                fill (255, 0, 0);
+            } else {
+                fill(255, 255, 255);
+            }
             textSize(15);
-            text("Easy", 35, 115);
+            text("Easy", 50, 115);
 
             // Medium button
-            fill(255, 255, 255);
+            if (this.difficulty === 0.5) {
+                fill (255, 0, 0);
+            } else {
+                fill(255, 255, 255);
+            }
             textSize(15);
-            text("Medium", 105, 115);
+            text("Medium", 115, 115);
 
             // Sound title
             fill(255, 255, 255);
             textSize(15);
-            text("Sound", 70, 160);
+            text("Sound", 80, 160);
 
             // Sound slider
             this.soundSlider.show();
-            this.soundSlider.position(200, 570);
+            this.soundSlider.position(170, 570);
             this.soundSlider.style('width', '150px');
 
             // Back button
             fill(255, 255, 255);
             textSize(15);
-            text("Back", 75, 240);
+            text("Back", 80, 240);
         } else {
             this.soundSlider.hide();
         }
@@ -77,22 +85,22 @@ export class Menu {
             // Title
             fill(255, 255, 255);
             textSize(20);
-            text("Game Over", 40, 70);
+            text("Game Over", 80, 70);
 
             // Score
             fill(255, 255, 255);
             textSize(15);
-            text("Score: " + this.score.count, 62, 110);
+            text("Score: " + this.score.count, 80, 110);
 
             // Restart button
             fill(255, 255, 255);
             textSize(15);
-            text("Restart", 67, 150);
+            text("Restart", 80, 150);
 
             // Main menu button
             fill(255, 255, 255);
             textSize(15);
-            text("Main Menu", 57, 180);
+            text("Main Menu", 80, 180);
         }
     }
 
@@ -101,12 +109,12 @@ export class Menu {
         // Main menu
         if (this.mode === "main") {
             // Checks if the Play button has been pressed.
-            if (mouseX/3 > 75 && mouseX/3 < 102 && mouseY/3 > 110 && mouseY/3 < 130) {
+            if (mouseX/3 > 65 && mouseX/3 < 95 && mouseY/3 > 120 && mouseY/3 < 140) {
                 this.mode = "play";
             }
 
             // Checks if the Settings button has been pressed.
-            if (mouseX/3 > 65 && mouseX/3 < 112 && mouseY/3 > 140 && mouseY/3 < 160) {
+            if (mouseX/3 > 55 && mouseX/3 < 105 && mouseY/3 > 150 && mouseY/3 < 170) {
                 this.mode = "settings";
             }
         }
@@ -114,17 +122,17 @@ export class Menu {
         // Settings menu
         if (this.mode === "settings") {
             // Checks if the Easy button has been pressed.
-            if (mouseX/3 > 35 && mouseX/3 < 70 && mouseY/3 > 95 && mouseY/3 < 115) {
+            if (mouseX/3 > 35 && mouseX/3 < 65 && mouseY/3 > 95 && mouseY/3 < 115) {
                 this.difficulty = 0.25;
             }
 
             // Checks if the Medium button has been pressed.
-            if (mouseX/3 > 105 && mouseX/3 < 150 && mouseY/3 > 95 && mouseY/3 < 115) {
+            if (mouseX/3 > 90 && mouseX/3 < 140 && mouseY/3 > 95 && mouseY/3 < 115) {
                 this.difficulty = 0.5;
             }
 
             // Checks if the Back button has been pressed.
-            if (mouseX/3 > 75 && mouseX/3 < 130 && mouseY/3 > 220 && mouseY/3 < 240) {
+            if (mouseX/3 > 65 && mouseX/3 < 95 && mouseY/3 > 220 && mouseY/3 < 240) {
                 this.mode = "main";
             }
         }
@@ -132,13 +140,13 @@ export class Menu {
         // Restart menu
         if (this.mode === "restart") {
             // Checks if the Restart button has been pressed.
-            if (mouseX/3 > 67 && mouseX/3 < 112 && mouseY/3 > 130 && mouseY/3 < 150) {
+            if (mouseX/3 > 55 && mouseX/3 < 105 && mouseY/3 > 130 && mouseY/3 < 150) {
                 this.mode = "play";
                 this.score.count = 0;
             }
 
             // Checks if the Main menu button has been pressed.
-            if (mouseX/3 > 57 && mouseX/3 < 112 && mouseY/3 > 160 && mouseY/3 < 180) {
+            if (mouseX/3 > 45 && mouseX/3 < 120 && mouseY/3 > 160 && mouseY/3 < 180) {
                 this.mode = "main";
                 this.score.count = 0;
             }

@@ -31,6 +31,7 @@ window.setup = function() {
     rectMode(CENTER);
     createCanvas(567, 750);
     frameRate(60);
+    textAlign(CENTER);
 
     // Sound from Zapsplat.com
     backgroundMusic = new Audio('assets/background_music.mp3');
