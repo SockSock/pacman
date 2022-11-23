@@ -45,17 +45,12 @@ export class Menu {
             // Easy button
             fill(255, 255, 255);
             textSize(15);
-            text("Easy", 15, 110);
+            text("Easy", 35, 115);
 
             // Medium button
             fill(255, 255, 255);
             textSize(15);
-            text("Medium", 65, 110);
-
-            // Hard button
-            fill(255, 255, 255);
-            textSize(15);
-            text("Hard", 135, 110);
+            text("Medium", 105, 115);
 
             // Sound title
             fill(255, 255, 255);
@@ -119,18 +114,13 @@ export class Menu {
         // Settings menu
         if (this.mode === "settings") {
             // Checks if the Easy button has been pressed.
-            if (mouseX/3 > 15 && mouseX/3 < 55 && mouseY/3 > 90 && mouseY/3 < 110) {
+            if (mouseX/3 > 35 && mouseX/3 < 70 && mouseY/3 > 95 && mouseY/3 < 115) {
                 this.difficulty = 0.25;
             }
 
             // Checks if the Medium button has been pressed.
-            if (mouseX/3 > 65 && mouseX/3 < 115 && mouseY/3 > 90 && mouseY/3 < 110) {
+            if (mouseX/3 > 105 && mouseX/3 < 150 && mouseY/3 > 95 && mouseY/3 < 115) {
                 this.difficulty = 0.5;
-            }
-
-            // Checks if the Hard button has been pressed.
-            if (mouseX/3 > 135 && mouseX/3 < 165 && mouseY/3 > 90 && mouseY/3 < 110) {
-                this.difficulty = 0.51;
             }
 
             // Checks if the Back button has been pressed.
