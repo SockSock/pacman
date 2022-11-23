@@ -4,10 +4,10 @@ import {getLevel} from "./level.js";
 import {getGrid} from "./utils.js";
 
 export class Menu {
-    constructor(score, board, sound) {
+    constructor(score, board, pacman) {
         this.score = score;
         this.board = board;
-        this.sound = sound;
+        this.pacman = pacman;
         this.mode = "main";
         this.difficulty = 0.5; // Holds the speed of the ghosts in terms of the difficulty mode.
         this.soundSlider = createSlider(0, 100, 100);
@@ -113,8 +113,6 @@ export class Menu {
             // Checks if the Play button has been pressed.
             if (mouseX/3 > 75 && mouseX/3 < 102 && mouseY/3 > 110 && mouseY/3 < 130) {
                 this.mode = "play";
-                // Play the music.
-                this.sound.playBackgroundMusic(this.soundSlider.value() / 100);
             }
 
             // Checks if the Settings button has been pressed.
@@ -152,8 +150,6 @@ export class Menu {
             if (mouseX/3 > 67 && mouseX/3 < 112 && mouseY/3 > 130 && mouseY/3 < 150) {
                 this.reset();
                 this.mode = "play";
-                // Play the music.
-                this.sound.playBackgroundMusic(this.soundSlider.value() / 100);
             }
 
             // Checks if the Main menu button has been pressed.

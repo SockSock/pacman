@@ -38,12 +38,12 @@ window.setup = function() {
     collectDot = new Audio('assets/collect_dot.mp3');
     eatGhost = new Audio('assets/eat_ghost.mp3');
 
-    sound = new Sound(backgroundMusic, collectDot, eatGhost);
     board = new Board();
     score = new Score();
-    menu = new Menu(score, board, sound);
-    pacman = new Pacman(board, score, sound, menu);
-    lives = new Lives(menu, sound);
+    pacman = new Pacman(board, score);
+    menu = new Menu(score, board, pacman);
+    lives = new Lives(menu);
+    sound = new Sound(backgroundMusic, collectDot, eatGhost, menu, pacman, lives);
     redGhost = new Ghost(42, 119, "blinky", "red", false, pacman, board, lives, menu);
     pinkGhost = new Ghost(42, 56, "pinky", "pink", false, pacman, board, lives, menu);
     blueGhost = new Ghost(147, 56, "inky", "cyan", false, pacman, board, lives, menu);

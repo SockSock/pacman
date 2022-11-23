@@ -2,10 +2,13 @@
 // the appropriate event happens.
 
 export class Sound {
-    constructor(backgroundMusic, collectDot, eatGhost) {
+    constructor(backgroundMusic, collectDot, eatGhost, menu, pacman, lives) {
         this.backgroundMusic = backgroundMusic;
         this.collectDot = collectDot;
         this.eatGhost = eatGhost;
+        this.menu = menu;
+        this.pacman = pacman;
+        this.lives = lives;
     }
 
     playBackgroundMusic(volumeLevel) {

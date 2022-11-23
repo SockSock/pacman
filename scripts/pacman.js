@@ -5,13 +5,12 @@ import {getCellCoords, getGrid, getVolume} from "./utils.js";
 
 export class Pacman extends Entity {
 
-    constructor(board, score, sound, menu) {
+    constructor(board, score, menu) {
         super();
         this.colour = "yellow";
         this.shape = "circle";
         this.score = score;
         this.grid = getGrid(board);
-        this.sound = sound;
         this.menu = menu;
         this.x = 90;
         this.y = 182;
@@ -50,8 +49,6 @@ export class Pacman extends Entity {
         // Dot collected
         if (this.grid[this.cellCoords[1]][this.cellCoords[0]] === 0) {
             this.score.increaseScore(1);
-            // Play the sound effect.
-            this.sound.playCollectDot(volumeLevel);
             // Change the dot into a path.
             this.grid[this.cellCoords[1]][this.cellCoords[0]] = 3;
         }
@@ -75,8 +72,6 @@ export class Pacman extends Entity {
             if (ghosts[i].scatter && this.cellCoords[0] === ghosts[i].cellCoords[0] && this.cellCoords[1] === ghosts[i].cellCoords[1]) {
                 ghosts[i].reset();
                 this.score.increaseScore(100);
-                // Play the sound effect.
-                this.sound.playEatGhost(volumeLevel);
             }
         }
     }
