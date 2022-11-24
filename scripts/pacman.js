@@ -106,6 +106,8 @@ export class Pacman extends Entity {
         this.cellCoords = getCellCoords(this.x, this.y);
     }
 
+    // Validation: Gets the original grid structure from the level file and passes it into Pac-Man's grid if all lives
+    // have been lost.
     restart() {
         if (getMode(this.menu) === "restart") {
             this.board.grid = getLevel();
