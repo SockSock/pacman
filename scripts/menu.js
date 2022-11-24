@@ -43,9 +43,12 @@ export class Menu {
             text("Difficulty", 80, 80);
 
             // Easy button
+            // Check if the current difficulty is easy.
             if (this.difficulty === 0.25) {
+                // If it is, make the Easy button red to show that it is selected.
                 fill (255, 0, 0);
             } else {
+                // Otherwise, keep the colour white.
                 fill(255, 255, 255);
             }
             textSize(15);

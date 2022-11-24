@@ -39,6 +39,7 @@ window.setup = function() {
     collectDot = new Audio('assets/collect_dot.mp3');
     eatGhost = new Audio('assets/eat_ghost.mp3');
 
+    // Initialize the objects.
     board = new Board();
     score = new Score();
     menu = new Menu(score);
@@ -58,9 +59,9 @@ window.setup = function() {
 
 // Validation: Updates 60 frames per second to reload objects to update their locations.
 window.draw = function() {
-    mode = getMode(menu);
-    difficulty = getDifficulty(menu);
-    scale(3);
+    mode = getMode(menu); // Gets the current mode of the game from the menu.
+    difficulty = getDifficulty(menu); // Gets the current speed of the ghosts from the menu.
+    scale(3); // Makes the game larger for better visibility.
     background(0);
     menu.drawMainMenu();
     menu.drawSettingsMenu();
@@ -94,6 +95,5 @@ window.keyPressed = function() {
 
 // Detects mouse clicks inputted by the user to allow for the selection of menu options.
 window.mouseClicked = function() {
-    console.log(mouseX/3, mouseY/3);
     menu.clickMenuButton();
 }

@@ -19,7 +19,7 @@ export class Board extends Sprite {
                 }
                 if (this.grid[j][i] === 1) {
                     noStroke();
-                    fill(0, 0, 255);
+                    fill(0, 0, 255); // Blue
                     rect(i * 7, j * 7, 7, 7);
                 }
                 if (this.grid[j][i] === 4) {

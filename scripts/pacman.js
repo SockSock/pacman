@@ -19,7 +19,7 @@ export class Pacman extends Entity {
         this.y = 182;
         this.xVel = 0.5;
         this.yVel = 0;
-        this.dir = "right";
+        this.dir = "right"; // Direction of Pac-Man.
         this.stopDir = "right"; // Direction used to calculate collision detection.
         keyCode = 68;
         this.cellCoords = getCellCoords(this.x, this.y);

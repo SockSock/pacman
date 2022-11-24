@@ -11,10 +11,12 @@ export class Sound {
         this.menu = menu;
     }
 
+    // Validation: Plays the background music when the game starts.
     controlBackgroundMusic() {
         if (getMode(this.menu) === "play") {
             this.backgroundMusic.volume = getVolume(this.menu);
             this.backgroundMusic.play();
+          // Otherwise, the music is paused.
         } else {
             this.backgroundMusic.pause();
             this.backgroundMusic.currentTime = 0; // Resets the music to the beginning.
