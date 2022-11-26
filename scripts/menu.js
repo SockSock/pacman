@@ -107,6 +107,16 @@ export class Menu {
         }
     }
 
+    // Validation: Displays the instructions while the game is being played.
+    drawInstructions() {
+        if (this.mode === "play") {
+            // Instructions
+            fill(255, 255, 255);
+            textSize(5);
+            text("WASD/Arrow Keys to move", 150, 242);
+        }
+    }
+
     // Validation: Controls what happens when certain buttons are clicked in the menus.
     clickMenuButton() {
         // Main menu

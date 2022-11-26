@@ -66,6 +66,7 @@ window.draw = function() {
     menu.drawMainMenu();
     menu.drawSettingsMenu();
     menu.drawRestartMenu();
+    menu.drawInstructions();
     sound.controlBackgroundMusic();
     pacman.restart();
     if (mode === "play") {
