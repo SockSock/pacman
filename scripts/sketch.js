@@ -92,6 +92,7 @@ window.draw = function() {
 // Detects keys inputted by the user to allow for movement of Pac-Man.
 window.keyPressed = function() {
     pacman.changeDirection();
+    menu.returnToMainMenu();
 }
 
 // Detects mouse clicks inputted by the user to allow for the selection of menu options.

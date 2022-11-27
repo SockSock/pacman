@@ -165,4 +165,11 @@ export class Menu {
             }
         }
     }
+
+    // Validation: Allows for a different way to return to the main menu.
+    returnToMainMenu() {
+        if (this.mode === "settings" || this.mode === "restart" && keyCode === ESCAPE) {
+            this.mode = "main";
+        }
+    }
 }
