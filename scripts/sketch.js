@@ -82,7 +82,7 @@ window.draw = function() {
             ghosts[i].stopSprite();
             ghosts[i].changeDirection();
             ghosts[i].checkContact(ghosts);
-            ghosts[i].scatterSpeed();
+            ghosts[i].setScatterSpeedAndColour();
         }
         score.drawSprite();
         lives.drawSprite();

@@ -52,15 +52,12 @@ export class Ghost extends Entity {
         }
     }
 
-    // Validation: Logic for the movement of the ghost.
+    // Validation: Logic for the ghosts being able to change their direction at a turn.
     changeDirection() {
         this.updateLocations();
-        // // Displays the chosen path.
-        // for (let i = 0; i < this.path.length; i++) {
-        //     fill(0, 255, 0);
-        //     rect(this.path[i].y*7, this.path[i].x*7, 3, 3);
-        // }
+        // Check to prevent an index out-of-bounds error.
         if (this.path.length >= 2) {
+            // Then, get the direction between the current node and the next node.
             this.dir = getDirectionBetweenTwoPoints(
                 new Point(this.path[this.path.length - 2].y, this.path[this.path.length - 2].x),
                 new Point(this.path[this.path.length - 1].y, this.path[this.path.length - 1].x),
@@ -191,7 +188,7 @@ export class Ghost extends Entity {
     }
 
     // Validation: Controls the colour and speed logic for scatter mode.
-    scatterSpeed() {
+    setScatterSpeedAndColour() {
         let difficulty = getDifficulty(this.menu);
         if (this.scatter) {
             this.colour = "white";
